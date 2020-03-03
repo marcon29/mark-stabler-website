@@ -3,6 +3,7 @@
 
 /* ******************************************************* */
 /* Resetting Default Layout and Text */
+/* ******************************************************* */
 
 html {
 	box-sizing: border-box;
@@ -11,6 +12,7 @@ html {
 
 /* ******************************************************* */
 /* Site Universals */
+/* ******************************************************* */
 
 body {
 	margin: 0;
@@ -22,6 +24,9 @@ body {
 
 /* ******************************************************* */
 /* Layout */
+/* ******************************************************* */
+
+/* Header (grid) & Footer (normal) layout */
 
 header {
 	background-color: #222222;
@@ -67,6 +72,8 @@ footer > * {
 	text-align: center;
 }
 
+/* Main content area layout */
+
 main {
 	width: 90%;
 	margin: auto;
@@ -78,7 +85,7 @@ main {
 }
 
 .text-box {
-	background-color: rgba(0,0,0,.75);
+	background-color: rgba(0,0,0,.6);
 	border: .2rem solid #CCCCCC;
 	padding: 1rem;
 	margin: 0;
@@ -92,27 +99,34 @@ main {
 	padding: .5rem 1rem 0;
 }
 
+.social img {
+	width: 40px;
+	height: 40px;
+	background-color: #285DC2;
+	border-radius: 35% 0;
+}
+
 #intro {
 	text-align: center;
-	background-color: black;
 	padding: 0 0 55px;
+	background-image: linear-gradient(rgba(0,0,0,1) 15%, rgba(0,0,0,0) 100%);
 }
 
 #about h3 {
 	min-height: 30px;
 	padding: 0 1rem;
 	margin: 0;
-	background-color: rgba(0,0,0,.75);
+	background-color: rgba(0,0,0,.6);
 }
 
-/* Grid layout for all sevices */
+/* Grid layout for All Sevices section */
 
 #all-services {
 	display: grid;
 	grid-template-columns: repeat(12, minmax(0, 1fr));
 	grid-auto-rows: minmax(55px, auto);
 	margin: 55px 0;
-}
+}   
 
 #web-dev {
 	grid-column: 1 / 5;
@@ -137,9 +151,9 @@ main {
 
 
 
-
 /* ******************************************************* */
 /* 3D shapes - not working yet, think can do in javascript */
+/* ******************************************************* */
 
 /*
 #trap-top {
@@ -171,8 +185,11 @@ main {
 } 
 */
 
+
+
 /* ******************************************************* */
 /* Typography */
+/* ******************************************************* */
 
 h1 {
 	color: #BD4626;
@@ -186,13 +203,13 @@ header h1 {
 }
 
 h2 {
-	color: #0064FF;
+	color: #285DC2;
 	font-size: 2.4rem;
 	font-family: Lato, sans-serif;
 } 
 
 h3 {
-	color: #0064FF;
+	color: #285DC2;
 	font-size: 2rem;
 	font-family: Lato, sans-serif;
 }
@@ -211,8 +228,41 @@ p, ul, ol {
 
 .lt-orange-text {
 	color: #E0A726;
+	font-weight: normal;
 }
 
 /* ******************************************************* */
 /* Links */
+/* ******************************************************* */
+
+/* General Links styles */
+a {
+	outline: none;
+	text-decoration: none;
+	color: #285DC2;
+}
+
+a:focus, a:hover {
+	color: #1693A5;
+	font-weight: bold;
+}
+
+/* Header Links styles */
+h1 a, h2 a, h3 a {
+	color: inherit;
+}
+
+h1 a:focus, h1 a:hover, h2 a:focus, h2 a:hover, h3 a:focus, h3 a:hover {
+	color: #D6341D;
+	font-weight: bold;
+}
+
+/* Social medial links styles */
+.social a img:focus, .social a img:hover {
+	background-color: #1693A5;
+}
+
+
+
+
 
