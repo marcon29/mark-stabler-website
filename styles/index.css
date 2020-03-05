@@ -49,7 +49,7 @@ header div {
 	grid-column: 2;
 	grid-row: 1;
 	margin: 0;
-	padding-right: 2rem;
+	padding-right: 3rem;
 	text-align: right;
 }
 
@@ -72,7 +72,14 @@ footer > * {
 	text-align: center;
 }
 
-/* Main content area layout */
+.social img {
+	width: 3rem;
+	height: 3rem;
+	background-color: #285DC2;
+	border-radius: 35% 0;
+}
+
+/* Main content area layout (normal) */
 
 main {
 	width: 90%;
@@ -97,13 +104,6 @@ main {
 	min-height: 5.5rem;
 	margin: -1.2rem;
 	padding: .5rem 1rem 0;
-}
-
-.social img {
-	width: 4rem;
-	height: 4rem;
-	background-color: #285DC2;
-	border-radius: 35% 0;
 }
 
 #intro {
@@ -146,7 +146,7 @@ main {
 
 #copy {
 	grid-column: 5 / 9;
-	grid-row: 7;
+	grid-row: 6;
 }
 
 
@@ -261,12 +261,72 @@ h1 a:focus, h1 a:hover, h2 a:focus, h2 a:hover, h3 a:focus, h3 a:hover {
 	font-weight: bold;
 }
 
-/* Social medial links styles */
+/* Social media links styles */
 .social a img:focus, .social a img:hover {
 	background-color: #1693A5;
 }
 
+/* ******************************************************* */
+/* Viewport Size Adjustments */
+/* ******************************************************* */
+@media screen and (max-width: 750px) {
+	html {
+		font-size: 9.5px;
+	}
+}
 
+@media screen and (max-width: 700px) {
+	html {
+		font-size: 9px;
+	}
+}
 
+@media screen and (max-width: 675px) {
+	html {
+		font-size: 8.5px;
+	}
+}
+
+@media screen and (max-width: 625px) {
+	html {
+		font-size: 8px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	html {
+		font-size: 10px;
+	}
+	
+	#all-services {
+		display: block;
+	}
+	
+	.text-box {
+		margin: 0 0 4rem;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	html {
+		font-size: 9px;
+	}
+}
+
+@media screen and (max-width: 440px) {
+	html {
+		font-size: 9px;
+	}
+	
+	header {
+		display: block;
+	}
+	
+	header div {
+		margin: 0;
+		padding: 1rem 0;
+		text-align: left;
+	}
+}
 
 
