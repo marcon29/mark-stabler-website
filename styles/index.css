@@ -218,6 +218,10 @@ p, ul, ol {
 	font-weight: 300;
 }
 
+#intro p {
+	font-size: 1.8rem;
+}
+
 .fine-print {
 	font-size: 1rem;
 }
