@@ -36,7 +36,7 @@ header {
 	padding: 2rem 2rem 0;
 	display: grid;
 	grid-template-columns: 2fr 1fr;
-	grid-auto-rows: minmax(55px, auto);
+	grid-auto-rows: minmax(5.5rem, auto);
 }
 
 header h1 {
@@ -62,7 +62,7 @@ header h2 {
 footer {
 	background-color: #222222;
 	width: 100%;
-	margin: 55px 0 0;
+	margin: 5.5rem 0 0;
 	padding: 1rem 2rem 2rem;
 }
 
@@ -94,26 +94,26 @@ main {
 .text-box h3 {
 	border: inherit;
 	text-align: center;
-	min-height: 55px;
+	min-height: 5.5rem;
 	margin: -1.2rem;
 	padding: .5rem 1rem 0;
 }
 
 .social img {
-	width: 40px;
-	height: 40px;
+	width: 4rem;
+	height: 4rem;
 	background-color: #285DC2;
 	border-radius: 35% 0;
 }
 
 #intro {
 	text-align: center;
-	padding: 0 0 55px;
+	padding: 0 0 5.5rem;
 	background-image: linear-gradient(rgba(0,0,0,1) 15%, rgba(0,0,0,0) 100%);
 }
 
 #about h3 {
-	min-height: 30px;
+	min-height: 3rem;
 	padding: 0 1rem;
 	margin: 0;
 	background-color: rgba(0,0,0,.6);
@@ -124,8 +124,8 @@ main {
 #all-services {
 	display: grid;
 	grid-template-columns: repeat(12, minmax(0, 1fr));
-	grid-auto-rows: minmax(55px, auto);
-	margin: 55px 0;
+	grid-auto-rows: minmax(5.5rem, auto);
+	margin: 5.5rem 0;
 }   
 
 #web-dev {
