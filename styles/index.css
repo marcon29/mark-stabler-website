@@ -149,44 +149,6 @@ main {
 	grid-row: 6;
 }
 
-
-
-/* ******************************************************* */
-/* 3D shapes - not working yet, think can do in javascript */
-/* ******************************************************* */
-
-/*
-#trap-top {
-	grid-column: 5 / 9;
-	grid-row: 1 / 3;
-	text-align: center;
-	background-color: darkblue;
-}
-
-#para-left {
-	grid-column: 1 / 6;
-	grid-row: 2 / 4;
-	text-align: center;
-	background-color: darkblue;
-}
-
-#para-right {
-	grid-column: 8 / 13;
-	grid-row: 2 / 4;
-	text-align: center;
-	background-color: darkblue;
-} 
-
-#trap-bottom {
-	grid-column: 5 / 9;
-	grid-row: 4 / 7;
-	text-align: center;
-	background-color: darkblue;
-} 
-*/
-
-
-
 /* ******************************************************* */
 /* Typography */
 /* ******************************************************* */
