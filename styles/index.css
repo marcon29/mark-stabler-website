@@ -49,7 +49,7 @@ header div {
 	grid-column: 2;
 	grid-row: 1;
 	margin: 0;
-	padding-right: 3rem;
+	padding-right: 4rem;
 	text-align: right;
 }
 
@@ -146,8 +146,52 @@ main {
 
 #copy {
 	grid-column: 5 / 9;
-	grid-row: 6;
+	grid-row: 7;
 }
+
+/* ******************************************************* */
+/* 3D shapes */
+/* ******************************************************* */
+
+#trap-top {
+	grid-column: 5 / 9;
+	grid-row: 1 / 3;
+	text-align: center;
+	background-image: url("../images/3Dfx-trap-top.svg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: center;
+} 
+
+#para-left {
+	grid-column: 1 / 6;
+	grid-row: 2 / 4;
+	text-align: center;
+	background-image: url("../images/3Dfx-para-left.svg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: center;
+}
+
+#para-right {
+	grid-column: 8 / 13;
+	grid-row: 2 / 4;
+	text-align: center;
+	background-image: url("../images/3Dfx-para-right.svg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: center;
+} 
+
+#trap-bottom {
+	grid-column: 5 / 9;
+	grid-row: 4 / 7;
+	text-align: center;
+	background-image: url("../images/3Dfx-trap-bottom.svg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: center;
+} 
 
 /* ******************************************************* */
 /* Typography */
