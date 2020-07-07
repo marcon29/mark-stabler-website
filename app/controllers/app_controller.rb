@@ -3,12 +3,11 @@ class AppController < Sinatra::Base
 		set :views, "app/views/"
 		set :public_folder, "public"
 		# enable :sessions
-		# set :session_secret, "woccpms"
+		# set :session_secret, "mswoccp"
 	end
 
 	# home page
 	get '/' do
-        # redirect '/subjects' if logged_in?
 		erb :index
     end
 
