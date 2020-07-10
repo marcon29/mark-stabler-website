@@ -9,21 +9,23 @@ class ContentSection < ActiveRecord::Base
 
     # page_location validation:        
         # must be an integer, error message: "Page location must be a whole number."
-        # must be an unique, error message: "You already have copy in that location. Please choose another."
+        # must be an unique, error message: "You already have content in that location. Please choose another."
         
 
     # helpers ################
+    # need absolute_link?
+        # checks if link is absolute or not (starts with "http://" of "https://" [maybe just "http" to cover both])
+            # this doesn't cover "www.example.com" - an absolute that will be linked as relative
+            # also add this in to method
+        # this is necessary so view can create link correctly
+    
     # need formatted_date
         # takes a timestamp (datetime) and converts to date only in mm/dd/yyyy (as a string)
 
-    # need absolute_link?
-        # checks if link is absolute or not (starts with "http://" of "https://" [maybe just "http" to cover both])
-        # this is necessary so view can create link correctly
-    
     # need slug
         # this will also be used for the css id
     
-    # need find_by_slug()  ?????
+    # need self.find_by_slug()  ?????
         # not sure this is necessary - hold and see if everything works without it
 
     # view notes ################
