@@ -2,15 +2,14 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-group :production do
-    gem 'sinatra'
-    gem 'activerecord', '~> 5.2.3', require: 'active_record'
-    gem 'sinatra-activerecord'
-    gem 'sqlite3'
-    gem 'bcrypt'
-    gem 'rack-flash3'
-    gem 'require_all'
-end
+
+gem 'sinatra'
+gem 'activerecord', '~> 5.2.3', require: 'active_record'
+gem 'sinatra-activerecord'
+gem 'sqlite3'
+gem 'bcrypt'
+gem 'rack-flash3'
+gem 'require_all'
 
 group :development do
     gem 'sinatra-reloader'

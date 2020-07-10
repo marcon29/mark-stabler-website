@@ -10,9 +10,9 @@ if ActiveRecord::Base.connection.migration_context.needs_migration?
 end
 
 # ActiveRecord::Base.logger.level = 1
-# ActiveRecord::Base.logger = nil
+ActiveRecord::Base.logger = nil
 
-Rspec.configure do |config|
+RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
   config.filter_run :focus
   
