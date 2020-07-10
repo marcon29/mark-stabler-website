@@ -5,7 +5,7 @@ class CopySection < ActiveRecord::Base
 
     # name validation:
         # must exist, error message: "You must provide a name."
-        # must be unique (case insensitive), error message: "That name is already use. Please provide another."
+        # must be unique (case insensitive), error message: "That name is already used. Please provide another."
 
     # page_location validation:        
         # must be an integer, error message: "Page location must be a whole number."

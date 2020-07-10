@@ -9,7 +9,7 @@ class AppController < Sinatra::Base
 	# home page
 	get '/' do
 		erb :index
-    end
+	end
 
 
 
