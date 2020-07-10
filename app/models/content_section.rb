@@ -1,4 +1,4 @@
-class CopySection < ActiveRecord::Base
+class ContentSection < ActiveRecord::Base
 
     # attrs/table setup: id, name, css_class, page_location, headline, body_copy, link, timestamps
     # no associations needed at this time

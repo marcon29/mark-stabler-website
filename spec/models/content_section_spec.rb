@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe "CopySection" do
-    # before(:each) - clear copy_sections table in test DB
+describe "ContentSection" do
+    # before(:each) - clear content_sections table in test DB
         # don't think I need this - set up in spec_helper already
         # test without this and see if works
     # end
