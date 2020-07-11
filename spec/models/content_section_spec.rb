@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe "ContentSection" do        
     # object creation and validation tests #######################################
