@@ -1,34 +1,36 @@
 class ContentSection < ActiveRecord::Base
+    validates :name, 
+        presence: { message: "You must provide a name." }, 
+        uniqueness: { case_sensitive: false, message: "That name is already used. Please provide another."}
 
-    # attrs/table setup: id, name, css_class, page_location, headline, body_copy, link, timestamps
-    # no associations needed at this time
+    validates :page_location,
+        uniqueness: { message: "You already have content in that location. Please choose another."},
+        numericality: { only_integer: true, message: "Page location must be a whole number."},
+        allow_blank: true
 
-    # name validation:
-        # must exist, error message: "You must provide a name."
-        # must be unique (case insensitive), error message: "That name is already used. Please provide another."
 
-    # page_location validation:        
-        # must be an integer, error message: "Page location must be a whole number."
-        # must be an unique, error message: "You already have content in that location. Please choose another."
+    # allows view to create <a> href attribute correctly
+    def absolute_link?
+        !!self.link.match(/http|www\./)
+    end    
+    
+    def formatted_date(date)
+        date.strftime("%m/%d/%Y") # if date
+    end
+    
+    # this will also be used for the css id
+    def slug
+        self.name.gsub(" ", "-").scan(/[[^\s\W]-]/).join.downcase
+    end
+
+    # not sure this is necessary - hold and see if everything works without it
+    # def self.find_by_slug(url_slug)
+    #     self.all.find { |obj| obj.slug == url_slug }
+    # end   
+    
         
 
-    # helpers ################
-    # need absolute_link?
-        # checks if link is absolute or not (starts with "http://" of "https://" [maybe just "http" to cover both])
-            # this doesn't cover "www.example.com" - an absolute that will be linked as relative
-            # also add this in to method
-        # this is necessary so view can create link correctly
-    
-    # need formatted_date
-        # takes a timestamp (datetime) and converts to date only in mm/dd/yyyy (as a string)
-
-    # need slug
-        # this will also be used for the css id
-    
-    # need self.find_by_slug()  ?????
-        # not sure this is necessary - hold and see if everything works without it
-
-    # view notes ################
+    # view notes ####################################
     # page location will also determine content order    
         # provide these instructions on the new and edit pages
         # provide a single edit view with all copy sections
@@ -40,9 +42,11 @@ class ContentSection < ActiveRecord::Base
             # 4 = all services bottom
             # 5+ = about section (in order)
 
-    # link: if to external site, must have http:// in url, or won't link correctly
+    # link: if to external site, must have "http" or "www" in url or won't link correctly
         # add instructions to make this clear
         # make value for href attribute use http:// if link is absolute
+
+    # formatted date: if not an issue in view, remove from method in model
 
 
 end
