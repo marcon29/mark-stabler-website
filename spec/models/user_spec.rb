@@ -35,7 +35,7 @@ describe "User" do
         end
     end
     
-    describe "has a required, unique email (case insensitive) and provides correct error message when invalid" do
+    describe "has a required, unique email (case insensitive) that matches standard email text patterns and provides correct error message when invalid" do
         it "won't instantiate without an email" do
             test_attrs = {first_name: "Joe", last_name: "Blow", email: "", username: "testuser1", password: "test"}
             no_email = User.create(test_attrs)
@@ -62,20 +62,20 @@ describe "User" do
         it "won't instantiate when email doesn't follow standard email text pattern" do
             no_at_attrs = {first_name: "Joe", last_name: "Blow", email: "joe_blowexample.com", username: "testuser1", password: "test"}
             no_dot_attrs = {first_name: "Joe", last_name: "Blow", email: "joe_blow@examplecom", username: "testuser2", password: "test"}
-            no_ext_attrs = {first_name: "Joe", last_name: "Blow", email: "joe_blow@example.", username: "testuser3", password: "test"}
-            short_ext_attrs = {first_name: "Joe", last_name: "Blow", email: "joe_blow@example.c", username: "testuser4", password: "test"}
-            long_ext_attrs = {first_name: "Joe", last_name: "Blow", email: "joe_blow@example.comm", username: "testuser5", password: "test"}
-            bad_ext_attrs = {first_name: "Joe", last_name: "Blow", email: "joe_blow@example.c2m", username: "testuser6", password: "test"}
+            no_tld_attrs = {first_name: "Joe", last_name: "Blow", email: "joe_blow@example.", username: "testuser3", password: "test"}
+            short_tld_attrs = {first_name: "Joe", last_name: "Blow", email: "joe_blow@example.c", username: "testuser4", password: "test"}
+            long_tld_attrs = {first_name: "Joe", last_name: "Blow", email: "joe_blow@example.comm", username: "testuser5", password: "test"}
+            bad_tld_attrs = {first_name: "Joe", last_name: "Blow", email: "joe_blow@example.c2m", username: "testuser6", password: "test"}
             no_name_attrs = {first_name: "Joe", last_name: "Blow", email: "@example.com", username: "testuser7", password: "test"}
             no_domain_attrs = {first_name: "Joe", last_name: "Blow", email: "joe_blow@.com", username: "testuser8", password: "test"}
             has_spaces_attrs = {first_name: "Joe", last_name: "Blow", email: "joe blow@example.com", username: "testuser9", password: "test"}
 
             no_at = User.create(no_at_attrs)
             no_dot = User.create(no_dot_attrs)
-            no_ext = User.create(no_ext_attrs)
-            short_ext = User.create(short_ext_attrs)
-            long_ext = User.create(long_ext_attrs)
-            bad_ext = User.create(bad_ext_attrs)
+            no_tld = User.create(no_tld_attrs)
+            short_tld = User.create(short_tld_attrs)
+            long_tld = User.create(long_tld_attrs)
+            bad_tld = User.create(bad_tld_attrs)
             no_name = User.create(no_name_attrs)
             no_domain = User.create(no_domain_attrs)
             has_spaces = User.create(has_spaces_attrs)
@@ -84,14 +84,14 @@ describe "User" do
             expect(no_at.errors.messages[:email]).to include("Your email doesn't look valid. Please use another.")
             expect(no_dot.save).to be false
             expect(no_dot.errors.messages[:email]).to include("Your email doesn't look valid. Please use another.")
-            expect(no_ext.save).to be false
-            expect(no_ext.errors.messages[:email]).to include("Your email doesn't look valid. Please use another.")
-            expect(short_ext.save).to be false
-            expect(short_ext.errors.messages[:email]).to include("Your email doesn't look valid. Please use another.")
-            expect(long_ext.save).to be false
-            expect(long_ext.errors.messages[:email]).to include("Your email doesn't look valid. Please use another.")
-            expect(bad_ext.save).to be false
-            expect(bad_ext.errors.messages[:email]).to include("Your email doesn't look valid. Please use another.")
+            expect(no_tld.save).to be false
+            expect(no_tld.errors.messages[:email]).to include("Your email doesn't look valid. Please use another.")
+            expect(short_tld.save).to be false
+            expect(short_tld.errors.messages[:email]).to include("Your email doesn't look valid. Please use another.")
+            expect(long_tld.save).to be false
+            expect(long_tld.errors.messages[:email]).to include("Your email doesn't look valid. Please use another.")
+            expect(bad_tld.save).to be false
+            expect(bad_tld.errors.messages[:email]).to include("Your email doesn't look valid. Please use another.")
             expect(no_name.save).to be false
             expect(no_name.errors.messages[:email]).to include("Your email doesn't look valid. Please use another.")
             expect(no_domain.save).to be false

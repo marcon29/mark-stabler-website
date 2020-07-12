@@ -1,9 +1,9 @@
 class SocialPlatform < ActiveRecord::Base
-    # attrs/table setup: name, base_url, image_file
+    # attrs/table setup: name, base_url, image_file_name
 
 
     # associations:
-    has_many :social_profiles #destroy any social_profiles if a social_platform is deleted
+    # has_many :social_profiles #destroy any social_profiles if a social_platform is deleted
 
     
     # attr validation:
@@ -39,9 +39,9 @@ class SocialPlatform < ActiveRecord::Base
 
 	# helpers ################
 		# format_base_url
-            # takes user url entry, removes http and https, ensures www. is there, ensures trailing slash
+            # takes user's url entry, removes http and https, ensures www. is there, ensures trailing slash
         
-        # image_file link 
+        # image_file_link
             # creates correct file path for image
 
         # slug
