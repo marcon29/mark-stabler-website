@@ -9,7 +9,7 @@ describe "ContentSection" do
             page_location: 1, 
             headline: "this is cool content", 
             body_copy: "Maybe it is cool and maybe it is not. I will let you decide.", 
-            link: "https://www.makstabler.com"
+            link: "https://www.example.com"
         }
 
         con_sec = ContentSection.create(attrs)
@@ -22,7 +22,7 @@ describe "ContentSection" do
         expect(con_sec.page_location).to eq 1
         expect(con_sec.headline).to eq("this is cool content")
         expect(con_sec.body_copy).to eq("Maybe it is cool and maybe it is not. I will let you decide.")
-        expect(con_sec.link).to eq("https://www.makstabler.com")
+        expect(con_sec.link).to eq("https://www.example.com")
     end
         
     it "can instantiate with only a name" do
