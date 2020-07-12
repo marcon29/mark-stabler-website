@@ -18,6 +18,19 @@ class SocialProfile < ActiveRecord::Base
             # must be unique (case insensitive), error message: "That handle is already used for that platform. Please provide another."
                 # uniqness is limited to the same platform
             # run format_handle before saving
+
+
+            # social full url examples: final trailing slash, caps and www. don't matter
+            # https://www.facebook.com/mark.stabler.984
+            # https://www.facebook.com/StablerWriter/
+            # https://twitter.com/stablerwriter/
+            # https://www.instagram.com/stablerwriter/
+            # https://www.linkedin.com/in/stablerwriter/
+            # https://www.reddit.com/user/stablerwriter
+            # https://github.com/marcon29
+
+
+    ######### revisit association tests in platform class to make sure handle input is correct #################
 		    
 
 

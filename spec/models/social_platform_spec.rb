@@ -8,10 +8,10 @@ describe "SocialPlatform" do
         platform = SocialPlatform.create(valid_attrs)
         
         expect(platform.valid?).to be true
-        expect(platform).to be_an_instance_of(SocialPlatform)        
+        expect(platform).to be_an_instance_of(SocialPlatform)
         expect(platform.name).to eq("platform name")
         expect(platform.base_url).to eq("https://www.example.com")
-        expect(platform.image_file_name).to eq("icon.png")        
+        expect(platform.image_file_name).to eq("icon.png")
     end
 
     describe "has a required, unique name (case insensitive) and provides correct error message when invalid" do
@@ -120,7 +120,7 @@ describe "SocialPlatform" do
             www_only_attrs = {name: "platform6 name", base_url: "www.example.com", image_file_name: "icon6.png"}
             domain_only_attrs = {name: "platform7 name", base_url: "example.com", image_file_name: "icon7.png"}
             resources_attrs = {name: "platform8 name", base_url: "http://www.example.com/asdfadsf/asdfasdf", image_file_name: "icon8.png"}
-            resources_trailing_slash_attrs = {name: "platform8 name", base_url: "http://www.example.com/asdfadsf/asdfasdf/", image_file_name: "icon8.png"}
+            resources_trailing_slash_attrs = {name: "platform9 name", base_url: "http://www.example.com/asdfadsf/asdfasdf/", image_file_name: "icon9.png"}
 
             full = SocialPlatform.create(full_attrs)
             full_secure = SocialPlatform.create(full_secure_attrs)
@@ -194,60 +194,96 @@ describe "SocialPlatform" do
     
 
     # model association tests ####################################################
+    it "has many social_profiles" do
+        valid_attrs = {name: "platform", base_url: "https://www.example.com", image_file_name: "icon.png"}
+        profile1_attrs = {name: "profile one", handle: "profileone", notes: "notes for profile one"}
+        profile2_attrs = {name: "profile two", handle: "profiletwo", notes: "notes for profile two"}
 
+        platform = SocialPlatform.create(valid_attrs)
+        profile1 = SocialProfile.create(profile1_attrs)
+        profile2 = SocialProfile.create(profile2_attrs)
 
+        platform.social_profiles << profile1
+        platform.social_profiles << profile2
+
+        expect(platform.social_profiles).to include(profile1)
+        expect(platform.social_profiles).to include(profile2)
+    end
 
 
     # helper method tests ########################################################
     
-    # # # tests format_base_url method
-    # it "can take a user's url entry and format it to create correct link text for view" do
-    # #     # removes http and https, ensures www. is there, and ensures a trailing slash
+    # tests format_base_url method
+    it "can take a user's url entry and format it to set up creating correct link text for view" do
+        full_attrs = {name: "platform1 name", base_url: "http://www.facebook.com", image_file_name: "icon1.png"}
+        full_secure_attrs = {name: "platform2 name", base_url: "https://www.facebook.com", image_file_name: "icon2.png"}
+        trailing_slash_attrs = {name: "platform3 name", base_url: "https://www.facebook.com/", image_file_name: "icon3.png"}
+        no_www_attrs = {name: "platform4 name", base_url: "http://facebook.com", image_file_name: "icon4.png"}
+        no_www_secure_attrs = {name: "platform5 name", base_url: "https://facebook.com", image_file_name: "icon5.png"}
+        www_only_attrs = {name: "platform6 name", base_url: "www.facebook.com", image_file_name: "icon6.png"}
+        domain_only_attrs = {name: "platform7 name", base_url: "facebook.com", image_file_name: "icon7.png"}
+        resources_attrs = {name: "platform8 name", base_url: "https://www.linkedin.com/in", image_file_name: "icon8.png"}
+        resources_trailing_slash_attrs = {name: "platform9 name", base_url: "https://www.reddit.com/user/", image_file_name: "icon9.png"}
 
-    # #     abs_http_link_1 = SocialPlatform.create(name: "absolute link", link: "https://example.com")
-    # #     abs_http_link_2 = SocialPlatform.create(name: "absolute link", link: "http://example.com")
-    # #     abs_http_www_link_1 = SocialPlatform.create(name: "absolute link", link: "https://www.example.com")
-    # #     abs_http_www_link_2 = SocialPlatform.create(name: "absolute link", link: "http://www.example.com")
-    # #     abs_www_link = SocialPlatform.create(name: "absolute link", link: "www.example.com")
-    # #     relative_link = SocialPlatform.create(name: "relative link", link: "/example")
-        
-    # #     expect(abs_http_link_1.absolute_link?).to be true
-    # #     expect(abs_http_link_2.absolute_link?).to be true
-    # #     expect(abs_http_www_link_1.absolute_link?).to be true
-    # #     expect(abs_http_www_link_2.absolute_link?).to be true
-    # #     expect(abs_www_link.absolute_link?).to be true
-    # #     expect(relative_link.absolute_link?).to be false
-    # end
-    
-    # # # tests image_file_link method
-    # it "can create correct file path for image" do
-    # #     date_test = SocialPlatform.create(name: "date test")
-        
-    # #     expect(date_test.formatted_date(date_test.created_at)).to match(/\d\d\/\d\d\/\d\d\d\d/)
-    # #     expect(date_test.formatted_date(date_test.updated_at)).to match(/\d\d\/\d\d\/\d\d\d\d/)
-    # end
+        full = SocialPlatform.create(full_attrs)
+        full_secure = SocialPlatform.create(full_secure_attrs)
+        trailing_slash = SocialPlatform.create(trailing_slash_attrs)
+        no_www = SocialPlatform.create(no_www_attrs)
+        no_www_secure = SocialPlatform.create(no_www_secure_attrs)
+        www_only = SocialPlatform.create(www_only_attrs)
+        domain_only = SocialPlatform.create(domain_only_attrs)
+        resources = SocialPlatform.create(resources_attrs)
+        resources_trailing_slash = SocialPlatform.create(resources_trailing_slash_attrs)
 
-    # # # tests #slug method
-    # it "has a properly created slug" do
-    # #     one_word = SocialPlatform.create(name: "stuff")
-    # #     one_word_cap = SocialPlatform.create(name: "Content")
-    # #     multi_word = SocialPlatform.create(name: "cool stuff and content")
-    # #     multi_word_cap = SocialPlatform.create(name: "cOOl Stuff AND Content")
-    # #     crazy_one_word = SocialPlatform.create(name: "$tu3FF")
-    # #     crazy_multi_word = SocialPlatform.create(name: "cR@z4 $tu3FF")
-        
-    # #     expect(one_word.slug).to eq("stuff")
-    # #     expect(one_word_cap.slug).to eq("content")
-    # #     expect(multi_word.slug).to eq("cool-stuff-and-content")
-    # #     expect(multi_word_cap.slug).to eq("cool-stuff-and-content")
-    # #     expect(crazy_one_word.slug).to eq("tu3ff")
-    # #     expect(crazy_multi_word.slug).to eq("crz4-tu3ff")
-    # end
+        expect(full.format_base_url).to eq("www.facebook.com/")
+        expect(full_secure.format_base_url).to eq("www.facebook.com/")
+        expect(trailing_slash.format_base_url).to eq("www.facebook.com/")
+        expect(no_www.format_base_url).to eq("www.facebook.com/")
+        expect(no_www_secure.format_base_url).to eq("www.facebook.com/")
+        expect(www_only.format_base_url).to eq("www.facebook.com/")
+        expect(domain_only.format_base_url).to eq("www.facebook.com/")
+        expect(resources.format_base_url).to eq("www.linkedin.com/in/")
+        expect(resources_trailing_slash.format_base_url).to eq("www.reddit.com/user/")
+    end
     
-    # # tests .find_by_slug method
-    # it "can be found by its slug" do
-    # #     platform = SocialPlatform.create(name: "cool stuff and content")
-    # #     search_result = SocialPlatform.find_by_slug("cool-stuff-and-content")
-    # #     expect(search_result).to eq(platform)
-    # end
+    # tests image_file_link method
+    it "can create correct file path for image" do
+        valid_attrs = {name: "platform", base_url: "https://www.example.com", image_file_name: "icon.png"}
+        platform = SocialPlatform.create(valid_attrs)
+        expect(platform.image_file_link).to eq("/images/icon.png")
+    end
+
+    # tests #slug method
+    it "has a properly created slug" do
+        one_word_attrs = {name: "name", base_url: "https://www.example1.com", image_file_name: "icon1.png"}
+        one_word_cap_attrs = {name: "Platform", base_url: "https://www.example2.com", image_file_name: "icon2.png"}
+        multi_word_attrs = {name: "cool name for platform", base_url: "https://www.example3.com", image_file_name: "icon3.png"}
+        multi_word_cap_attrs = {name: "cOOl Name FOR Platform", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
+        crazy_one_word_attrs = {name: "n@mE!46", base_url: "https://www.example5.com", image_file_name: "icon5.png"}
+        crazy_multi_word_attrs = {name: "cR@z4 p!atF0rm", base_url: "https://www.example6.com", image_file_name: "icon6.png"}
+
+        one_word = SocialPlatform.create(one_word_attrs)
+        one_word_cap = SocialPlatform.create(one_word_cap_attrs)
+        multi_word = SocialPlatform.create(multi_word_attrs)
+        multi_word_cap = SocialPlatform.create(multi_word_cap_attrs)
+        crazy_one_word = SocialPlatform.create(crazy_one_word_attrs)
+        crazy_multi_word = SocialPlatform.create(crazy_multi_word_attrs)
+
+        
+        expect(one_word.slug).to eq("name")
+        expect(one_word_cap.slug).to eq("platform")
+        expect(multi_word.slug).to eq("cool-name-for-platform")
+        expect(multi_word_cap.slug).to eq("cool-name-for-platform")
+        expect(crazy_one_word.slug).to eq("nme46")
+        expect(crazy_multi_word.slug).to eq("crz4-patf0rm")
+    end
+    
+    # tests .find_by_slug method
+    it "can be found by its slug" do
+        valid_attrs = {name: "cool name for platform", base_url: "https://www.example.com", image_file_name: "icon.png"}
+        platform = SocialPlatform.create(valid_attrs)
+
+        search_result = SocialPlatform.find_by_slug("cool-name-for-platform")
+        expect(search_result).to eq(platform)
+    end
 end

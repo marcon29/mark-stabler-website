@@ -37,19 +37,34 @@ class SocialPlatform < ActiveRecord::Base
 
 
 
-	# helpers ################
-		# format_base_url
-            # takes user's url entry, removes http and https, ensures www. is there, ensures trailing slash
+    # helpers ################
+    
+    # takes user's url entry, removes http and https, ensures www. is there, ensures trailing slash
+    def format_base_url
+        # string = check.gsub(/(https:\/\/|http:\/\/)?(www.)?/, "").strip.downcase
+
+        # if string.ends_with?('/')
+        #     string = "www.#{string}"
+        # else
+        #     string = ("www.#{string}/")
+        # end
         
-        # image_file_link
-            # creates correct file path for image
+        # self.base_url = string # if !string.empty?
+    end    
+    
+    # creates correct file path for image (requires "images" directory in "public" directory)
+    def image_file_link
+        # "/images/#{self.image_file_name}"
+    end
 
-        # slug
-            # standard
-
-        # self.find_by_slug
-            # standard
-            
+    def slug
+        # self.name.gsub(" ", "-").scan(/[[^\s\W]-]/).join.downcase
+    end
+    
+    def self.find_by_slug(url_slug)
+        # self.all.find { |obj| obj.slug == url_slug }
+    end
+         
 
 
 	# view notes ################
