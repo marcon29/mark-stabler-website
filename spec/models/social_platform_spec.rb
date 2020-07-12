@@ -203,11 +203,30 @@ describe "SocialPlatform" do
         profile1 = SocialProfile.create(profile1_attrs)
         profile2 = SocialProfile.create(profile2_attrs)
 
+        # if need to add .save (or assign the other way around) - update the delete test below also
         platform.social_profiles << profile1
         platform.social_profiles << profile2
 
         expect(platform.social_profiles).to include(profile1)
         expect(platform.social_profiles).to include(profile2)
+    end
+
+    it "will also delete any associated social_profiles if itself is deleted" do
+        valid_attrs = {name: "platform", base_url: "https://www.example.com", image_file_name: "icon.png"}
+        profile1_attrs = {name: "profile one", handle: "profileone", notes: "notes for profile one"}
+        profile2_attrs = {name: "profile two", handle: "profiletwo", notes: "notes for profile two"}
+
+        platform = SocialPlatform.create(valid_attrs)
+        profile1 = SocialProfile.create(profile1_attrs)
+        profile2 = SocialProfile.create(profile2_attrs)
+
+        platform.social_profiles << profile1
+        platform.social_profiles << profile2
+
+        platform.destroy
+
+        expect(SocialProfile.all.include?(profile1)).to be false
+        expect(SocialProfile.all.include?(profile2)).to be false
     end
 
 
