@@ -71,56 +71,57 @@ describe "ContentSection" do
     end
     
     # helper method tests ########################################################
-    
-    # tests #absolute_link? method
-    it "can tell if the link is absolute or relative" do
-        abs_http_link_1 = ContentSection.create(name: "absolute link", link: "https://example.com")
-        abs_http_link_2 = ContentSection.create(name: "absolute link", link: "http://example.com")
-        abs_http_www_link_1 = ContentSection.create(name: "absolute link", link: "https://www.example.com")
-        abs_http_www_link_2 = ContentSection.create(name: "absolute link", link: "http://www.example.com")
-        abs_www_link = ContentSection.create(name: "absolute link", link: "www.example.com")
-        relative_link = ContentSection.create(name: "relative link", link: "/example")
+    describe "all helper methods work correctly" do
+        # tests #absolute_link? method
+        it "can tell if the link is absolute or relative" do
+            abs_http_link_1 = ContentSection.create(name: "absolute link", link: "https://example.com")
+            abs_http_link_2 = ContentSection.create(name: "absolute link", link: "http://example.com")
+            abs_http_www_link_1 = ContentSection.create(name: "absolute link", link: "https://www.example.com")
+            abs_http_www_link_2 = ContentSection.create(name: "absolute link", link: "http://www.example.com")
+            abs_www_link = ContentSection.create(name: "absolute link", link: "www.example.com")
+            relative_link = ContentSection.create(name: "relative link", link: "/example")
+            
+            expect(abs_http_link_1.absolute_link?).to be true
+            expect(abs_http_link_2.absolute_link?).to be true
+            expect(abs_http_www_link_1.absolute_link?).to be true
+            expect(abs_http_www_link_2.absolute_link?).to be true
+            expect(abs_www_link.absolute_link?).to be true
+            expect(relative_link.absolute_link?).to be false
+        end
         
-        expect(abs_http_link_1.absolute_link?).to be true
-        expect(abs_http_link_2.absolute_link?).to be true
-        expect(abs_http_www_link_1.absolute_link?).to be true
-        expect(abs_http_www_link_2.absolute_link?).to be true
-        expect(abs_www_link.absolute_link?).to be true
-        expect(relative_link.absolute_link?).to be false
-    end
-    
-    # tests #formatted_date method
-    it "can return only the properly formatted date of when the object was created and updated" do
-        date_test = ContentSection.create(name: "date test")
-        
-        expect(date_test.formatted_date(date_test.created_at)).to match(/\d\d\/\d\d\/\d\d\d\d/)
-        expect(date_test.formatted_date(date_test.updated_at)).to match(/\d\d\/\d\d\/\d\d\d\d/)
-    end
+        # tests #formatted_date method
+        it "can return only the properly formatted date of when the object was created and updated" do
+            date_test = ContentSection.create(name: "date test")
+            
+            expect(date_test.formatted_date(date_test.created_at)).to match(/\d\d\/\d\d\/\d\d\d\d/)
+            expect(date_test.formatted_date(date_test.updated_at)).to match(/\d\d\/\d\d\/\d\d\d\d/)
+        end
 
-    # tests #slug method
-    it "has a properly created slug" do
-        one_word = ContentSection.create(name: "stuff")
-        one_word_cap = ContentSection.create(name: "Content")
-        multi_word = ContentSection.create(name: "cool stuff and content")
-        multi_word_cap = ContentSection.create(name: "cOOl Stuff AND Content")
-        crazy_one_word = ContentSection.create(name: "$tu3FF")
-        crazy_multi_word = ContentSection.create(name: "cR@z4 $tu3FF")
+        # tests #slug method
+        it "has a properly created slug" do
+            one_word = ContentSection.create(name: "stuff")
+            one_word_cap = ContentSection.create(name: "Content")
+            multi_word = ContentSection.create(name: "cool stuff and content")
+            multi_word_cap = ContentSection.create(name: "cOOl Stuff AND Content")
+            crazy_one_word = ContentSection.create(name: "$tu3FF")
+            crazy_multi_word = ContentSection.create(name: "cR@z4 $tu3FF")
+            
+            expect(one_word.slug).to eq("stuff")
+            expect(one_word_cap.slug).to eq("content")
+            expect(multi_word.slug).to eq("cool-stuff-and-content")
+            expect(multi_word_cap.slug).to eq("cool-stuff-and-content")
+            expect(crazy_one_word.slug).to eq("tu3ff")
+            expect(crazy_multi_word.slug).to eq("crz4-tu3ff")
+        end
         
-        expect(one_word.slug).to eq("stuff")
-        expect(one_word_cap.slug).to eq("content")
-        expect(multi_word.slug).to eq("cool-stuff-and-content")
-        expect(multi_word_cap.slug).to eq("cool-stuff-and-content")
-        expect(crazy_one_word.slug).to eq("tu3ff")
-        expect(crazy_multi_word.slug).to eq("crz4-tu3ff")
+        # tests .find_by_slug method
+            # (commenting out to see if needed here, use in other classes if not)
+        # it "can be found by its slug" do
+        #     con_sec = ContentSection.create(name: "cool stuff and content")
+        #     search_result = ContentSection.find_by_slug("cool-stuff-and-content")
+        #     expect(search_result).to eq(con_sec)
+        # end
     end
-    
-    # tests .find_by_slug method
-        # (commenting out to see if needed here, use in other classes if not)
-    # it "can be found by its slug" do
-    #     con_sec = ContentSection.create(name: "cool stuff and content")
-    #     search_result = ContentSection.find_by_slug("cool-stuff-and-content")
-    #     expect(search_result).to eq(con_sec)
-    # end
 end
 
 

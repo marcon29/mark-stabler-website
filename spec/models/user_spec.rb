@@ -155,15 +155,17 @@ describe "User" do
 
 
     # helper method tests ########################################################
-    # tests full_name method
-    it "can create a properly formatted full name from user's first and last name" do
-        test_attrs = {first_name: "Joe", last_name: "Blow", email: "joe_blow@example.com", username: "testuser1", password: "test"}
-        test_attrs_cap = {first_name: "jane", last_name: "doe", email: "jane.doe@example.com", username: "testuser2", password: "test"}
-        
-        user = User.create(test_attrs)
-        user_cap = User.create(test_attrs_cap)
+    describe "all helper methods work correctly" do
+        # tests full_name method
+        it "can create a properly formatted full name from user's first and last name" do
+            test_attrs = {first_name: "Joe", last_name: "Blow", email: "joe_blow@example.com", username: "testuser1", password: "test"}
+            test_attrs_cap = {first_name: "jane", last_name: "doe", email: "jane.doe@example.com", username: "testuser2", password: "test"}
+            
+            user = User.create(test_attrs)
+            user_cap = User.create(test_attrs_cap)
 
-        expect(user.full_name).to eq("Joe Blow")
-        expect(user_cap.full_name).to eq("Jane Doe")
+            expect(user.full_name).to eq("Joe Blow")
+            expect(user_cap.full_name).to eq("Jane Doe")
+        end
     end
 end
