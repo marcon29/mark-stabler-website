@@ -1,61 +1,40 @@
 class SocialProfile < ActiveRecord::Base
-    # attrs/table setup: name, handle, social_platform_id
+    belongs_to :social_platform
 
-
-    # associations:
-    # belongs_to :social_platform
+    validates :name, 
+        presence: { message: "You must provide a name." }, 
+        uniqueness: { case_sensitive: false, message: "That profile already exists. Please provide another." }
+    validates :handle, 
+        presence: { message: "You must provide a valid profile handle. Can only use letters, numbers, periods, hyphens, underscores. Spaces and @'s will be removed." }, 
+        uniqueness: { case_sensitive: false, scope: :social_platform, message: "That handle is already used for that platform. Please provide another." }
+    validates :social_platform, presence: { message: "Your profile must belong to a platform." }
+    validates_associated :social_platform, message: "Your profile must belong to a platform."
+    before_validation :format_handle
 
     
-    # attr validation:
-        # name and handle, they must both exist and be unique
-
-        # name 
-            # must exist, error message: "You must provide a name."
-		    # must be unique (case insensitive), error message: "That profile already exists. Please provide another."
-		
-        # handle
-		    # must exist, error message: "You must provide your profile handle."
-            # must be unique (case insensitive), error message: "That handle is already used for that platform. Please provide another."
-                # uniqness is limited to the same platform
-            # format: { with: /\A\w+\z/, message: "That handle doesn't look valid. Please provide another." }
-            # run format_handle before saving
-        
-         # social_platform_id
-		    # must exist, error message: "Your profile must belong to a platform."
-            
-
-            # social full url examples: final trailing slash, caps and www. don't matter
-            # https://www.facebook.com/mark.stabler.984
-            # https://www.facebook.com/StablerWriter/
-            # https://twitter.com/stablerwriter/
-            # https://www.instagram.com/stablerwriter/
-            # https://www.linkedin.com/in/stablerwriter/
-            # https://www.reddit.com/user/stablerwriter
-            # https://github.com/marcon29
-
-
-    ######### revisit association tests in platform class to make sure handle input is correct #################
-		    
-
-
 	# helpers ################
-    # removes @ and spaces if included
-    # def format_handle
-    #     # self.handle.gsub(/[@ ]/, "").downcase
-    # end
+    def format_handle
+        string = self.handle.gsub(/[@ ]/, "").downcase
+        
+        if string.scan(/[^\w\-_\.]/).empty?
+            self.handle = string.gsub(/[@ ]/, "").downcase
+        else
+            self.handle = ""
+        end
+    end
 
-    # # creates link url from SocialPlatform.base_url + SocialProfile.handle
-    # def link
-    #     # "#{self.platform.base_url}/#{self.handle}"
-    # end
+    # creates link url from SocialPlatform.base_url + SocialProfile.handle
+    def link
+        "#{self.social_platform.base_url}#{self.handle}"        
+    end
 
-    # def slug
-    #     # self.name.gsub(" ", "-").scan(/[[^\s\W]-]/).join.downcase
-    # end
+    def slug
+        self.name.gsub(" ", "-").scan(/[[^\s\W]-]/).join.downcase
+    end
     
-    # def self.find_by_slug(url_slug)
-    #     # self.all.find { |obj| obj.slug == url_slug }
-    # end
+    def self.find_by_slug(url_slug)
+        self.all.find { |obj| obj.slug == url_slug }
+    end
             
 
             

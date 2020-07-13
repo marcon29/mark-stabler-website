@@ -1,12 +1,9 @@
 class SocialPlatform < ActiveRecord::Base
-    # attrs/table setup: name, base_url, image_file_name
-
-    # associations:
-    # has_many :social_profiles #destroy any social_profiles if a social_platform is deleted
+    has_many :social_profiles, :dependent => :destroy
 
     validates :name, 
         presence: { message: "You must provide a name." }, 
-        uniqueness: { case_sensitive: false, message: "That platform already exists. Please provide another." }
+        uniqueness: { case_sensitive: false, message: "That platform already exists. Please provide another." }    
     validates :base_url, 
         presence: { message: "You must provide the base URL." }, 
         uniqueness: { case_sensitive: false, message: "That URL is already used for another platform. Please provide another." }, 
@@ -17,10 +14,8 @@ class SocialPlatform < ActiveRecord::Base
         format: { with: /\A(\w+.jpeg|\w+.jpg|\w+.png|\w+.svg)\z/, message: "Only .jpeg, .jpg, .png, or .svg files are allowed." }
     before_validation :format_base_url
 
-    
-    # helpers ################
-        
 
+    # helpers ################
     # takes user's url entry, removes http and https, ensures www. is there, ensures trailing slash
     def format_base_url
         string = self.base_url.gsub(/(https:\/\/|http:\/\/)?(www.)?/, "").strip.downcase

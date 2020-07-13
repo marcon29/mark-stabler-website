@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'pry'
-
 describe "SocialPlatform" do        
     # object creation and validation tests #######################################
     describe "can create and save valid instances " do
@@ -210,14 +208,13 @@ describe "SocialPlatform" do
     describe "works with assoicated models correctly" do
         it "has many social_profiles" do
             valid_attrs = {name: "platform", base_url: "https://www.example.com", image_file_name: "icon.png"}
-            profile1_attrs = {name: "profile one", handle: "profileone", notes: "notes for profile one"}
-            profile2_attrs = {name: "profile two", handle: "profiletwo", notes: "notes for profile two"}
+            profile1_attrs = {name: "profile one", handle: "profileone"}
+            profile2_attrs = {name: "profile two", handle: "profiletwo"}
 
             platform = SocialPlatform.create(valid_attrs)
             profile1 = SocialProfile.create(profile1_attrs)
             profile2 = SocialProfile.create(profile2_attrs)
 
-            # if need to add .save (or assign the other way around) - update the delete test below also
             platform.social_profiles << profile1
             platform.social_profiles << profile2
 
@@ -227,15 +224,15 @@ describe "SocialPlatform" do
 
         it "will also delete any associated social_profiles if itself is deleted" do
             valid_attrs = {name: "platform", base_url: "https://www.example.com", image_file_name: "icon.png"}
-            profile1_attrs = {name: "profile one", handle: "profileone", notes: "notes for profile one"}
-            profile2_attrs = {name: "profile two", handle: "profiletwo", notes: "notes for profile two"}
+            profile1_attrs = {name: "profile one", handle: "profileone"}
+            profile2_attrs = {name: "profile two", handle: "profiletwo"}
 
             platform = SocialPlatform.create(valid_attrs)
             profile1 = SocialProfile.create(profile1_attrs)
             profile2 = SocialProfile.create(profile2_attrs)
 
             platform.social_profiles << profile1
-            platform.social_profiles << profile2
+            platform.social_profiles << profile2            
 
             platform.destroy
 
