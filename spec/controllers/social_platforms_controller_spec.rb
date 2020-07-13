@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "AppController" do    
+describe "SocialPlatformslController" do
 	# controller tests ###########################################################
 	# add your describe statements to group if needed
 
