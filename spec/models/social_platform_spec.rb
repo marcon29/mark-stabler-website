@@ -4,16 +4,17 @@ require 'pry'
 
 describe "SocialPlatform" do        
     # object creation and validation tests #######################################
-
-    it "can instantiate with a name, base url, and image file name" do
-        valid_attrs = {name: "platform name", base_url: "https://www.example.com", image_file_name: "icon.png"}
-        platform = SocialPlatform.create(valid_attrs)
-        
-        expect(platform.valid?).to be true
-        expect(platform).to be_an_instance_of(SocialPlatform)
-        expect(platform.name).to eq("platform name")
-        expect(platform.base_url).to eq("www.example.com/")
-        expect(platform.image_file_name).to eq("icon.png")
+    describe "can create and save valid instances " do
+        it "can instantiate with a name, base url, and image file name" do
+            valid_attrs = {name: "platform name", base_url: "https://www.example.com", image_file_name: "icon.png"}
+            platform = SocialPlatform.create(valid_attrs)
+            
+            expect(platform.valid?).to be true
+            expect(platform).to be_an_instance_of(SocialPlatform)
+            expect(platform.name).to eq("platform name")
+            expect(platform.base_url).to eq("www.example.com/")
+            expect(platform.image_file_name).to eq("icon.png")
+        end
     end
 
     describe "has a required, unique name (case insensitive) and provides correct error message when invalid" do
@@ -68,8 +69,6 @@ describe "SocialPlatform" do
         it "won't instantiate when base_url doesn't follow standard base_url text pattern" do
             # can only use letters, numbers, and hyphens; no hyphens at beginning or end of domain; must have TLD; case insensitive (covered above)
             # base_url will be formatted before validation to always be valid
-                # if formatting fails, should also trip failures here
-                # no error message needed
 
             extra_dot1_attrs = {name: "platform1 name", base_url: "https://www.example..com", image_file_name: "icon1.png"}
             extra_dot2_attrs = {name: "platform2 name", base_url: "https://www..example.com", image_file_name: "icon2.png"}
@@ -250,7 +249,7 @@ describe "SocialPlatform" do
     describe "all helper methods work correctly" do
 
         # tests format_base_url method
-        it "can take a user's url entry and format it to set up creating correct link text for view" do
+        it "can take a user's url entry and format it to set up correct link text for view" do
             full_attrs = {name: "platform1 name", base_url: "http://www.facebook.com", image_file_name: "icon1.png"}
             full_secure_attrs = {name: "platform2 name", base_url: "https://www.facebook.com", image_file_name: "icon2.png"}
             trailing_slash_attrs = {name: "platform3 name", base_url: "https://www.facebook.com/", image_file_name: "icon3.png"}
@@ -294,7 +293,7 @@ describe "SocialPlatform" do
             one_word_attrs = {name: "name", base_url: "https://www.example1.com", image_file_name: "icon1.png"}
             one_word_cap_attrs = {name: "Platform", base_url: "https://www.example2.com", image_file_name: "icon2.png"}
             multi_word_attrs = {name: "cool name for platform", base_url: "https://www.example3.com", image_file_name: "icon3.png"}
-            multi_word_cap_attrs = {name: "cOOl Name FOR Platform", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
+            multi_word_cap_attrs = {name: "cOOl PlatForm Name", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
             crazy_one_word_attrs = {name: "n@mE!46", base_url: "https://www.example5.com", image_file_name: "icon5.png"}
             crazy_multi_word_attrs = {name: "cR@z4 p!atF0rm", base_url: "https://www.example6.com", image_file_name: "icon6.png"}
 
@@ -304,12 +303,11 @@ describe "SocialPlatform" do
             multi_word_cap = SocialPlatform.create(multi_word_cap_attrs)
             crazy_one_word = SocialPlatform.create(crazy_one_word_attrs)
             crazy_multi_word = SocialPlatform.create(crazy_multi_word_attrs)
-
             
             expect(one_word.slug).to eq("name")
             expect(one_word_cap.slug).to eq("platform")
             expect(multi_word.slug).to eq("cool-name-for-platform")
-            expect(multi_word_cap.slug).to eq("cool-name-for-platform")
+            expect(multi_word_cap.slug).to eq("cool-platform-name")
             expect(crazy_one_word.slug).to eq("nme46")
             expect(crazy_multi_word.slug).to eq("crz4-patf0rm")
         end

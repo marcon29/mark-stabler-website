@@ -2,34 +2,36 @@ require 'spec_helper'
 
 describe "ContentSection" do        
     # object creation and validation tests #######################################
-    it "can instantiate with a name, css_class, page_location, headline, body_copy, link" do
-        attrs = {
-            name: "test content", 
-            css_class: "text-box", 
-            page_location: 1, 
-            headline: "this is cool content", 
-            body_copy: "Maybe it is cool and maybe it is not. I will let you decide.", 
-            link: "https://www.example.com"
-        }
+    describe "can create and save valid instances " do
+        it "can instantiate with a name, css_class, page_location, headline, body_copy, link" do
+            attrs = {
+                name: "test content", 
+                css_class: "text-box", 
+                page_location: 1, 
+                headline: "this is cool content", 
+                body_copy: "Maybe it is cool and maybe it is not. I will let you decide.", 
+                link: "https://www.example.com"
+            }
 
-        con_sec = ContentSection.create(attrs)
-        
-        expect(con_sec.valid?).to be true
-        expect(con_sec).to be_an_instance_of(ContentSection)
+            con_sec = ContentSection.create(attrs)
+            
+            expect(con_sec.valid?).to be true
+            expect(con_sec).to be_an_instance_of(ContentSection)
 
-        expect(con_sec.name).to eq("test content")
-        expect(con_sec.css_class).to eq("text-box")
-        expect(con_sec.page_location).to eq 1
-        expect(con_sec.headline).to eq("this is cool content")
-        expect(con_sec.body_copy).to eq("Maybe it is cool and maybe it is not. I will let you decide.")
-        expect(con_sec.link).to eq("https://www.example.com")
-    end
-        
-    it "can instantiate with only a name" do
-        con_sec = ContentSection.create(name: "another test")
-        
-        expect(con_sec.valid?).to be true
-        expect(con_sec).to be_an_instance_of(ContentSection)
+            expect(con_sec.name).to eq("test content")
+            expect(con_sec.css_class).to eq("text-box")
+            expect(con_sec.page_location).to eq 1
+            expect(con_sec.headline).to eq("this is cool content")
+            expect(con_sec.body_copy).to eq("Maybe it is cool and maybe it is not. I will let you decide.")
+            expect(con_sec.link).to eq("https://www.example.com")
+        end
+            
+        it "can instantiate with only a name" do
+            con_sec = ContentSection.create(name: "another test")
+            
+            expect(con_sec.valid?).to be true
+            expect(con_sec).to be_an_instance_of(ContentSection)
+        end
     end
     
     describe "has a required, unique name (case insensitive) and provides correct error message when invalid" do

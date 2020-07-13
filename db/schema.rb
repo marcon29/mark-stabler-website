@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_12_191311) do
+ActiveRecord::Schema.define(version: 2020_07_13_025600) do
 
   create_table "content_sections", force: :cascade do |t|
     t.string "name"
@@ -27,6 +27,12 @@ ActiveRecord::Schema.define(version: 2020_07_12_191311) do
     t.string "name"
     t.string "base_url"
     t.string "image_file_name"
+  end
+
+  create_table "social_profiles", force: :cascade do |t|
+    t.string "name"
+    t.string "handle"
+    t.integer "social_platform_id"
   end
 
   create_table "users", force: :cascade do |t|

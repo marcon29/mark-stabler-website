@@ -1,9 +1,9 @@
 class SocialProfile < ActiveRecord::Base
-    # attrs/table setup: name, handle, notes, social_platform_id
+    # attrs/table setup: name, handle, social_platform_id
 
 
     # associations:
-    belongs_to :social_platform
+    # belongs_to :social_platform
 
     
     # attr validation:
@@ -11,14 +11,18 @@ class SocialProfile < ActiveRecord::Base
 
         # name 
             # must exist, error message: "You must provide a name."
-		    # must be unique (case insensitive), error message: "That name is already used. Please provide another."
+		    # must be unique (case insensitive), error message: "That profile already exists. Please provide another."
 		
         # handle
 		    # must exist, error message: "You must provide your profile handle."
             # must be unique (case insensitive), error message: "That handle is already used for that platform. Please provide another."
                 # uniqness is limited to the same platform
+            # format: { with: /\A\w+\z/, message: "That handle doesn't look valid. Please provide another." }
             # run format_handle before saving
-
+        
+         # social_platform_id
+		    # must exist, error message: "Your profile must belong to a platform."
+            
 
             # social full url examples: final trailing slash, caps and www. don't matter
             # https://www.facebook.com/mark.stabler.984
@@ -35,17 +39,23 @@ class SocialProfile < ActiveRecord::Base
 
 
 	# helpers ################
-		# link
-            # creates link url from SocialPlatform.base_url + SocialProfile.handle
-        
-        # format_handle 
-            # removes @ if included
+    # removes @ and spaces if included
+    # def format_handle
+    #     # self.handle.gsub(/[@ ]/, "").downcase
+    # end
 
-        # slug
-            # standard slug, but should comprise of SocialPlatform.name and SocialProfile.name
+    # # creates link url from SocialPlatform.base_url + SocialProfile.handle
+    # def link
+    #     # "#{self.platform.base_url}/#{self.handle}"
+    # end
 
-        # self.find_by_slug
-            # standard
+    # def slug
+    #     # self.name.gsub(" ", "-").scan(/[[^\s\W]-]/).join.downcase
+    # end
+    
+    # def self.find_by_slug(url_slug)
+    #     # self.all.find { |obj| obj.slug == url_slug }
+    # end
             
 
             
