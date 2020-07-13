@@ -11,6 +11,12 @@ class AppController < Sinatra::Base
 		erb :index
 	end
 
+	# contact page
+	get '/contact' do
+		@contact_email = "online@markstabler.com"
+		erb :contact
+	end
+
 
 
 end

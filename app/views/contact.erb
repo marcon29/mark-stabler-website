@@ -1,0 +1,21 @@
+<section>
+    <h1>Contact Form Goes Here</h1>	
+</section>
+
+<section>
+	<form id="contact form" method="post" action="mailto:<%= @contact_email %>">
+		<h3>Let's Get in Touch</h3>
+		<p><label for="first_name">First Name: </label>
+			<input id="first_name" type="text" name="email[first_name]"></p>
+		<p><label for="last_name">Last Name: </label>
+			<input id="last_name" type="text" name="email[last_name]"></p>
+		<p><label for="email">Email: </label>
+			<input id="email" type="text" name="email[email]"></p>
+		<p><label for="subject">Subject: </label>
+            <input id="subject" type="text" name="email[subject]"></p>        
+        <p><label for="message">Message: </label>            
+            <textarea id="message" type="text" name="email[message]"></textarea></p>
+
+		<p><input type="submit" value="Send"></p>
+	</form>
+</section>

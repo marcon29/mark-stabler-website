@@ -46,7 +46,7 @@ class ContentSection < ActiveRecord::Base
         # add instructions to make this clear
         # make value for href attribute use http:// if link is absolute
 
-    # formatted date: if not an issue in view, remove from method in model
+    # formatted date: check on "if date" if not an issue in view, remove from method in model
 
 
 end
