@@ -4,59 +4,49 @@ class SocialPlatformslController < AppController
     # use Rack::Flash
     
     # create routes ###############################
-    get '/social-platforms/new' do
-        # test
-        "hello world from new route of social_platform_controller"
-        
-        # redirect '/' if !logged_in?
-        # insert code for action here
-        # erb :"/social-platforms/new"
+	get '/social-platforms/new' do        
+		# redirect "/admin" if !logged_in?				
+        # erb :"/social_platforms/new"
 	end
 
 	post '/social-platforms' do
-		# insert code for action here
-		# redirect "/social-platforms/#{social_platform.slug}"
+		# platform = SocialPlatform.new(params[:social_platform])
+
+		# if platform.save
+			# # flash[:message] = "#{platform.name} created"
+			# redirect "/admin/social"
+		# else
+			# # flash[:message] = error_messages(social_platform).join("<br>")
+			# redirect back
+		# end
 	end
 
-	# read routes #################################
-	get '/social-platforms' do
-		# test
-		"hello world from index route of social_platform_controller"
 
-		# redirect '/' if !logged_in?
-		# insert code for action here
-		# erb :"/social-platforms/index"
-	end
-
-    get '/social-platforms/:slug' do
-        # test
-        "hello world from show route of social_platform_controller"
-        
-		# redirect '/' if !logged_in?
-		# insert code for action here
-		# erb :"/social-platforms/show"
-	end
-  
 	# update routes ###############################
-    get '/social-platforms/:slug/edit' do
-        # test
-        "hello world from edit route of social_platform_controller"
-
-		# redirect '/' if !logged_in?
-		# insert code for action here
-		# erb :"/social-platforms/edit"
+    get '/social-platforms/:slug/edit' do		
+		# redirect "/admin" if !logged_in?
+		# platform = SocialPlatform.find_by_slug(params[:slug])
+		# erb :"/social_platforms/edit"
 	end
   
 	patch '/social-platforms/:slug' do
-		# insert code for action here
-		# redirect "/social-platforms/#{social_platform.slug}"
-	end
-        
+		# platform = SocialPlatform.find_by_slug(params[:slug])
+
+		# if platform.update(params[:social_platform])
+			# # flash[:message] = "#{platform.name} updated"
+			# redirect "/admin/social"
+		# else
+			# # flash[:message] = error_messages(social_platform).join("<br>")
+			# redirect back
+		# end
+	end	
+	
+
 	# delete routes ###############################
 	delete '/social-platforms/:slug' do
-		# insert code for action here
-		# redirect "/"
+		# platform = SocialPlatform.find_by_slug(params[:slug])
+		# platform.destroy
+		# # flash[:message] = "#{platform.name} removed"
+		# redirect "/admin/social"
 	end
-
-
 end

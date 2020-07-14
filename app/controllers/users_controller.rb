@@ -3,92 +3,52 @@
 class UsersController < AppController
 	# use Rack::Flash
     
-	# admin home page ###############################################
-	# this route for CMS home - don't need this if redirecting to a content page for web app
-	# make this the login/signup home page if not logged in (users/index)
-	# make gateway to all other functionality if logged in (users/admin)
-	get '/admin' do
-		# test
-		"hello world from admin home page from users_controller"
-
-	        # erb :"/users/index" if !logged_in?
-	        # erb :"/users/admin"
+    # new user (signup) routes ################################################
+    get '/users/new' do
+        # redirect "/admin" if !logged_in?
+		# erb :"users/new"
 	end
     
-	# signup routes ################################################
-	get '/signup' do
-		# test
-		"hello world from signup route of users_controller"
+    post '/users/new' do
+        # don't login after creation, only an existing user can create a new one
 
-		# redirect "/admin" if logged_in?
-		# erb :"users/signup"
-	end
-
-	post '/signup' do
 		# user = User.new(params[:user])
 
 		# if user.save
-			# login(user)
 			# # flash[:message] = "#{user.username} created"
-			# redirect "/admin"
+			# redirect "/admin/users"
 		# else
-			# flash[:message] = error_messages(user).join("<br>")
-			# redirect '/signup'
+			# # flash[:message] = error_messages(user).join("<br>")
+			# redirect back
 		# end
-	end
-
-
-	# login routes ################################################
-	get '/login' do
-		# test
-		"hello world from login route of users_controller"
-
-		# redirect "/admin" if logged_in?
-		# erb :"users/login"
-	end
-
-	post '/login' do
-		# if params[:user][:username] == "" || params[:user][:password] == ""            
-			# # flash[:message] = "Operation Failed <br> Both Username and Password must be filled out"
-			# redirect '/login'
-	        # else
-			# user = User.find_by(username: params[:user][:username])
-			# login(user)
-			# # flash[:message] = "Welcome, #{user.first_name.capitalize}"
-			# redirect "/admin"
-		# end
-	end
+    end    
 
 
 	# update routes ###############################
 	get '/users/:slug/edit' do
-		# test
-		"hello world from edit route of users_controller"
-
-		# redirect "/admin" if !logged_in?
+        # redirect "/admin" if !logged_in?
+        # user = User.find_by_slug(params[:slug])
 		# erb :"/users/edit"
 	end
     
 	patch '/users/:slug' do
-		# user = current_user
+		# user = User.find_by_slug(params[:slug])
         
 		# if user.update(params[:user])
 			# # flash[:message] = "#{user.username} updated"
-			# redirect "/users/#{user.slug}"
+			# redirect "/admin/users"
 		# else
 			# # flash[:message] = error_messages(user).join("<br>")
-			# redirect "/users/#{current_user.slug}/edit"
+			# redirect back
 		# end
-	end
+	end    
 
     
-	# logout routes ################################################
-	get '/logout' do
-		# test
-		"hello world from logout route of users_controller"
-
-		# redirect '/' if !logged_in?
-		# session.delete(:user_id)
-		# redirect '/'
+    # delete routes ###############################
+	delete '/users/:slug' do
+		# user = User.find_by_slug(params[:slug])
+		# user.destroy
+		# # flash[:message] = "#{user.username} removed"
+		# redirect "/admin/users"
 	end
 end
