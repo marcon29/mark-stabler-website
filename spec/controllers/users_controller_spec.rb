@@ -1,17 +1,72 @@
 require 'spec_helper'
 
 describe "UsersController" do
+	
+	# need a logged in user for all of these
+
+
 	# controller tests ###########################################################
-	# add your describe statements to group if needed
+	describe "new user routes" do		
+		it "GET Route redirects to the login page when user is not logged in" do
+			# visit '/users/new'
+		end		
+		
+		it "GET Route loads the users/new page when the user is logged in and displays the new user form" do
+			# visit '/users/new'
+		end
+    
+        it "POST Route lets a user create a new user" do
+			# visit '/users/new'
+		end
 
-	# it "can [descriptiong of what instance should be able to do]" do
-		# setup tests
-		# create test value
+		it "POST Route loads the admin/users page after creating a new user" do
+			# visit '/users/new'
+		end
 
-		# expect(test value).to eq("known true value")
-	# end
+		# it "POST Route displays the appropriate flash message upon redirect" do
+		#	# think I can test the display in only processing routes no in every get
+		# 	# visit '/users/new'
+		# end
+	end
 
-	# repeate for each functionality to be tested
+	describe "update user routes" do
+		it "GET Route redirects to the login page when user is not logged in" do
+			# visit '/users/:slug/edit'
+		end		
+		
+		it "GET Route loads the users/edit page when the user is logged in and displays the edit user form" do
+			# make sure edit form has the correct existing object info
+			# visit '/users/:slug/edit'
+		end
+    
+        it "POST Route lets a user update an existing user" do
+			# visit '/users/:slug/edit'
+		end
+
+		it "POST Route loads the admin/users page after updating an existing user" do
+			# visit '/users/:slug/edit'
+		end
+
+		# it "POST Route displays the appropriate flash message upon redirect" do
+		# 	# think I can test the display in only processing routes no in every get
+		# 	# visit '/users/:slug/edit'
+		# end
+	end
+
+	describe "delete user routes" do		
+		it "deletes the user" do
+			# visit '/admin/users'
+		end		
+		
+		it "redirects to the admin/users page after deletion" do
+			# visit '/admin/users'
+		end
+
+		# it "POST Route displays the appropriate flash message upon redirect" do
+		# 	# think I can test the display in only processing routes no in every get
+		# 	# visit '/admin/users'
+		# end
+	end
 
 
 	# helper method tests ########################################################

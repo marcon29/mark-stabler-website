@@ -16,7 +16,25 @@ class AdminController < AppController
             # link to admin/social (erb: profiles/index)		
         
         # erb :"/admin/login" !logged_in?        
-        # erb :"/admin"
+        # erb :"/admin/index"
+    end
+
+    post '/login' do
+		# if params[:user][:username] == "" || params[:user][:password] == ""            
+			# # flash[:message] = "Operation Failed <br> Both Username and Password must be filled out"
+			# redirect '/login'
+        # else
+			# user = User.find_by(username: params[:user][:username])
+			# login(user)
+			# # flash[:message] = "Welcome, #{user.first_name.capitalize}"
+			# redirect "/admin"
+		# end
+    end    
+
+	get '/logout' do
+		# redirect '/' if !logged_in?
+		# session.delete(:user_id)
+		# redirect "/admin"
     end
 
     
@@ -33,27 +51,8 @@ class AdminController < AppController
         # ======================================================
 		
 		# redirect "/admin" if !logged_in?
-		# erb :"users/index"
+		# erb :"/admin/users"
     end
-
-	post '/login' do
-		# if params[:user][:username] == "" || params[:user][:password] == ""            
-			# # flash[:message] = "Operation Failed <br> Both Username and Password must be filled out"
-			# redirect '/login'
-	        # else
-			# user = User.find_by(username: params[:user][:username])
-			# login(user)
-			# # flash[:message] = "Welcome, #{user.first_name.capitalize}"
-			# redirect "/admin"
-		# end
-    end    
-
-	get '/logout' do
-		# redirect '/' if !logged_in?
-		# session.delete(:user_id)
-		# redirect "/admin"
-    end
-
 
     # admin/content routes ################################################
     get '/admin/content' do
@@ -69,7 +68,7 @@ class AdminController < AppController
 
 		# insert code for action here
 
-		# erb :"/content_sections/index"
+		# erb :"/admin/content"
 	end
 
 	# no show route
@@ -97,7 +96,7 @@ class AdminController < AppController
 
 		# insert code for action here
 		
-		# erb :"/social_profiles/index"
+		# erb :"/admin/social"
     end
     
     # no show route

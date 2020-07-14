@@ -65,6 +65,11 @@ describe "AppController" do
 
             # expect(page).to have_current_path("/contact")
         end
+
+        # it "POST Route displays the appropriate flash message upon redirect" do
+		# 	# think I can test the display in only processing routes no in every get
+		# 	# visit '/contact'
+		# end
     end
 
 

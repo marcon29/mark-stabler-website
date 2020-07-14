@@ -59,6 +59,10 @@ class AppController < Sinatra::Base
 		!!session[:user_id]
 	end
 
+	# def logout!
+	# 	# add this method to make testing easier
+	# end
+
 
 
 end
