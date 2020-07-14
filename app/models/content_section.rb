@@ -12,10 +12,6 @@ class ContentSection < ActiveRecord::Base
     # allows view to create <a> href attribute correctly
     def absolute_link?
         !!self.link.match(/http|www\./)
-    end    
-    
-    def formatted_date(date)
-        date.strftime("%m/%d/%Y") # if date
     end
     
     # this will also be used for the css id

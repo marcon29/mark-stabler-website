@@ -38,66 +38,56 @@ class AdminController < AppController
 
     
     # admin/user routes ################################################
-    # no login view route (login page view is on admin page if not logged in)
-
     get '/admin/users' do
         # ======================================================
-        # lists all users and their info
+		# link to users/new (erb: users/new)
+		# lists all users and their info
         # for each user: 
             # link to users/slug/edit (erb: users/edit)            
-            # link to delete (route only)
-        # link to users/new (erb: users/new)
+            # link to delete (route only)        
         # ======================================================
 		
-		# redirect "/admin" if !logged_in?
-		# erb :"/admin/users"
+		redirect "/admin" if !logged_in?
+
+		@users = User.all
+		
+		erb :"/admin/users"
     end
+
 
     # admin/content routes ################################################
     get '/admin/content' do
 		# ======================================================
+		# link to content-sections/new (erb :content_sections/new)
 		# lists all content_section objects (in location order) and select info (name, HL, body, link text, last updated)
         # for each object:
             # link to content-sections/slug/edit (erb :content_sections/edit)
-			# link to delete (route only)
-		# link to content-sections/new (erb :content_sections/new)
+			# link to delete (route only)		
 		# ======================================================
 
-		# redirect "/admin" if !logged_in?
-
-		# insert code for action here
-
-		# erb :"/admin/content"
+		redirect "/admin" if !logged_in?
+		erb :"/admin/content"
 	end
-
-	# no show route
-		# all important details will be on index page (admin/content)
-		# rest only needed for editing, so only show on that page
 
 
     # admin/social routes ################################################
     get '/admin/social' do
 		# ======================================================
+		# link to social-platforms/new (erb :social_platforms/new)
 		# lists all social_platforms objects with all info
         # for each platform:
             # link to social-platforms/slug/edit (erb :social_platforms/edit)
 			# link to delete (route only)
-		# link to social-platforms/new (erb :social_platforms/new)
+		
 
+		# link to social-profiles/new (erb :social_profiles/new)
 		# lists all social_profiles objects with all info (by platform)
         # for each profile:
             # link to social-profiles/slug/edit (erb :social_profiles/edit)
-			# link to delete (route only)
-		# link to social-profiles/new (erb :social_profiles/new)
+			# link to delete (route only)		
 		# ======================================================
 
-		# redirect "/admin" if !logged_in?
-
-		# insert code for action here
-		
-		# erb :"/admin/social"
+		redirect "/admin" if !logged_in?
+		erb :"/admin/social"
     end
-    
-    # no show route
-        # all details will be on index page (admin/social)
 end

@@ -33,6 +33,9 @@ class AppController < Sinatra::Base
 
 	# app helpers ###############################
 	# add helpers used in numerous controllers
+	def formatted_date(date)
+        date.strftime("%m/%d/%Y") # if date
+    end
 
 	
 	
