@@ -47,7 +47,7 @@ class AppController < Sinatra::Base
 			session[:user_id] = user.id
 		else
 			# flash[:message] = "We did not find a matching profile. Please sign up instead."
-			redirect '/signup'
+			redirect '/admin'
 		end		
 	end
 	
@@ -59,9 +59,9 @@ class AppController < Sinatra::Base
 		!!session[:user_id]
 	end
 
-	# def logout!
-	# 	# add this method to make testing easier
-	# end
+	def logout!
+		session.delete(:user_id)
+	end
 
 
 

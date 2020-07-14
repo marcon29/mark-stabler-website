@@ -8,33 +8,32 @@ class AdminController < AppController
 	# make this the login/signup home page if not logged in (users/index)
 	# make gateway to all other functionality if logged in (users/admin)
 	get '/admin' do
-        # serves as login page when not logged in
-        # serves as admin home page when logged in
-        # links to home pages for each model
-            # link to admin/users (erb: users/index)
-            # link to admin/content (erb: content/index)
-            # link to admin/social (erb: profiles/index)		
-        
-        # erb :"/admin/login" !logged_in?        
-        # erb :"/admin/index"
+		if !logged_in?
+			erb :"/admin/login"
+		else
+			erb :"/admin/index"			
+		end
     end
 
     post '/login' do
 		# if params[:user][:username] == "" || params[:user][:password] == ""            
 			# # flash[:message] = "Operation Failed <br> Both Username and Password must be filled out"
-			# redirect '/login'
         # else
 			# user = User.find_by(username: params[:user][:username])
 			# login(user)
 			# # flash[:message] = "Welcome, #{user.first_name.capitalize}"
-			# redirect "/admin"
 		# end
+		
+		# remove these two and use above when adding flash messages
+		user = User.find_by(username: params[:user][:username])
+		login(user)
+
+		redirect "/admin"
     end    
 
 	get '/logout' do
-		# redirect '/' if !logged_in?
-		# session.delete(:user_id)
-		# redirect "/admin"
+		logout! if logged_in?			
+		redirect "/admin"
     end
 
     

@@ -9,8 +9,9 @@ if ActiveRecord::Base.connection.migration_context.needs_migration?
   raise 'Migrations are pending run `rake db:migrate SINATRA_ENV=test` to resolve the issue.'
 end
 
+# these control the display results (turns off showing all the damn query results)
 # ActiveRecord::Base.logger.level = 1
-# ActiveRecord::Base.logger = nil
+ActiveRecord::Base.logger = nil
 
 RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
@@ -36,3 +37,18 @@ def app
 end
 
 Capybara.app = app
+
+def visit_admin_and_login_user
+  visit '/admin'
+  login_user
+end
+
+def login_user
+	fill_in :username, :with => "testuser1"
+	fill_in :password, :with => "test"
+	click_button "Log In"
+end
+
+def logout_user
+	click_link "Log Out"
+end

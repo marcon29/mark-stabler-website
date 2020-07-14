@@ -4,11 +4,29 @@ describe "UsersController" do
 	
 	# need a logged in user for all of these
 
+	# before do
+	# 	user_info = {
+	# 		first_name: "test", 
+	# 		last_name: "user", 
+	# 		email: "tester1@example.com",
+	# 		username: "testuser1", 
+	# 		password: "test"
+	# 	}
+	# 	user = User.create(user_info)
+		
+	# 	visit_admin_and_login_user
+	# end
+
+	# after do
+	# 	logout_user
+	# end
+	
 
 	# controller tests ###########################################################
 	describe "new user routes" do		
-		it "GET Route redirects to the login page when user is not logged in" do
+		it "GET Route redirects to the login page when user is not logged in" do			
 			# visit '/users/new'
+
 		end		
 		
 		it "GET Route loads the users/new page when the user is logged in and displays the new user form" do
