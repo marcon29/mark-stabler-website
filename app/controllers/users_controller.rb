@@ -27,7 +27,7 @@ class UsersController < AppController
 	# update routes ###############################
 	get '/users/:slug/edit' do
         # redirect "/admin" if !logged_in?
-        # user = User.find_by_slug(params[:slug])
+        # @user = User.find_by_slug(params[:slug])
 		# erb :"/users/edit"
 	end
     
@@ -46,6 +46,9 @@ class UsersController < AppController
     
     # delete routes ###############################
 	delete '/users/:slug' do
+		# add in check so won't delete if User.all.count = 1
+			# # redirect "/admin/users" if so
+
 		# user = User.find_by_slug(params[:slug])
 		# user.destroy
 		# # flash[:message] = "#{user.username} removed"

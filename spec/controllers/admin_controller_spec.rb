@@ -19,6 +19,7 @@ describe "AdminController" do
 
 			expect(page.body).to include("<h1>Login</h1>")
 			expect(page.body).to include('<form id="login-form"')
+			expect(page.body).to include('method="post" action="/login"')
 			expect(page).to have_field(:username)
 			expect(page).to have_field(:password)
 		end
@@ -28,6 +29,7 @@ describe "AdminController" do
 
 			expect(page.body).to include("<h1>Login</h1>")
 			expect(page.body).to include('<form id="login-form"')
+			expect(page.body).to include('method="post" action="/login"')
 			expect(page).to have_field(:username)
 			expect(page).to have_field(:password)
 		end
@@ -37,6 +39,7 @@ describe "AdminController" do
 
 			expect(page.body).to include("<h1>Login</h1>")
 			expect(page.body).to include('<form id="login-form"')
+			expect(page.body).to include('method="post" action="/login"')
 			expect(page).to have_field(:username)
 			expect(page).to have_field(:password)
 		end
@@ -50,6 +53,7 @@ describe "AdminController" do
 
 				expect(page.body).to include("<h1>Login</h1>")
 				expect(page.body).to include('<form id="login-form"')
+				expect(page.body).to include('method="post" action="/login"')
 				expect(page).to have_field(:username)
 				expect(page).to have_field(:password)
 			end

@@ -1,0 +1,22 @@
+<section>
+	<h1>Add New User</h1>
+</section>
+
+<section>
+	<form id="new-user-form" class="new-edit-form" method="post" action="/users/new">
+        <h3>Enter Info to Create a New User</h3>
+		<p><label for="first_name">First Name: </label>
+			<input id="first_name" type="text" name="user[first_name]"></p>
+		<p><label for="last_name">Last Name: </label>
+			<input id="last_name" type="text" name="user[last_name]"></p>
+		<p><label for="email">Email: </label>
+			<input id="email" type="text" name="user[email]"></p>
+		<p><label for="username">Username: </label>
+			<input id="username" type="text" name="user[username]"></p>
+		<p><label for="password">New Password: </label>
+			<input id="password" type="password" name="user[password]"></p>
+		<br>
+
+		<p><input type="submit" value="Add User"></p>
+	</form>
+</section>

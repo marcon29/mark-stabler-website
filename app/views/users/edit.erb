@@ -1,0 +1,27 @@
+<section>
+	<h1>Edit <%= @user.username %></h1>
+</section>
+
+<section>
+	<form id="user-edit-form" class="new-edit-form" method="post" action="/users/<%= @user.slug %>">
+		<input id="hidden" type="hidden" name="_method" value="patch">
+
+		<h3>Edit the Info You Want to Change</h3>
+		<p><label for="first_name">First Name: </label>
+			<input id="first_name" type="text" name="user[first_name]" value="<%= @user.first_name %>"></p>
+		<p><label for="last_name">Last Name: </label>
+			<input id="last_name" type="text" name="user[last_name]" value="<%= @user.last_name %>"></p>
+		<p><label for="email">Email: </label>
+			<input id="email" type="text" name="user[email]" value="<%= @user.email %>"></p>
+		<p><label for="username">Username: </label>
+			<input id="username" type="text" name="user[username]" value="<%= @user.username %>"></p>
+		<p>
+			<label for="password">New Password: </label>
+			<input id="password" type="password" name="user[password]" value="<%= @user.password %>"><br>
+			<span style="padding-left: 6.8em;">(leave this blank if not changing your password)<span>
+		</p>
+		<br>
+
+		<p><input type="submit" value="Update User"></p>
+	</form>
+</section>
