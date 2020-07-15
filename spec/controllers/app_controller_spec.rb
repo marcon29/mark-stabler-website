@@ -61,18 +61,4 @@ describe "AppController" do
 		# 	# visit '/contact'
 		# end
     end
-
-
-    # helper method tests ########################################################
-    
-    # tests #formatted_date method
-        # this test moved from content_sections because that method was moved to that controller
-    # it "can return only the properly formatted date of when the object was created and updated" do
-    #     date_test = ContentSection.create(name: "date test")
-        
-    #     expect(date_test.formatted_date(date_test.created_at)).to match(/\d\d\/\d\d\/\d\d\d\d/)
-    #     expect(date_test.formatted_date(date_test.updated_at)).to match(/\d\d\/\d\d\/\d\d\d\d/)
-    # end
-
-
 end
