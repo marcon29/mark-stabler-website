@@ -1,0 +1,55 @@
+<section>
+	<h1>Social Management</h1>
+</section>
+
+<section>
+    <h3><a href="/social-platforms/new"><h3>ADD PLATFORM</a></h3>
+    <h3><a href="/social-profiles/new"><h3>ADD PROFILE</a></h3>
+</section>
+<hr>
+
+<section>
+    <h2>All Social Profiles</h2>
+    <% @platforms.order("name ASC").each do |plat| %>        
+        <h3><%= plat.name %></h3>
+        <p>Base URL: <%= plat.base_url %></p>
+        <p>Image File: <%= plat.image_file_name %></p>
+        <form class="crud-button" method="get" action="/social-platforms/<%= plat.slug %>/edit">
+            <input type="submit" value="Edit">
+        </form>
+        <form class="crud-button" method="post" action="/social-platforms/<%= plat.slug %>">
+            <input id="hidden" type="hidden" name="_method" value="delete">
+            <input type="submit" value="Delete">
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Profile Name</th>
+                    <th>Handle</th>
+                    <th>Display Order</th>
+                    <th>Management Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% plat.social_profiles.order("display_order ASC").each do |prof| %>
+                    <tr>
+                        <td><%= prof.name %></td>
+                        <td><%= prof.handle %></td>
+                        <td><%= prof.display_order %></td>
+                        <td>
+                            <form class="crud-button" method="get" action="/social-profiles/<%= prof.slug %>/edit">
+                                <input type="submit" value="Edit">
+                            </form>
+                            <form class="crud-button" method="post" action="/social-profiles/<%= prof.slug %>">
+                                <input id="hidden" type="hidden" name="_method" value="delete">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                <% end %>
+            <tbody>
+        </table>
+        <hr>
+    <% end %>
+</section>

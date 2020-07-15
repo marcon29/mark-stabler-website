@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+require 'pry'
+
 describe "SocialProfile" do        
     # object creation and validation tests #######################################
 
@@ -149,6 +151,36 @@ describe "SocialProfile" do
             expect(has_dots.save).to be true
             expect(has_hyphens.save).to be true
             expect(has_underscore.save).to be true
+        end
+    end
+
+    describe "can have a unique display_order that is an integer and provides correct error message when invalid" do
+        it "won't instantiate when display_order is same as other instance" do
+            valid_platform_attrs = {name: "platform name", base_url: "https://www.example.com", image_file_name: "icon.png"}
+            platform = SocialPlatform.create(valid_platform_attrs)
+
+            valid_instance = SocialProfile.create(name: "profile1 name", handle: "@profhandle1", display_order: 1)
+            valid_instance.social_platform = platform
+            valid_instance.save
+            same_position = SocialProfile.create(name: "dupe location", handle: "@profhandle2", display_order: 1)
+            same_position.social_platform = platform
+            
+            expect(same_position.save).to be false            
+            expect(same_position.errors.messages[:display_order]).to include("You already have a profile in that position. Please choose another.")
+        end
+
+        it "won't instantiate when display_order is not an integer" do
+            valid_platform_attrs = {name: "platform name", base_url: "https://www.example.com", image_file_name: "icon.png"}
+            platform = SocialPlatform.create(valid_platform_attrs)
+
+            valid_instance = SocialProfile.create(name: "profile1 name", handle: "@profhandle1", display_order: 1)
+            valid_instance.social_platform = platform
+            valid_instance.save
+            not_num = SocialProfile.create(name: "not number", handle: "@profhandle2", display_order: "five")
+            not_num.social_platform = platform
+            
+            expect(not_num.save).to be false            
+            expect(not_num.errors.messages[:display_order]).to include("Display order must be a whole number.")
         end
     end
 

@@ -11,7 +11,7 @@ class ContentSection < ActiveRecord::Base
 
     # allows view to create <a> href attribute correctly
     def absolute_link?
-        !!self.link.match(/http|www\./)
+        !!self.link_url.match(/http|www\./)
     end
     
     # this will also be used for the css id

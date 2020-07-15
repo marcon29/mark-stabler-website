@@ -27,7 +27,6 @@ class AdminController < AppController
 		# remove these two and use above when adding flash messages
 		user = User.find_by(username: params[:user][:username])
 		login(user)
-
 		redirect "/admin"
     end    
 
@@ -38,34 +37,17 @@ class AdminController < AppController
 
     
     # admin/user routes ################################################
-    get '/admin/users' do
-        # ======================================================
-		# link to users/new (erb: users/new)
-		# lists all users and their info
-        # for each user: 
-            # link to users/slug/edit (erb: users/edit)            
-            # link to delete (route only)        
-        # ======================================================
-		
+    get '/admin/users' do		
 		redirect "/admin" if !logged_in?
-
-		@users = User.all
-		
+		@users = User.all		
 		erb :"/admin/users"
     end
 
 
     # admin/content routes ################################################
     get '/admin/content' do
-		# ======================================================
-		# link to content-sections/new (erb :content_sections/new)
-		# lists all content_section objects (in location order) and select info (name, HL, body, link text, last updated)
-        # for each object:
-            # link to content-sections/slug/edit (erb :content_sections/edit)
-			# link to delete (route only)		
-		# ======================================================
-
 		redirect "/admin" if !logged_in?
+		@sections = ContentSection.all
 		erb :"/admin/content"
 	end
 
@@ -88,6 +70,8 @@ class AdminController < AppController
 		# ======================================================
 
 		redirect "/admin" if !logged_in?
+		@platforms = SocialPlatform.all
+		@profiles = SocialProfile.all
 		erb :"/admin/social"
     end
 end

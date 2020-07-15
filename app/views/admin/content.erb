@@ -1,0 +1,45 @@
+<section>
+	<h1>Content Management</h1>
+</section>
+
+<section>
+    <h3><a href="/content-sections/new"><h3>ADD CONTENT SECTION</a></h3>
+</section>
+<hr>
+
+<section>
+    <h2>All Content Sections</h2>
+    <p>listed in display order</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Section Name</th>
+                <th>Headline</th>
+                <th>Body Copy</th>
+                <th>Link</th>
+                <th>Last Updated</th>
+                <th>Management Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @sections.order("page_location ASC").each do |cs| %>
+                <tr>
+                    <td><%= cs.name %></td>
+                    <td><%= cs.headline %></td>
+                    <td><%= cs.body_copy %></td>
+                    <td><a href="<%= cs.link_url %>" target="_blank"><%= cs.link_text %></td>
+                    <td><%= formatted_date(cs.updated_at) %></td>
+                    <td>
+                        <form class="crud-button" method="get" action="/content-sections/<%= cs.slug %>/edit">
+                            <input type="submit" value="Edit">
+                        </form>
+                        <form class="crud-button" method="post" action="/content-sections/<%= cs.slug %>">
+                            <input id="hidden" type="hidden" name="_method" value="delete">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            <% end %>
+        <tbody>
+    </table>
+</section>

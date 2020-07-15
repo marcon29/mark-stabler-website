@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_025600) do
+ActiveRecord::Schema.define(version: 2020_07_14_221533) do
 
   create_table "content_sections", force: :cascade do |t|
     t.string "name"
@@ -18,9 +18,10 @@ ActiveRecord::Schema.define(version: 2020_07_13_025600) do
     t.integer "page_location"
     t.string "headline"
     t.text "body_copy"
-    t.string "link"
+    t.string "link_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "link_text"
   end
 
   create_table "social_platforms", force: :cascade do |t|
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 2020_07_13_025600) do
     t.string "name"
     t.string "handle"
     t.integer "social_platform_id"
+    t.integer "display_order"
   end
 
   create_table "users", force: :cascade do |t|

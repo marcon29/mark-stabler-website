@@ -10,7 +10,8 @@ describe "ContentSection" do
                 page_location: 1, 
                 headline: "this is cool content", 
                 body_copy: "Maybe it is cool and maybe it is not. I will let you decide.", 
-                link: "https://www.example.com"
+                link_url: "https://www.example.com",
+                link_text: "example"
             }
 
             con_sec = ContentSection.create(attrs)
@@ -23,7 +24,8 @@ describe "ContentSection" do
             expect(con_sec.page_location).to eq 1
             expect(con_sec.headline).to eq("this is cool content")
             expect(con_sec.body_copy).to eq("Maybe it is cool and maybe it is not. I will let you decide.")
-            expect(con_sec.link).to eq("https://www.example.com")
+            expect(con_sec.link_url).to eq("https://www.example.com")
+            expect(con_sec.link_text).to eq("example")
         end
             
         it "can instantiate with only a name" do
@@ -76,12 +78,12 @@ describe "ContentSection" do
     describe "all helper methods work correctly" do
         # tests #absolute_link? method
         it "can tell if the link is absolute or relative" do
-            abs_http_link_1 = ContentSection.create(name: "absolute link", link: "https://example.com")
-            abs_http_link_2 = ContentSection.create(name: "absolute link", link: "http://example.com")
-            abs_http_www_link_1 = ContentSection.create(name: "absolute link", link: "https://www.example.com")
-            abs_http_www_link_2 = ContentSection.create(name: "absolute link", link: "http://www.example.com")
-            abs_www_link = ContentSection.create(name: "absolute link", link: "www.example.com")
-            relative_link = ContentSection.create(name: "relative link", link: "/example")
+            abs_http_link_1 = ContentSection.create(name: "absolute link", link_url: "https://example.com")
+            abs_http_link_2 = ContentSection.create(name: "absolute link", link_url: "http://example.com")
+            abs_http_www_link_1 = ContentSection.create(name: "absolute link", link_url: "https://www.example.com")
+            abs_http_www_link_2 = ContentSection.create(name: "absolute link", link_url: "http://www.example.com")
+            abs_www_link = ContentSection.create(name: "absolute link", link_url: "www.example.com")
+            relative_link = ContentSection.create(name: "relative link", link_url: "/example")
             
             expect(abs_http_link_1.absolute_link?).to be true
             expect(abs_http_link_2.absolute_link?).to be true
@@ -89,14 +91,6 @@ describe "ContentSection" do
             expect(abs_http_www_link_2.absolute_link?).to be true
             expect(abs_www_link.absolute_link?).to be true
             expect(relative_link.absolute_link?).to be false
-        end
-        
-        # tests #formatted_date method
-        it "can return only the properly formatted date of when the object was created and updated" do
-            date_test = ContentSection.create(name: "date test")
-            
-            expect(date_test.formatted_date(date_test.created_at)).to match(/\d\d\/\d\d\/\d\d\d\d/)
-            expect(date_test.formatted_date(date_test.updated_at)).to match(/\d\d\/\d\d\/\d\d\d\d/)
         end
 
         # tests #slug method
