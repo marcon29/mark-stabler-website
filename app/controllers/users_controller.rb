@@ -6,7 +6,7 @@ class UsersController < AppController
     # new user (signup) routes ################################################
     get '/users/new' do
         # redirect "/admin" if !logged_in?
-		# erb :"users/new"
+		erb :"users/new"
 	end
     
     post '/users/new' do
@@ -25,14 +25,14 @@ class UsersController < AppController
 
 
 	# update routes ###############################
-	get '/users/:slug/edit' do
+	get '/users/:username/edit' do
         # redirect "/admin" if !logged_in?
-        # @user = User.find_by_slug(params[:slug])
-		# erb :"/users/edit"
+        @user = User.find_by(username: params[:username])
+		erb :"/users/edit"
 	end
     
-	patch '/users/:slug' do
-		# user = User.find_by_slug(params[:slug])
+	patch '/users/:username' do
+		# user = User.find_by(username: params[:username])
         
 		# if user.update(params[:user])
 			# # flash[:message] = "#{user.username} updated"
@@ -44,14 +44,15 @@ class UsersController < AppController
 	end    
 
     
-    # delete routes ###############################
-	delete '/users/:slug' do
-		# add in check so won't delete if User.all.count = 1
-			# # redirect "/admin/users" if so
-
-		# user = User.find_by_slug(params[:slug])
-		# user.destroy
-		# # flash[:message] = "#{user.username} removed"
-		# redirect "/admin/users"
+	# delete routes ###############################
+	delete '/users/:username' do
+		if User.all.count == 1
+			# # flash[:message] = "You can't delete the only registered user."
+		else
+			# user = User.find_by(username: params[:username])
+			# user.destroy
+			# # flash[:message] = "#{user.username} removed"
+		end
+		redirect "/admin/users"		
 	end
 end

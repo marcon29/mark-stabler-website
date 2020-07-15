@@ -3,7 +3,7 @@
 </section>
 
 <section>
-	<form id="user-edit-form" class="new-edit-form" method="post" action="/users/<%= @user.slug %>">
+	<form id="user-edit-form" class="new-edit-form" method="post" action="/users/<%= @user.username %>">
 		<input id="hidden" type="hidden" name="_method" value="patch">
 
 		<h3>Edit the Info You Want to Change</h3>
@@ -20,7 +20,6 @@
 			<input id="password" type="password" name="user[password]" value="<%= @user.password %>"><br>
 			<span style="padding-left: 6.8em;">(leave this blank if not changing your password)<span>
 		</p>
-		<br>
 
 		<p><input type="submit" value="Update User"></p>
 	</form>
