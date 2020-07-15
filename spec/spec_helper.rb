@@ -36,8 +36,6 @@ def app
   Rack::Builder.parse_file('config.ru').first
 end
 
-Capybara.app = app
-
 def visit_admin_and_login_user
   visit '/admin'
   login_user
@@ -52,3 +50,5 @@ end
 def logout_user
 	click_link "Log Out"
 end
+
+Capybara.app = app

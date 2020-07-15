@@ -28,11 +28,11 @@
                     <td><%= formatted_date(u.created_at) %></td>
                     <td>
                         <form class="crud-button" method="get" action="/users/<%= u.username %>/edit">
-                            <input type="submit" value="Edit">
+                            <input id="edit-<%= u.username %>" type="submit" value="Edit">
                         </form>                
                         <form class="crud-button" method="post" action="/users/<%= u.username %>">
                             <input id="hidden" type="hidden" name="_method" value="delete">
-                            <input type="submit" value="Delete">
+                            <input id="delete-<%= u.username %>" type="submit" value="Delete">
                         </form>
                     </td>
                 </tr>
