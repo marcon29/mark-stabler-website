@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe "ContentSection" do        
+describe "ContentSection" do
     # object creation and validation tests #######################################
     describe "can create and save valid instances " do
         it "can instantiate with a name, css_class, page_location, headline, body_copy, link" do

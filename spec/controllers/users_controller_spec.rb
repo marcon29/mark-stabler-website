@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "UsersController" do
 	before do
 		user_info = {

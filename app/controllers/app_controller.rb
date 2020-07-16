@@ -21,9 +21,9 @@ class AppController < Sinatra::Base
         # process contact form
                 
 		# if # email sent
-		# 	flash[:message] = "Your message was sent. I'll get back to you as soon as possible."
-        # else
-        #     flash[:message] = "There was a problem sending your message. Looks like I owe you a beer. Please submit again."
+		# 	# flash[:message] = "Your message was sent. I'll get back to you as soon as possible."
+		# else
+		# 	# flash[:message] = "There was a problem sending your message. Looks like I owe you a beer. Please submit again."
 		# end
 		
 		# redirect back
@@ -34,7 +34,7 @@ class AppController < Sinatra::Base
 	# app helpers ###############################
 	# add helpers used in numerous controllers
 	def formatted_date(date)
-        date.strftime("%m/%d/%Y") # if date
+        date.strftime("%m/%d/%Y")
     end
 
 	

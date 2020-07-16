@@ -1,0 +1,26 @@
+SocialProfile
+- has #link instance method to build profile link (base + handle)
+- can leave display_order blank to remove profile from view without deleting it from DB
+
+SocialPlatform
+- has #image_file_link instance method to build link to images so they'll load correctly
+- need to add instructions that image must be loaded in specific folder to work
+    - (requires "images" directory in "public" directory)
+
+ContentSection
+- page location will also determine content order    
+        # provide these instructions on the new and edit pages
+        # provide a single edit view with all copy sections
+            # blank = will not appear (use for WIP copy and to turn things off without deleting them)
+            # 0 = intro section
+            # 1 = all services center
+            # 2 = all services top left
+            # 3 = all services top right
+            # 4 = all services bottom
+            # 5+ = about section (in order)
+
+- link: if to external site, must have "http" or "www" in url or won't link correctly
+        # add instructions to make this clear
+        # make value for href attribute use http:// if link is absolute
+    
+- can leave page_location blank to remove content section from view without deleting it from DB

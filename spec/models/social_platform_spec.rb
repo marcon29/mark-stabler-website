@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe "SocialPlatform" do        
+describe "SocialPlatform" do
     # object creation and validation tests #######################################
     describe "can create and save valid instances " do
         it "can instantiate with a name, base url, and image file name" do

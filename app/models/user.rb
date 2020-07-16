@@ -16,9 +16,5 @@ class User < ActiveRecord::Base
 	# helpers ################
 	def full_name
 		"#{self.first_name.capitalize} #{self.last_name.capitalize}"
-    end
-   
-
-	# view notes ################
-    # use the username for url paths
+    end   
 end

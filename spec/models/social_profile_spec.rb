@@ -1,8 +1,4 @@
-require 'spec_helper'
-
-require 'pry'
-
-describe "SocialProfile" do        
+describe "SocialProfile" do
     # object creation and validation tests #######################################
 
     describe "can create and save valid instances " do

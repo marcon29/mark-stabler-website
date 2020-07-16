@@ -13,10 +13,10 @@ class ContentSectionslController < AppController
 		con_sec = ContentSection.new(params[:content_section])
 
 		if con_sec.save
-			# # flash[:message] = "#{con_sec.name} created"
+			# flash[:message] = "#{con_sec.name} created"
 			redirect "/admin/content"
 		else
-			# # flash[:message] = error_messages(content_section).join("<br>")
+			# flash[:message] = error_messages(content_section).join("<br>")
 			redirect back
 		end
 	end
@@ -33,10 +33,10 @@ class ContentSectionslController < AppController
 		con_sec = ContentSection.find_by_slug(params[:slug])
 
 		if con_sec.update(params[:content_section])
-			# # flash[:message] = "#{con_sec.name} updated"
+			# flash[:message] = "#{con_sec.name} updated"
 			redirect "/admin/content"
 		else
-			# # flash[:message] = error_messages(content_section).join("<br>")
+			# flash[:message] = error_messages(content_section).join("<br>")
 			redirect back
 		end
 	end
@@ -46,7 +46,7 @@ class ContentSectionslController < AppController
 	delete '/content-sections/:slug' do
 		con_sec = ContentSection.find_by_slug(params[:slug])
 		con_sec.destroy
-		# # flash[:message] = "#{con_sec.name} removed"
+		# flash[:message] = "#{con_sec.name} removed"
 		redirect "/admin/content"
 	end
 end

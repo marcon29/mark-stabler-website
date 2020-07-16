@@ -10,15 +10,13 @@ class UsersController < AppController
 	end
     
     post '/users/new' do
-        # don't login after creation, only an existing user can create a new one
-
 		user = User.new(params[:user])
 
 		if user.save
-			# # flash[:message] = "#{user.username} created"
+			# flash[:message] = "#{user.username} created"
 			redirect "/admin/users"
 		else
-			# # flash[:message] = error_messages(user).join("<br>")
+			# flash[:message] = error_messages(user).join("<br>")
 			redirect back
 		end
     end    
@@ -35,10 +33,10 @@ class UsersController < AppController
 		user = User.find_by(username: params[:username])
         
 		if user.update(params[:user])
-			# # flash[:message] = "#{user.username} updated"			
+			# flash[:message] = "#{user.username} updated"			
 			redirect "/admin/users"
 		else
-			# # flash[:message] = error_messages(user).join("<br>")
+			# flash[:message] = error_messages(user).join("<br>")
 			redirect back
 		end
 	end    
@@ -49,9 +47,9 @@ class UsersController < AppController
 		if User.all.count > 1
 			user = User.find_by(username: params[:username])
 			user.destroy
-			# # flash[:message] = "#{user.username} removed"			
+			# flash[:message] = "#{user.username} removed"			
 		else
-			# # flash[:message] = "You can't delete the only registered user."
+			# flash[:message] = "You can't delete the only registered user."
 		end
 		redirect "/admin/users"		
 	end

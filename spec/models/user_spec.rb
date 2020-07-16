@@ -1,9 +1,7 @@
-require 'spec_helper'
-
-describe "User" do        
+describe "User" do
     # object creation and validation tests #######################################
 
-    it "can instantiate with a first_name, last_name, email, username, and password" do
+    it "can instantiate with a first_name, last_name, email, username, and password" do        
         valid_attrs = {first_name: "Joe", last_name: "Blow", email: "joe_blow@example.com", username: "testuser1", password: "test"}
         user = User.create(valid_attrs)
         

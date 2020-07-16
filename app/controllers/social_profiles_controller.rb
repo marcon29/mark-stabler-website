@@ -5,7 +5,6 @@ class SocialProfileslController < AppController
     
     # create routes ###############################
 	get '/social-profiles/new' do
-		# form needs to also have ability associate to platform (existing only)		
 		redirect "/admin" if !logged_in?
 		@platforms = SocialPlatform.all
         erb :"/social_profiles/new"
@@ -26,7 +25,6 @@ class SocialProfileslController < AppController
 
 	# update routes ###############################
     get '/social-profiles/:slug/edit' do
-		# form needs to also have ability associate to different platform (existing only)
 		redirect "/admin" if !logged_in?		
 		@profile = SocialProfile.find_by_slug(params[:slug])
 		@platforms = SocialPlatform.all
@@ -35,10 +33,6 @@ class SocialProfileslController < AppController
   
 	patch '/social-profiles/:slug' do
 		profile = SocialProfile.find_by_slug(params[:slug])
-
-		# if params[:social_profile][:handle] == "@profhandle2"
-		# 	binding.pry
-		# end
 
 		if profile.update(params[:social_profile])
 			# flash[:message] = "#{profile.name} updated"

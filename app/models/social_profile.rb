@@ -11,7 +11,6 @@ class SocialProfile < ActiveRecord::Base
         uniqueness: { message: "You already have a profile in that position. Please choose another." },
         numericality: { only_integer: true, message: "Display order must be a whole number." },
         allow_blank: true
-
     validates :social_platform, presence: { message: "Your profile must belong to a platform." }
     validates_associated :social_platform, message: "Your profile must belong to a platform."
     before_validation :format_handle
@@ -27,8 +26,7 @@ class SocialProfile < ActiveRecord::Base
             self.handle = ""
         end
     end
-
-    # creates link url from SocialPlatform.base_url + SocialProfile.handle
+    
     def link
         "#{self.social_platform.base_url}#{self.handle}"        
     end
@@ -40,14 +38,4 @@ class SocialProfile < ActiveRecord::Base
     def self.find_by_slug(url_slug)
         self.all.find { |obj| obj.slug == url_slug }
     end
-            
-
-            
-	# view notes ################
-		# add any notes based on validations and helpers so the proper data will appear in the view
-
-
-
-
-
 end

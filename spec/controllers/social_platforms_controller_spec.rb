@@ -1,6 +1,3 @@
-require 'spec_helper'
-require 'pry'
-
 describe "SocialPlatformslController" do
 	before do
 		user_info = {
@@ -296,8 +293,8 @@ describe "SocialPlatformslController" do
 		describe "won't update social platform if validated fields are blank" do
 			it "POST social-platforms/edit route won't update social platform if name field is left blank" do
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
-				visit "/social-platforms/#{@platform.slug}/edit"
 				check = @platform.name
+				visit "/social-platforms/#{@platform.slug}/edit"
 				
 				# fill in form without name
 				fill_in :name, :with => ""
@@ -316,8 +313,8 @@ describe "SocialPlatformslController" do
 
 			it "POST social-platforms/edit route won't update social platform if base_url field is left blank" do
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
-				visit "/social-platforms/#{@platform.slug}/edit"
 				check = @platform.base_url
+				visit "/social-platforms/#{@platform.slug}/edit"
 				
 				# fill in form without base_url
 				fill_in :name, :with => "#{update_platform_info[:name]}"
@@ -336,8 +333,8 @@ describe "SocialPlatformslController" do
 
 			it "POST social-platforms/edit route won't update social platform if image_file_name field is left blank" do
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
-				visit "/social-platforms/#{@platform.slug}/edit"
 				check = @platform.image_file_name
+				visit "/social-platforms/#{@platform.slug}/edit"
 				
 				# fill in form without image_file_name
 				fill_in :name, :with => "#{update_platform_info[:name]}"
@@ -360,9 +357,8 @@ describe "SocialPlatformslController" do
 				platform2_info = {name: "platform2", base_url: "https://www.example2.com", image_file_name: "icon2.png"}
 				platform2 = SocialPlatform.create(platform2_info)
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
-				
-				visit "/social-platforms/#{@platform.slug}/edit"
 				check = @platform.name
+				visit "/social-platforms/#{@platform.slug}/edit"
 
 				# fill in form with duplicated name
 				fill_in :name, :with => "platform2"
@@ -383,9 +379,8 @@ describe "SocialPlatformslController" do
 				platform2_info = {name: "platform2", base_url: "https://www.example2.com", image_file_name: "icon2.png"}
 				platform2 = SocialPlatform.create(platform2_info)
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
-				
-				visit "/social-platforms/#{@platform.slug}/edit"
 				check = @platform.base_url
+				visit "/social-platforms/#{@platform.slug}/edit"
 
 				# fill in form with duplicated base_url
 				fill_in :name, :with => "#{update_platform_info[:name]}"
@@ -406,9 +401,8 @@ describe "SocialPlatformslController" do
 				platform2_info = {name: "platform2", base_url: "https://www.example2.com", image_file_name: "icon2.png"}
 				platform2 = SocialPlatform.create(platform2_info)
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
-				
-				visit "/social-platforms/#{@platform.slug}/edit"
 				check = @platform.image_file_name
+				visit "/social-platforms/#{@platform.slug}/edit"
 
 				# fill in form with duplicated image_file_name
 				fill_in :name, :with => "#{update_platform_info[:name]}"
@@ -427,8 +421,8 @@ describe "SocialPlatformslController" do
 			
 			it "POST social-platforms/edit route won't update social platform if base_url doesn't match standard URL format" do
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
-				visit "/social-platforms/#{@platform.slug}/edit"
 				check = @platform.base_url
+				visit "/social-platforms/#{@platform.slug}/edit"
 
 				# fill in form with bad base_url
 				fill_in :name, :with => "#{update_platform_info[:name]}"
@@ -447,8 +441,8 @@ describe "SocialPlatformslController" do
 
 			it "POST social-platforms/edit route won't update social platform if image_file_name is wrong file type" do
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
-				visit "/social-platforms/#{@platform.slug}/edit"
 				check = @platform.image_file_name
+				visit "/social-platforms/#{@platform.slug}/edit"
 
 				# fill in form with bad image_file_name
 				fill_in :name, :with => "#{update_platform_info[:name]}"

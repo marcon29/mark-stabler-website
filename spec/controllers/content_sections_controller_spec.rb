@@ -1,6 +1,3 @@
-require 'spec_helper'
-require 'pry'
-
 describe "ContentSectionslController" do
 	before do
 		user_info = {
@@ -21,7 +18,6 @@ describe "ContentSectionslController" do
 			link_url: "https://www.example1.com", 
 			link_text: "example1"
 		}
-
         @consec = ContentSection.create(consec_info)
 	end
 	
@@ -93,7 +89,6 @@ describe "ContentSectionslController" do
 				expect(test_consec.link_url).to eq(new_consec_info[:link_url])
 				expect(test_consec.link_text).to eq(new_consec_info[:link_text])
 				
-
 				# check redirect 
 				expect(page.body).to include("<h1>Content Management</h1>")
 				expect(page.body).to include('<nav id="admin">')
@@ -224,8 +219,6 @@ describe "ContentSectionslController" do
 				expect(page.body).to include('<nav id="admin">')
 				expect(page.body).to include('<a href="/content-sections/new"')
 			end
-
-			
 		end
 
 		# it "POST Route displays the appropriate flash message upon redirect" do

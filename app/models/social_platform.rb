@@ -29,9 +29,9 @@ class SocialPlatform < ActiveRecord::Base
             
             self.base_url = string
         end
-    end    
+    end
     
-    # creates correct file path for image (requires "images" directory in "public" directory)
+    # creates correct file path for image
     def image_file_link
         "/images/#{self.image_file_name}"
     end
@@ -43,13 +43,4 @@ class SocialPlatform < ActiveRecord::Base
     def self.find_by_slug(url_slug)
         self.all.find { |obj| obj.slug == url_slug }
     end
-         
-
-
-	# view notes ################
-        # the image file needs to be loaded in the correct place
-            # add instructions on where it needs to go
-            #
-
-
 end

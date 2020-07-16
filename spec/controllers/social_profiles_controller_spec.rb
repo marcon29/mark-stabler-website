@@ -1,6 +1,3 @@
-require 'spec_helper'
-require 'pry'
-
 describe "SocialProfileslController" do
 	before do
 		user_info = {
@@ -324,8 +321,8 @@ describe "SocialProfileslController" do
 				update_profile_info = {name: "update profile1", handle: "@profhandle4", display_order: 4, social_platform_id: @platform.id}
 				platform2_info = {name: "platform2", base_url: "https://www.example2.com", image_file_name: "icon2.png"}
 				platform2 = SocialPlatform.create(platform2_info)
-				visit "/social-profiles/#{@profile.slug}/edit"
 				check = @profile.name
+				visit "/social-profiles/#{@profile.slug}/edit"
 				
 				# fill in form without name
 				fill_in :name, :with => ""
@@ -347,8 +344,8 @@ describe "SocialProfileslController" do
 				update_profile_info = {name: "update profile1", handle: "@profhandle4", display_order: 4, social_platform_id: @platform.id}
 				platform2_info = {name: "platform2", base_url: "https://www.example2.com", image_file_name: "icon2.png"}
 				platform2 = SocialPlatform.create(platform2_info)
-				visit "/social-profiles/#{@profile.slug}/edit"
 				check = @profile.handle
+				visit "/social-profiles/#{@profile.slug}/edit"
 				
 				# fill in form without handle
 				fill_in :name, :with => "#{update_profile_info[:name]}"
@@ -369,9 +366,9 @@ describe "SocialProfileslController" do
 			it "POST social-profiles/edit route won't update social profile if an associated platform unselected" do
 				update_profile_info = {name: "update profile1", handle: "@profhandle4", display_order: 4, social_platform_id: @platform.id}
 				platform2_info = {name: "platform2", base_url: "https://www.example2.com", image_file_name: "icon2.png"}
-				platform2 = SocialPlatform.create(platform2_info)
-				visit "/social-profiles/#{@profile.slug}/edit"
+				platform2 = SocialPlatform.create(platform2_info)				
 				check = @profile.name
+				visit "/social-profiles/#{@profile.slug}/edit"
 
 				# fill in form without display_order
 				fill_in :name, :with => "#{update_profile_info[:name]}"
@@ -398,9 +395,8 @@ describe "SocialProfileslController" do
 				profile2_info = {name: "profile2", handle: "@profhandle2", display_order: 2, social_platform_id: @platform.id}
 				profile2 = SocialProfile.create(profile2_info)
 				update_profile_info = {name: "update profile1", handle: "@profhandle4", display_order: 4, social_platform_id: @platform.id}
-				
-				visit "/social-profiles/#{@profile.slug}/edit"
 				check = @profile.name
+				visit "/social-profiles/#{@profile.slug}/edit"
 
 				# fill in form with duplicated name
 				fill_in :name, :with => "profile2"
@@ -424,15 +420,13 @@ describe "SocialProfileslController" do
 				profile2_info = {name: "profile2", handle: "@profhandle2", display_order: 2, social_platform_id: platform2.id}
 				profile2 = SocialProfile.create(profile2_info)
 				update_profile_info = {name: "update profile1", handle: "@profhandle4", display_order: 4, social_platform_id: @platform.id}
-				
-				visit "/social-profiles/#{@profile.slug}/edit"
 				check = @profile.handle
+				visit "/social-profiles/#{@profile.slug}/edit"
 
 				# fill in form with duplicated handle
 				fill_in :name, :with => "#{update_profile_info[:name]}"
 				fill_in :handle, :with => "@profhandle2"
 				fill_in :display_order, :with => "#{update_profile_info[:display_order]}"
-				# select("#{platform2.id}", from: "social-platform-dropdown")
 				select("#{platform2.id}", from: "social-platform-dropdown")
 				click_button "Update Social Profile"
 
@@ -451,9 +445,8 @@ describe "SocialProfileslController" do
 				profile2_info = {name: "profile2", handle: "@profhandle2", display_order: 2, social_platform_id: @platform.id}
 				profile2 = SocialProfile.create(profile2_info)
 				update_profile_info = {name: "update profile1", handle: "@profhandle4", display_order: 4, social_platform_id: @platform.id}
-				
-				visit "/social-profiles/#{@profile.slug}/edit"
 				check = @profile.display_order
+				visit "/social-profiles/#{@profile.slug}/edit"
 
 				# fill in form with duplicated display_order
 				fill_in :name, :with => "#{update_profile_info[:name]}"
@@ -475,8 +468,8 @@ describe "SocialProfileslController" do
 				platform2_info = {name: "platform2", base_url: "https://www.example2.com", image_file_name: "icon2.png"}
 				platform2 = SocialPlatform.create(platform2_info)
 				update_profile_info = {name: "update profile1", handle: "@profhandle4", display_order: 4, social_platform_id: @platform.id}
-				visit "/social-profiles/#{@profile.slug}/edit"
 				check = @profile.handle
+				visit "/social-profiles/#{@profile.slug}/edit"
 
 				# fill in form with bad handle
 				fill_in :name, :with => "#{update_profile_info[:name]}"

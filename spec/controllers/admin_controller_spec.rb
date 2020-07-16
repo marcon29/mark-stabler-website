@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "AdminController" do
 	before do
 		user_info = {
