@@ -55,7 +55,7 @@ describe "ContentSectionslController" do
 		end
 
 		describe "displays and lets user interact with new content section form" do
-			it "GET content-sections/new route loads the content-sections/new page and displays new content section form when user is logged in" do
+			it "GET content-sections/new route loads the content-sections/new page and displays new content form when user is logged in" do
 				visit '/content-sections/new'
 
 				expect(page.body).to include("<h1>Add New Content Section</h1>")
@@ -219,7 +219,7 @@ describe "ContentSectionslController" do
 				expect(ContentSection.all.count).to eq total_consecs+1
 				expect(ContentSection.all.last.page_location.blank?).to be true
 
-				# expect info from content-sections/new page after reload
+				# expect info from admin/content page after reload
 				expect(page.body).to include("<h1>Content Management</h1>")
 				expect(page.body).to include('<nav id="admin">')
 				expect(page.body).to include('<a href="/content-sections/new"')

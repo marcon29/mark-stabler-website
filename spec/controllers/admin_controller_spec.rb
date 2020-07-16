@@ -232,10 +232,8 @@ describe "AdminController" do
 			SocialPlatform.create(platform2_info)
 
 			visit '/admin/social'
-
-			# counter = 0 	# this is for checking that list is in proper order
+			
 			SocialPlatform.all.order("name ASC").each do |platform|
-				# expect(platform.page_location).to eq(counter += 1)
 				expect(page.body).to include(platform.name)
 				expect(page.body).to include(platform.base_url)
 				expect(page.body).to include(platform.image_file_name)
