@@ -51,4 +51,14 @@ def logout_user
 	click_link "Log Out"
 end
 
+def testable_base_url(base_url)
+  string = base_url.gsub(/(https:\/\/|http:\/\/)?(www.)?/, "").strip.downcase
+
+  if string.ends_with?('/')
+      string = "www.#{string}"
+  else
+      string = ("www.#{string}/")
+  end
+end   
+
 Capybara.app = app

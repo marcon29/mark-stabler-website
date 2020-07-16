@@ -15,11 +15,11 @@
         <p>Base URL: <%= plat.base_url %></p>
         <p>Image File: <%= plat.image_file_name %></p>
         <form class="crud-button" method="get" action="/social-platforms/<%= plat.slug %>/edit">
-            <input type="submit" value="Edit">
+            <input id="edit-<%= plat.slug %>" type="submit" value="Edit">
         </form>
         <form class="crud-button" method="post" action="/social-platforms/<%= plat.slug %>">
             <input id="hidden" type="hidden" name="_method" value="delete">
-            <input type="submit" value="Delete">
+            <input id="delete-<%= plat.slug %>" type="submit" value="Delete">
         </form>
 
         <table>
@@ -39,11 +39,11 @@
                         <td><%= prof.display_order %></td>
                         <td>
                             <form class="crud-button" method="get" action="/social-profiles/<%= prof.slug %>/edit">
-                                <input type="submit" value="Edit">
+                                <input id="edit-<%= prof.slug %>" type="submit" value="Edit">
                             </form>
                             <form class="crud-button" method="post" action="/social-profiles/<%= prof.slug %>">
                                 <input id="hidden" type="hidden" name="_method" value="delete">
-                                <input type="submit" value="Delete">
+                                <input id="delete-<%= prof.slug %>" type="submit" value="Delete">
                             </form>
                         </td>
                     </tr>

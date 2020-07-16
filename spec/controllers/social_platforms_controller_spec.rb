@@ -69,7 +69,7 @@ describe "SocialPlatformslController" do
 				# check platform created correctly				
 				test_platform = SocialPlatform.all.last
 				expect(test_platform.name).to eq(new_platform_info[:name])
-				expect(test_platform.base_url).to eq(new_platform_info[:base_url])
+				expect(test_platform.base_url).to eq(testable_base_url(new_platform_info[:base_url]))
 				expect(test_platform.image_file_name).to eq(new_platform_info[:image_file_name])
 
 				# check redirect 
@@ -262,7 +262,7 @@ describe "SocialPlatformslController" do
 				# check correct edit form is displayed
 				expect(page.body).to include("<h1>Edit #{@platform.name}</h1>")
 				expect(page.body).to include('<form id="edit-platform-form"')
-				expect(page.body).to include('method="post" action="/social-platforms/"platform1"')
+				expect(page.body).to include('method="post" action="/social-platforms/platform1"')
 				expect(page.body).to include('name="_method" value="patch"')
 
 				# check edit form fields are prefilled with correct existing object info
@@ -282,8 +282,8 @@ describe "SocialPlatformslController" do
 
 				# check platform updated correctly
 				test_platform = SocialPlatform.find(@platform.id)
-				expect(test_platform.name).to eq(update_platform_info[:name])
-				expect(test_platform.base_url).to eq(update_platform_info[:base_url])
+				expect(test_platform.name).to eq(update_platform_info[:name])				
+				expect(test_platform.base_url).to eq(testable_base_url(update_platform_info[:base_url]))
 				expect(test_platform.image_file_name).to eq(update_platform_info[:image_file_name])
 
 				# check redirect 

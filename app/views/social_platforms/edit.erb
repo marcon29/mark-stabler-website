@@ -1,0 +1,19 @@
+<section>
+    <h1>Edit <%= @platform.slug %></h1>
+</section>
+
+<section>
+    <form id="edit-platform-form" class="new-edit-form" method="post" action="/social-platforms/<%= @platform.slug %>">
+        <input id="hidden" type="hidden" name="_method" value="patch">
+
+        <h3>Edit the Info You Want to Change</h3>
+		<p><label for="name">Name: </label>
+			<input id="name" type="text" name="social_platform[name]" value="<%= @platform.name %>"></p>
+		<p><label for="base_url">Base URL: </label>
+			<input id="base_url" type="text" name="social_platform[base_url]" value="<%= @platform.base_url %>"></p>		
+		<p><label for="image_file_name">Image File Name: </label>
+            <input id="image_file_name" type="text" name="social_platform[image_file_name]" value="<%= @platform.image_file_name %>"></p>
+                
+        <p><input type="submit" value="Update Social Platform"></p>
+	</form>
+</section>
