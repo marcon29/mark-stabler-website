@@ -111,12 +111,13 @@ describe "ContentSection" do
         end
         
         # tests .find_by_slug method
-            # (commenting out to see if needed here, use in other classes if not)
-        # it "can be found by its slug" do
-        #     con_sec = ContentSection.create(name: "cool stuff and content")
-        #     search_result = ContentSection.find_by_slug("cool-stuff-and-content")
-        #     expect(search_result).to eq(con_sec)
-        # end
+        it "can be found by its slug" do
+            valid_attrs = {name: "test content", css_class: "text-box", page_location: 1, headline: "this is cool content", body_copy: "Maybe it is cool and maybe it is not. I will let you decide.", link_url: "https://www.example.com", link_text: "example"}
+            con_sec = ContentSection.create(valid_attrs)
+
+            search_result = ContentSection.find_by_slug("test-content")
+            expect(search_result).to eq(con_sec)
+        end
     end
 end
 

@@ -566,7 +566,7 @@ describe "UsersController" do
 			user2 = User.create(user2_info)
 
 			visit '/admin/users'
-			click_button "delete-#{user2.id}"
+			click_button "delete-#{user2.username}"
 			
 			expect(User.all.include?(user2)).to be false
 			expect(User.all.include?(@user)).to be true
@@ -577,7 +577,7 @@ describe "UsersController" do
 
 		it "DELETE users route won't delete last remaining user, loads admin/users page upon failure" do
 			visit '/admin/users'
-			click_button "delete-#{@user.id}"
+			click_button "delete-#{@user.username}"
 			
 			expect(User.all.include?(@user)).to be true
 			expect(page.body).to include("<h1>User Management</h1>")

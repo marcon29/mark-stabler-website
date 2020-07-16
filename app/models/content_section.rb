@@ -18,11 +18,10 @@ class ContentSection < ActiveRecord::Base
     def slug
         self.name.gsub(" ", "-").scan(/[[^\s\W]-]/).join.downcase
     end
-
-    # not sure this is necessary - hold and see if everything works without it
-    # def self.find_by_slug(url_slug)
-    #     self.all.find { |obj| obj.slug == url_slug }
-    # end   
+    
+    def self.find_by_slug(url_slug)
+        self.all.find { |obj| obj.slug == url_slug }
+    end   
     
         
 

@@ -3,6 +3,15 @@ require 'pry'
 
 describe "ContentSectionslController" do
 	before do
+		user_info = {
+			first_name: "test", 
+			last_name: "user", 
+			email: "tester1@example.com",
+			username: "testuser1", 
+			password: "test"
+		}
+		@user = User.create(user_info)
+
 		consec_info = {
 			name: "test content1", 
 			css_class: "text-box", 
@@ -24,8 +33,8 @@ describe "ContentSectionslController" do
 			expect(page.body).to include("<h1>Login</h1>")
 			expect(page.body).to include('<form id="login-form"')
 			expect(page.body).to include('method="post" action="/login"')
-			expect(page).to have_field(:headline)
-			expect(page).to have_field(:body_copy)
+			expect(page).to have_field(:username)
+			expect(page).to have_field(:password)
 		end
 
 		it "GET content-sections/edit route redirects to the admin/login page if user not logged in" do
@@ -34,8 +43,8 @@ describe "ContentSectionslController" do
 			expect(page.body).to include("<h1>Login</h1>")
 			expect(page.body).to include('<form id="login-form"')
 			expect(page.body).to include('method="post" action="/login"')
-			expect(page).to have_field(:headline)
-			expect(page).to have_field(:body_copy)
+			expect(page).to have_field(:username)
+			expect(page).to have_field(:password)
 		end
 	end
 
@@ -51,7 +60,7 @@ describe "ContentSectionslController" do
 
 				expect(page.body).to include("<h1>Add New Content Section</h1>")
 				expect(page.body).to include('<form id="new-content-form"')
-				expect(page.body).to include('method="post" action="/content-sections/new"')
+				expect(page.body).to include('method="post" action="/content-sections"')
 				expect(page).to have_field(:name)
 				expect(page).to have_field(:css_class)
 				expect(page).to have_field(:page_location)
@@ -74,7 +83,7 @@ describe "ContentSectionslController" do
 				fill_in :link_text, :with => "#{new_consec_info[:link_text]}"
 				click_button "Add Content Section"
 
-				# check content section created correctly
+				# check content section created correctly				
 				test_consec = ContentSection.all.last
 				expect(test_consec.name).to eq(new_consec_info[:name])
 				expect(test_consec.css_class).to eq(new_consec_info[:css_class])
@@ -112,9 +121,9 @@ describe "ContentSectionslController" do
 				expect(ContentSection.all.count).to eq total_consecs
 
 				# expect info from content-sections/new page after reload
-				expect(page.body).to include("<h1>Add New Content</h1>")
+				expect(page.body).to include("<h1>Add New Content Section</h1>")
 				expect(page.body).to include('<form id="new-content-form"')
-				expect(page.body).to include('method="post" action="/content-sections/new"')
+				expect(page.body).to include('method="post" action="/content-sections"')
 			end
 		end
 
@@ -138,9 +147,9 @@ describe "ContentSectionslController" do
 				expect(ContentSection.all.count).to eq total_consecs
 
 				# expect info from content-sections/new page after reload
-				expect(page.body).to include("<h1>Add New Content</h1>")
+				expect(page.body).to include("<h1>Add New Content Section</h1>")
 				expect(page.body).to include('<form id="new-content-form"')
-				expect(page.body).to include('method="post" action="/content-sections/new"')
+				expect(page.body).to include('method="post" action="/content-sections"')
 			end
 			
 			it "POST content-sections/new route won't create a new content section if page_location is same as other content section" do
@@ -162,12 +171,12 @@ describe "ContentSectionslController" do
 				expect(ContentSection.all.count).to eq total_consecs
 
 				# expect info from content-sections/new page after reload
-				expect(page.body).to include("<h1>Add New Content</h1>")
+				expect(page.body).to include("<h1>Add New Content Section</h1>")
 				expect(page.body).to include('<form id="new-content-form"')
-				expect(page.body).to include('method="post" action="/content-sections/new"')
+				expect(page.body).to include('method="post" action="/content-sections"')
 			end
 
-			it "POST content-sections/edit route won't create a new content section if page_location isn't a number" do
+			it "POST content-sections/new route won't create a new content section if page_location isn't a number" do
 				new_consec_info = {name: "new content1", css_class: "text-box", page_location: 2, headline: "HL for new content1", body_copy: "Body copy for new content1.", link_url: "https://www.example2.com", link_text: "example2"}
 				visit '/content-sections/new'
 				total_consecs = ContentSection.all.count
@@ -186,12 +195,12 @@ describe "ContentSectionslController" do
 				expect(ContentSection.all.count).to eq total_consecs
 
 				# expect info from content-sections/new page after reload
-				expect(page.body).to include("<h1>Add New Content</h1>")
+				expect(page.body).to include("<h1>Add New Content Section</h1>")
 				expect(page.body).to include('<form id="new-content-form"')
-				expect(page.body).to include('method="post" action="/content-sections/new"')
+				expect(page.body).to include('method="post" action="/content-sections"')
 			end
 
-			it "POST content-sections/edit route will create a new content section if page_location is blank" do
+			it "POST content-sections/new route will create a new content section if page_location is blank (redirects to admin/content instead)" do
 				new_consec_info = {name: "new content1", css_class: "text-box", page_location: 2, headline: "HL for new content1", body_copy: "Body copy for new content1.", link_url: "https://www.example2.com", link_text: "example2"}
 				visit '/content-sections/new'
 				total_consecs = ContentSection.all.count
@@ -211,9 +220,9 @@ describe "ContentSectionslController" do
 				expect(ContentSection.all.last.page_location.blank?).to be true
 
 				# expect info from content-sections/new page after reload
-				expect(page.body).to include("<h1>Add New Content</h1>")
-				expect(page.body).to include('<form id="new-content-form"')
-				expect(page.body).to include('method="post" action="/content-sections/new"')
+				expect(page.body).to include("<h1>Content Management</h1>")
+				expect(page.body).to include('<nav id="admin">')
+				expect(page.body).to include('<a href="/content-sections/new"')
 			end
 
 			
@@ -244,7 +253,7 @@ describe "ContentSectionslController" do
 				# check edit form fields are prefilled with correct existing object info
 				expect(find_field("name").value).to eq("#{@consec.name}")
 				expect(find_field("css_class").value).to eq("#{@consec.css_class}")
-				expect(find_field("page_location").value).to eq @consec.page_location
+				expect(find_field("page_location").value.to_i).to eq @consec.page_location
 				expect(find_field("headline").value).to eq("#{@consec.headline}")
 				expect(find_field(:body_copy).value).to eq("#{@consec.body_copy}")
 				expect(find_field(:link_url).value).to eq("#{@consec.link_url}")
@@ -429,7 +438,7 @@ describe "ContentSectionslController" do
 			consec2 = ContentSection.create(consec2_info)
 
 			visit '/admin/content'
-			click_button "delete-#{consec2.id}"
+			click_button "delete-#{consec2.slug}"
 			
 			expect(ContentSection.all.include?(consec2)).to be false
 			expect(ContentSection.all.include?(@consec)).to be true

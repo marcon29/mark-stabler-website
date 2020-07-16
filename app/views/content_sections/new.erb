@@ -1,0 +1,25 @@
+<section>
+	<h1>Add New Content Section</h1>
+</section>
+
+<section>
+	<form id="new-content-form" class="new-edit-form" method="post" action="/content-sections">
+        <h3>Enter Info to Create a New Content Section</h3>
+		<p><label for="name">Name: </label>
+			<input id="name" type="text" name="content_section[name]"></p>
+		<p><label for="css_class">CSS Class: </label>
+			<input id="css_class" type="text" name="content_section[css_class]"></p>
+		<p><label for="page_location">Page Location: </label>
+			<input id="page_location" type="number" name="content_section[page_location]"></p>
+		<p><label for="headline">Headline: </label>
+			<input id="headline" type="text" name="content_section[headline]"></p>        
+        <p><label for="body_copy">Body Copy: </label>            
+            <textarea id="body_copy" type="text" name="content_section[body_copy]"></textarea></p>        
+        <p><label for="link_url">Link URL: </label>
+			<input id="link_url" type="text" name="content_section[link_url]"></p>
+        <p><label for="link_text">Link Text: </label>
+			<input id="link_text" type="text" name="content_section[link_text]"></p>	
+        
+        <p><input type="submit" value="Add Content Section"></p>
+	</form>
+</section>

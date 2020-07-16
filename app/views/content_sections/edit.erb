@@ -1,0 +1,28 @@
+<section>
+    <h1>Edit <%= @con_sec.name %></h1>
+</section>
+
+<section>
+    <form id="edit-content-form" class="new-edit-form" method="post" action="/content-sections/<%= @con_sec.slug %>">
+        <input id="hidden" type="hidden" name="_method" value="patch">
+
+        <h3>Edit the Info You Want to Change</h3>
+		<p><label for="name">Name: </label>
+			<input id="name" type="text" name="content_section[name]" value="<%= @con_sec.name %>"></p>
+		<p><label for="css_class">CSS Class: </label>
+			<input id="css_class" type="text" name="content_section[css_class]" value="<%= @con_sec.css_class %>"></p>
+		<p><label for="page_location">Page Location: </label>
+			<input id="page_location" type="number" name="content_section[page_location]" value="<%= @con_sec.page_location %>"></p>
+		<p><label for="headline">Headline: </label>
+			<input id="headline" type="text" name="content_section[headline]" value="<%= @con_sec.headline %>"></p>
+        <p><label for="body_copy">Body Copy: </label>            
+            <textarea id="body_copy" type="text" name="content_section[body_copy]"><%= @con_sec.body_copy %></textarea></p>
+        <p><label for="link_url">Link URL: </label>
+			<input id="link_url" type="text" name="content_section[link_url]" value="<%= @con_sec.link_url %>"></p>
+        <p><label for="link_text">Link Text: </label>
+			<input id="link_text" type="text" name="content_section[link_text]" value="<%= @con_sec.link_text %>"></p>
+        
+        <p><input type="submit" value="Update Content Section"></p>
+	</form>
+</section>
+
