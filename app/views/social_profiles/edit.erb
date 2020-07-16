@@ -1,0 +1,26 @@
+<section>
+    <h1>Edit <%= @profile.slug %></h1>
+</section>
+
+<section>
+    <form id="edit-profile-form" class="new-edit-form" method="post" action="/social-profiles/<%= @profile.slug %>">
+        <input id="hidden" type="hidden" name="_method" value="patch">
+
+        <h3>Edit the Info You Want to Change</h3>
+		<p><label for="name">Name: </label>
+			<input id="name" type="text" name="social_profile[name]" value="<%= @profile.name %>"></p>
+		<p><label for="handle">Profile Handle: </label>
+			<input id="handle" type="text" name="social_profile[handle]" value="<%= @profile.handle %>"></p>		
+		<p><label for="display_order">Display Order: </label>
+            <input id="display_order" type="number" name="social_profile[display_order]" value="<%= @profile.display_order %>"></p>
+        <select id="social-platform-dropdown" name="social_profile[social_platform_id]">
+            <option value="<%= @profile.social_platform.slug %>"><%= @profile.social_platform.name %></option>
+            <option id="default" value="">--Please choose a platform--</option>
+            <% @platforms.all.each do |plat| %>
+                <option id="plat.slug" value="<%= plat.id %>"><%= plat.name %></option>
+            <% end %>
+        </select></p>
+                
+        <p><input type="submit" value="Update Social Profile"></p>
+	</form>
+</section>

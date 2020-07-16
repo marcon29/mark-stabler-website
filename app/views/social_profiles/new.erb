@@ -1,0 +1,23 @@
+<section>
+    <h1>Add New Social Profile</h1>
+</section>
+
+<section>
+    <form id="new-profile-form" class="new-edit-form" method="post" action="/social-profiles">
+    <h3>Enter Info to Create a New Social Profile</h3>
+		<p><label for="name">Name: </label>
+			<input id="name" type="text" name="social_profile[name]"></p>
+		<p><label for="handle">Profile Handle: </label>
+			<input id="handle" type="text" name="social_profile[handle]"></p>		
+		<p><label for="display_order">Display Order: </label>
+            <input id="display_order" type="number" name="social_profile[display_order]"></p>        
+        <select id="social-platform-dropdown" name="social_profile[social_platform_id]">
+            <option id="default" value="">--Please choose a platform--</option>
+            <% @platforms.all.each do |plat| %>
+                <option id="plat.slug" value="<%= plat.id %>"><%= plat.name %></option>
+            <% end %>
+        </select></p>
+                
+        <p><input type="submit" value="Add Social Profile"></p>
+	</form>
+</section>

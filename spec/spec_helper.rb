@@ -59,6 +59,16 @@ def testable_base_url(base_url)
   else
       string = ("www.#{string}/")
   end
-end   
+end
+
+def testable_handle(handle)
+  string = handle.gsub(/[@ ]/, "").downcase
+  
+  if string.scan(/[^\w\-_\.]/).empty?
+      handle = string.gsub(/[@ ]/, "").downcase
+  else
+      handle = ""
+  end
+end
 
 Capybara.app = app
