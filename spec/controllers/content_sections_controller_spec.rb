@@ -94,7 +94,7 @@ describe "ContentSectionslController" do
 				expect(test_consec.link_text).to eq(new_consec_info[:link_text])
 				
 
-				# check redirect (these should be good)
+				# check redirect 
 				expect(page.body).to include("<h1>Content Management</h1>")
 				expect(page.body).to include('<nav id="admin">')
 				expect(page.body).to include('<a href="/content-sections/new"')
@@ -283,7 +283,7 @@ describe "ContentSectionslController" do
 				expect(test_consec.link_url).to eq(update_consec_info[:link_url])
 				expect(test_consec.link_text).to eq(update_consec_info[:link_text])
 
-				# check redirect (these should be good)
+				# check redirect 
 				expect(page.body).to include("<h1>Content Management</h1>")
 				expect(page.body).to include('<nav id="admin">')
 				expect(page.body).to include('<a href="/content-sections/new"')

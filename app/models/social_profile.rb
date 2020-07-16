@@ -7,7 +7,6 @@ class SocialProfile < ActiveRecord::Base
     validates :handle, 
         presence: { message: "You must provide a valid profile handle. Can only use letters, numbers, periods, hyphens, underscores. Spaces and @'s will be removed." }, 
         uniqueness: { case_sensitive: false, scope: :social_platform, message: "That handle is already used for that platform. Please provide another." }
-
     validates :display_order,
         uniqueness: { message: "You already have a profile in that position. Please choose another." },
         numericality: { only_integer: true, message: "Display order must be a whole number." },

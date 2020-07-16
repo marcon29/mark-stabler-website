@@ -74,7 +74,7 @@ describe "UsersController" do
 				expect(test_user.username).to eq(new_user_info[:username])
 				expect(!!test_user.authenticate("#{new_user_info[:password]}")).to be true
 
-				# check redirect (these should be good)
+				# check redirect 
 				expect(page.body).to include("<h1>User Management</h1>")
 				expect(page.body).to include('<nav id="admin">')
 				expect(page.body).to include('<a href="/users/new"')
@@ -333,7 +333,7 @@ describe "UsersController" do
 				expect(test_user.username).to eq(update_user_info[:username])
 				expect(!!test_user.authenticate("#{update_user_info[:password]}")).to be true
 
-				# check redirect (these should be good)
+				# check redirect 
 				expect(page.body).to include("<h1>User Management</h1>")
 				expect(page.body).to include('<nav id="admin">')
 				expect(page.body).to include('<a href="/users/new"')

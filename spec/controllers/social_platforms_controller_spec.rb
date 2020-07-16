@@ -72,7 +72,7 @@ describe "SocialPlatformslController" do
 				expect(test_platform.base_url).to eq(new_platform_info[:base_url])
 				expect(test_platform.image_file_name).to eq(new_platform_info[:image_file_name])
 
-				# check redirect (these should be good)
+				# check redirect 
 				expect(page.body).to include("<h1>Social Management</h1>")
 				expect(page.body).to include('<nav id="admin">')
 				expect(page.body).to include('<a href="/social-platforms/new"')
@@ -286,7 +286,7 @@ describe "SocialPlatformslController" do
 				expect(test_platform.base_url).to eq(update_platform_info[:base_url])
 				expect(test_platform.image_file_name).to eq(update_platform_info[:image_file_name])
 
-				# check redirect (these should be good)
+				# check redirect 
 				expect(page.body).to include("<h1>Social Management</h1>")
 				expect(page.body).to include('<nav id="admin">')
 				expect(page.body).to include('<a href="/social-platforms/new"')
