@@ -3,11 +3,11 @@ class ContentSection < ActiveRecord::Base
         presence: { message: "You must provide a name." }, 
         uniqueness: { case_sensitive: false, message: "That name is already used. Please provide another."}
 
+    # can leave page_locatin blank to remove content section from view without deleting it
     validates :page_location,
         uniqueness: { message: "You already have content in that location. Please choose another."},
         numericality: { only_integer: true, message: "Page location must be a whole number."},
         allow_blank: true
-
 
     # allows view to create <a> href attribute correctly
     def absolute_link?

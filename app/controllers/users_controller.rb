@@ -45,9 +45,9 @@ class UsersController < AppController
 
     
 	# delete routes ###############################
-	delete '/users/:username' do
+	delete '/users/:id' do
 		if User.all.count > 1
-			user = User.find_by(username: params[:username])
+			user = User.find(username: params[:id])
 			user.destroy
 			# # flash[:message] = "#{user.username} removed"			
 		else

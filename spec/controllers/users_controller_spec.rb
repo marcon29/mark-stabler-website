@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'pry'
-
 
 describe "UsersController" do
 	before do
@@ -303,7 +301,7 @@ describe "UsersController" do
 
 				# check correct edit form is displayed
 				expect(page.body).to include("<h1>Edit #{@user.username}</h1>")
-				expect(page.body).to include('<form id="user-edit-form"')
+				expect(page.body).to include('<form id="edit-user-form"')
 				expect(page.body).to include('method="post" action="/users/testuser1"')
 				expect(page.body).to include('name="_method" value="patch"')
 
@@ -362,7 +360,7 @@ describe "UsersController" do
 
 				# expect info from users/edit page after reload
 				expect(page.body).to include("<h1>Edit #{test_user.username}</h1>")
-				expect(page.body).to include('<form id="user-edit-form"')
+				expect(page.body).to include('<form id="edit-user-form"')
 			end
 
 			it "POST users/edit route won't update user if last_name field is left blank" do
@@ -384,7 +382,7 @@ describe "UsersController" do
 
 				# expect info from users/edit page after reload
 				expect(page.body).to include("<h1>Edit #{test_user.username}</h1>")
-				expect(page.body).to include('<form id="user-edit-form"')
+				expect(page.body).to include('<form id="edit-user-form"')
 			end
 
 			it "POST users/edit route won't update user if email field is left blank" do
@@ -406,7 +404,7 @@ describe "UsersController" do
 				
 				# expect info from users/edit page after reload
 				expect(page.body).to include("<h1>Edit #{test_user.username}</h1>")
-				expect(page.body).to include('<form id="user-edit-form"')
+				expect(page.body).to include('<form id="edit-user-form"')
 			end
 
 			it "POST users/edit route won't update user if username field is left blank" do
@@ -428,7 +426,7 @@ describe "UsersController" do
 				
 				# expect info from users/edit page after reload
 				expect(page.body).to include("<h1>Edit #{test_user.username}</h1>")
-				expect(page.body).to include('<form id="user-edit-form"')
+				expect(page.body).to include('<form id="edit-user-form"')
 			end
 
 			it "POST users/edit route won't update user if password field is left blank (redirects to admin/users instead)" do
@@ -478,7 +476,7 @@ describe "UsersController" do
 				
 				# expect info from users/edit page after reload
 				expect(page.body).to include("<h1>Edit #{test_user.username}</h1>")
-				expect(page.body).to include('<form id="user-edit-form"')
+				expect(page.body).to include('<form id="edit-user-form"')
 			end
 
 			it "POST users/edit route won't update user if email doesn't match standard email format" do
@@ -500,7 +498,7 @@ describe "UsersController" do
 				
 				# expect info from users/edit page after reload
 				expect(page.body).to include("<h1>Edit #{test_user.username}</h1>")
-				expect(page.body).to include('<form id="user-edit-form"')
+				expect(page.body).to include('<form id="edit-user-form"')
 			end
 
 			it "POST users/edit route won't update user if username is same as other user" do
@@ -525,7 +523,7 @@ describe "UsersController" do
 				
 				# expect info from users/edit page after reload
 				expect(page.body).to include("<h1>Edit #{test_user.username}</h1>")
-				expect(page.body).to include('<form id="user-edit-form"')
+				expect(page.body).to include('<form id="edit-user-form"')
 			end
 
 			it "POST users/edit route won't update user if username contains non-letters or spaces" do
@@ -547,7 +545,7 @@ describe "UsersController" do
 				
 				# expect info from users/edit page after reload
 				expect(page.body).to include("<h1>Edit #{test_user.username}</h1>")
-				expect(page.body).to include('<form id="user-edit-form"')
+				expect(page.body).to include('<form id="edit-user-form"')
 			end
 		end
 
@@ -564,13 +562,13 @@ describe "UsersController" do
 		end
 
 		it "DELETE users route deletes only the correct user then loads admin/users page upon success" do
-			user_to_delete_info = {first_name: "test2", last_name: "user2", email: "tester2@example.com", username: "testuser2", password: "test"}
-			user_to_delete = User.create(user_to_delete_info)
+			user2_info = {first_name: "test2", last_name: "user2", email: "tester2@example.com", username: "testuser2", password: "test"}
+			user2 = User.create(user2_info)
 
 			visit '/admin/users'
-			click_button "delete-#{user_to_delete.username}"
+			click_button "delete-#{user2.id}"
 			
-			expect(User.all.include?(user_to_delete)).to be false
+			expect(User.all.include?(user2)).to be false
 			expect(User.all.include?(@user)).to be true
 			expect(page.body).to include("<h1>User Management</h1>")
 			expect(page.body).to include('<nav id="admin">')
@@ -579,7 +577,7 @@ describe "UsersController" do
 
 		it "DELETE users route won't delete last remaining user, loads admin/users page upon failure" do
 			visit '/admin/users'
-			click_button "delete-#{@user.username}"
+			click_button "delete-#{@user.id}"
 			
 			expect(User.all.include?(@user)).to be true
 			expect(page.body).to include("<h1>User Management</h1>")
