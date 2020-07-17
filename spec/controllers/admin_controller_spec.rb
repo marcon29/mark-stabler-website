@@ -12,32 +12,32 @@ describe "AdminController" do
 
 	# non-user blocked access tests ###########################################################
 	describe "no routes except admin/login allow access to non-signed-in users" do
-		it "admin/users route redirects to the admin/login page if user not logged in" do
+		it "/admin/users route redirects to the admin/login page if user not logged in" do
 			visit '/admin/users'
 
 			expect(page.body).to include("<h1>Login</h1>")
 			expect(page.body).to include('<form id="login-form"')
-			expect(page.body).to include('method="post" action="/login"')
+			expect(page.body).to include('method="post" action="/admin/login"')
 			expect(page).to have_field(:username)
 			expect(page).to have_field(:password)
 		end
 
-		it "admin/content route redirects to the admin/login page if user not logged in" do
+		it "/admin/content route redirects to the admin/login page if user not logged in" do
 			visit '/admin/content'
 
 			expect(page.body).to include("<h1>Login</h1>")
 			expect(page.body).to include('<form id="login-form"')
-			expect(page.body).to include('method="post" action="/login"')
+			expect(page.body).to include('method="post" action="/admin/login"')
 			expect(page).to have_field(:username)
 			expect(page).to have_field(:password)
 		end
 
-		it "admin/social route redirects to the admin/login page if user not logged in" do
+		it "/admin/social route redirects to the admin/login page if user not logged in" do
 			visit '/admin/social'
 
 			expect(page.body).to include("<h1>Login</h1>")
 			expect(page.body).to include('<form id="login-form"')
-			expect(page.body).to include('method="post" action="/login"')
+			expect(page.body).to include('method="post" action="/admin/login"')
 			expect(page).to have_field(:username)
 			expect(page).to have_field(:password)
 		end
@@ -51,7 +51,7 @@ describe "AdminController" do
 
 				expect(page.body).to include("<h1>Login</h1>")
 				expect(page.body).to include('<form id="login-form"')
-				expect(page.body).to include('method="post" action="/login"')
+				expect(page.body).to include('method="post" action="/admin/login"')
 				expect(page).to have_field(:username)
 				expect(page).to have_field(:password)
 			end
@@ -65,7 +65,7 @@ describe "AdminController" do
 				expect(page.body).to include('<a href="/admin/content"')
 				expect(page.body).to include('<a href="/admin/social"')
 				expect(page.body).to include('<a href="/admin/users"')
-				expect(page.body).to include('<a href="/logout"')
+				expect(page.body).to include('<a href="/admin/logout"')
 			end
 		end
 		
@@ -147,10 +147,10 @@ describe "AdminController" do
 			
 			expect(page.body).to include("<h1>User Management</h1>")
 			expect(page.body).to include('<nav id="admin">')
-			expect(page.body).to include('<a href="/users/new"')
+			expect(page.body).to include('<a href="/admin/users/new"')
 		end
 		
-		it "admin/users page lists all users in alphabetical order (by username) and shows for each: all info, edit and delete buttons" do
+		it "/admin/users page lists all users in alphabetical order (by username) and shows for each: all info, edit and delete buttons" do
 			user2_info = {first_name: "test2", last_name: "user2", email: "tester2@example.com",username: "testuser2", password: "test"}
 			user3_info = {first_name: "test3", last_name: "user3", email: "tester3@example.com",username: "testuser3", password: "test"}
 			user4_info = {first_name: "test4", last_name: "user4", email: "tester4@example.com",username: "testuser4", password: "test"}
@@ -164,8 +164,8 @@ describe "AdminController" do
 				expect(page.body).to include(user.username)
 				expect(page.body).to include(user.full_name)
 				expect(page.body).to include(user.email)
-				expect(page.body).to include("/users/#{user.username}/edit")
-				expect(page.body).to include("/users/#{user.username}")
+				expect(page.body).to include("/admin/users/#{user.username}/edit")
+				expect(page.body).to include("/admin/users/#{user.username}")
 			end
 		end
 	end
@@ -181,10 +181,10 @@ describe "AdminController" do
 			
 			expect(page.body).to include("<h1>Content Management</h1>")
 			expect(page.body).to include('<nav id="admin">')
-			expect(page.body).to include('<a href="/content-sections/new"')
+			expect(page.body).to include('<a href="/admin/content-sections/new"')
 		end
 		
-		it "admin/content page lists all content_sections in location order and shows for each: name, HL, body, link, last updated, edit and delete buttons" do
+		it "/admin/content page lists all content_sections in location order and shows for each: name, HL, body, link, last updated, edit and delete buttons" do
 			con_sec1_info = {name: "content1", css_class: "text-box", page_location: 3, headline: "Test Content1", body_copy: "body copy for test content1", link_url: "www.example1.com", link_text: "example1"}
 			con_sec2_info = {name: "content2", css_class: "text-box", page_location: 2, headline: "Test Content2", body_copy: "body copy for test content2", link_url: "www.example2.com", link_text: "example2"}
 			con_sec3_info = {name: "content3", css_class: "text-box", page_location: 1, headline: "Test Content3", body_copy: "body copy for test content3", link_url: "www.example3.com", link_text: "example3"}
@@ -202,8 +202,8 @@ describe "AdminController" do
 				expect(page.body).to include(con_sec.body_copy)
 				expect(page.body).to include(con_sec.link_url)
 				expect(page.body).to include(con_sec.link_text)
-				expect(page.body).to include("/content-sections/#{con_sec.slug}/edit")
-				expect(page.body).to include("/content-sections/#{con_sec.slug}")
+				expect(page.body).to include("/admin/content-sections/#{con_sec.slug}/edit")
+				expect(page.body).to include("/admin/content-sections/#{con_sec.slug}")
 			end
 		end
 	end
@@ -219,11 +219,11 @@ describe "AdminController" do
 			
 			expect(page.body).to include("<h1>Social Management</h1>")
 			expect(page.body).to include('<nav id="admin">')
-			expect(page.body).to include('<a href="/social-platforms/new"')
-			expect(page.body).to include('<a href="/social-profiles/new"')
+			expect(page.body).to include('<a href="/admin/social-platforms/new"')
+			expect(page.body).to include('<a href="/admin/social-profiles/new"')
 		end
 		
-		it "admin/social page lists all social_platforms and shows for each: all info, edit and delete buttons" do
+		it "/admin/social page lists all social_platforms and shows for each: all info, edit and delete buttons" do
 			platform1_info = {name: "platform name1", base_url: "https://www.example1.com", image_file_name: "icon1.png"}
             platform2_info = {name: "platform name2", base_url: "https://www.example2.com", image_file_name: "icon2.png"}
 			SocialPlatform.create(platform1_info)
@@ -235,12 +235,12 @@ describe "AdminController" do
 				expect(page.body).to include(platform.name)
 				expect(page.body).to include(platform.base_url)
 				expect(page.body).to include(platform.image_file_name)
-				expect(page.body).to include("/social-platforms/#{platform.slug}/edit")
-				expect(page.body).to include("/social-platforms/#{platform.slug}")
+				expect(page.body).to include("/admin/social-platforms/#{platform.slug}/edit")
+				expect(page.body).to include("/admin/social-platforms/#{platform.slug}")
 			end
 		end
 		
-		it "admin/social page lists all social_profiles and shows for each: all info, edit and delete buttons" do
+		it "/admin/social page lists all social_profiles and shows for each: all info, edit and delete buttons" do
 			platform1_info = {name: "zplatform name1", base_url: "https://www.example1.com", image_file_name: "icon1.png"}
             platform2_info = {name: "aplatform name2", base_url: "https://www.example2.com", image_file_name: "icon2.png"}
 			platform1 = SocialPlatform.create(platform1_info)
@@ -267,8 +267,8 @@ describe "AdminController" do
 				expect(page.body).to include(profile.name)
 				expect(page.body).to include(profile.handle)
 				expect(page.body).to include(profile.display_order.to_s)
-				expect(page.body).to include("/social-profiles/#{profile.slug}/edit")
-				expect(page.body).to include("/social-profiles/#{profile.slug}")
+				expect(page.body).to include("/admin/social-profiles/#{profile.slug}/edit")
+				expect(page.body).to include("/admin/social-profiles/#{profile.slug}")
 			end
 		end
     end

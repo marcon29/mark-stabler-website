@@ -4,9 +4,9 @@ class SocialPlatformslController < AppController
     # use Rack::Flash
     
     # create routes ###############################
-	get '/social-platforms/new' do        
+	get '/admin/social-platforms/new' do        
 		redirect "/admin" if !logged_in?				
-        erb :"/social_platforms/new"
+        erb :"social_platforms/new"
 	end
 
 	post '/social-platforms' do
@@ -23,13 +23,13 @@ class SocialPlatformslController < AppController
 
 
 	# update routes ###############################
-    get '/social-platforms/:slug/edit' do		
+    get '/admin/social-platforms/:slug/edit' do		
 		redirect "/admin" if !logged_in?
 		@platform = SocialPlatform.find_by_slug(params[:slug])
-		erb :"/social_platforms/edit"
+		erb :"social_platforms/edit"
 	end
   
-	patch '/social-platforms/:slug' do
+	patch '/admin/social-platforms/:slug' do
 		platform = SocialPlatform.find_by_slug(params[:slug])
 
 		if platform.update(params[:social_platform])
@@ -43,7 +43,7 @@ class SocialPlatformslController < AppController
 	
 
 	# delete routes ###############################
-	delete '/social-platforms/:slug' do
+	delete '/admin/social-platforms/:slug' do
 		platform = SocialPlatform.find_by_slug(params[:slug])
 		platform.destroy
 		# flash[:message] = "#{platform.name} removed"

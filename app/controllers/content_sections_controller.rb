@@ -4,12 +4,12 @@ class ContentSectionslController < AppController
     # use Rack::Flash
     
     # create routes ###############################
-    get '/content-sections/new' do
+    get '/admin/content-sections/new' do
         redirect "/admin" if !logged_in?
-		erb :"/content_sections/new"
+		erb :"content_sections/new"
 	end
 
-	post '/content-sections' do
+	post '/admin/content-sections' do
 		con_sec = ContentSection.new(params[:content_section])
 
 		if con_sec.save
@@ -23,13 +23,13 @@ class ContentSectionslController < AppController
 
 
 	# update routes ###############################
-    get '/content-sections/:slug/edit' do
+    get '/admin/content-sections/:slug/edit' do
 		redirect "/admin" if !logged_in?
 		@con_sec = ContentSection.find_by_slug(params[:slug])
-		erb :"/content_sections/edit"
+		erb :"content_sections/edit"
 	end
   
-	patch '/content-sections/:slug' do
+	patch '/admin/content-sections/:slug' do
 		con_sec = ContentSection.find_by_slug(params[:slug])
 
 		if con_sec.update(params[:content_section])
@@ -43,7 +43,7 @@ class ContentSectionslController < AppController
 
 
 	# delete routes ###############################
-	delete '/content-sections/:slug' do
+	delete '/admin/content-sections/:slug' do
 		con_sec = ContentSection.find_by_slug(params[:slug])
 		con_sec.destroy
 		# flash[:message] = "#{con_sec.name} removed"

@@ -3,7 +3,7 @@
 </section>
 
 <section>
-    <h3><a href="/content-sections/new"><h3>ADD CONTENT SECTION</a></h3>
+    <h3><a href="/admin/content-sections/new"><h3>ADD CONTENT SECTION</a></h3>
 </section>
 <hr>
 
@@ -30,10 +30,10 @@
                     <td><a href="<%= cs.link_url %>" target="_blank"><%= cs.link_text %></td>
                     <td><%= formatted_date(cs.updated_at) %></td>
                     <td>
-                        <form class="crud-button" method="get" action="/content-sections/<%= cs.slug %>/edit">
+                        <form class="crud-button" method="get" action="/admin/content-sections/<%= cs.slug %>/edit">
                             <input id="edit-<%= cs.slug %>" type="submit" value="Edit">
                         </form>
-                        <form class="crud-button" method="post" action="/content-sections/<%= cs.slug %>">
+                        <form class="crud-button" method="post" action="/admin/content-sections/<%= cs.slug %>">
                             <input id="hidden" type="hidden" name="_method" value="delete">
                             <input id="delete-<%= cs.slug %>" type="submit" value="Delete <%= cs.slug %>">
                         </form>

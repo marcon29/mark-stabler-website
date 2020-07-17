@@ -4,12 +4,12 @@ class UsersController < AppController
 	# use Rack::Flash
     
     # new user (signup) routes ################################################
-    get '/users/new' do
+    get '/admin/users/new' do
         redirect "/admin" if !logged_in?
 		erb :"users/new"
 	end
     
-    post '/users/new' do
+    post '/admin/users/new' do
 		user = User.new(params[:user])
 
 		if user.save
@@ -23,13 +23,13 @@ class UsersController < AppController
 
 
 	# update routes ###############################
-	get '/users/:username/edit' do
-        redirect "/admin" if !logged_in?
-        @user = User.find_by(username: params[:username])
-		erb :"/users/edit"
+	get '/admin/users/:username/edit' do
+		redirect "/admin" if !logged_in?		
+		@user = User.find_by(username: params[:username])
+		erb :"users/edit"
 	end
     
-	patch '/users/:username' do
+	patch '/admin/users/:username' do
 		user = User.find_by(username: params[:username])
         
 		if user.update(params[:user])
@@ -43,7 +43,7 @@ class UsersController < AppController
 
     
 	# delete routes ###############################
-	delete '/users/:username' do
+	delete '/admin/users/:username' do
 		if User.all.count > 1
 			user = User.find_by(username: params[:username])
 			user.destroy

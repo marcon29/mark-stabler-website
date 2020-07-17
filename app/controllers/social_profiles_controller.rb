@@ -4,10 +4,10 @@ class SocialProfileslController < AppController
     # use Rack::Flash
     
     # create routes ###############################
-	get '/social-profiles/new' do
+	get '/admin/social-profiles/new' do
 		redirect "/admin" if !logged_in?
 		@platforms = SocialPlatform.all
-        erb :"/social_profiles/new"
+        erb :"social_profiles/new"
 	end
 
 	post '/social-profiles' do
@@ -24,14 +24,14 @@ class SocialProfileslController < AppController
 
 
 	# update routes ###############################
-    get '/social-profiles/:slug/edit' do
+    get '/admin/social-profiles/:slug/edit' do
 		redirect "/admin" if !logged_in?		
 		@profile = SocialProfile.find_by_slug(params[:slug])
 		@platforms = SocialPlatform.all
-		erb :"/social_profiles/edit"
+		erb :"social_profiles/edit"
 	end
   
-	patch '/social-profiles/:slug' do
+	patch '/admin/social-profiles/:slug' do
 		profile = SocialProfile.find_by_slug(params[:slug])
 
 		if profile.update(params[:social_profile])
@@ -45,7 +45,7 @@ class SocialProfileslController < AppController
 	
 
 	# delete routes ###############################
-	delete '/social-profiles/:slug' do
+	delete '/admin/social-profiles/:slug' do
 		profile = SocialProfile.find_by_slug(params[:slug])
 		profile.destroy
 		# flash[:message] = "#{profile.name} removed"

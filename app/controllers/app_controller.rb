@@ -48,9 +48,10 @@ class AppController < Sinatra::Base
 	def login(user)
 		if user && user.authenticate(params[:user][:password])
 			session[:user_id] = user.id
+			# redirect '/admin'    # only need this if different redirect for successful login
 		else
 			# flash[:message] = "We did not find a matching profile. Please sign up instead."
-			redirect '/admin'
+			# redirect '/admin/login'    # only need this if different redirect for unsuccessful login
 		end		
 	end
 	

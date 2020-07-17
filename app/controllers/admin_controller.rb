@@ -4,15 +4,15 @@ class AdminController < AppController
     # use Rack::Flash
 
     # admin home page ###############################################
-	get '/admin' do
+	get '/admin' do		
 		if !logged_in?
-			erb :"/admin/login"
+			erb :"admin/login"
 		else
-			erb :"/admin/index"			
+			erb :"admin/index"			
 		end
     end
 
-    post '/login' do
+    post '/admin/login' do
 		# if params[:user][:username] == "" || params[:user][:password] == ""            
 			# # flash[:message] = "Operation Failed <br> Both Username and Password must be filled out"
         # else
@@ -21,13 +21,13 @@ class AdminController < AppController
 			# # flash[:message] = "Welcome, #{user.first_name.capitalize}"
 		# end
 		
-		# remove these two and use above when adding flash messages
+		# remove these two and use above when adding flash messages		
 		user = User.find_by(username: params[:user][:username])
-		login(user)
+		login(user)		
 		redirect "/admin"
     end    
 
-	get '/logout' do
+	get '/admin/logout' do
 		logout! if logged_in?			
 		redirect "/admin"
     end
@@ -36,8 +36,8 @@ class AdminController < AppController
     # admin/user routes ################################################
     get '/admin/users' do		
 		redirect "/admin" if !logged_in?
-		@users = User.all		
-		erb :"/admin/users"
+		@users = User.all
+		erb :"admin/users"
 	end
 	
 
@@ -45,7 +45,7 @@ class AdminController < AppController
     get '/admin/content' do
 		redirect "/admin" if !logged_in?
 		@sections = ContentSection.all
-		erb :"/admin/content"
+		erb :"admin/content"
 	end
 	
 
@@ -54,6 +54,6 @@ class AdminController < AppController
 		redirect "/admin" if !logged_in?
 		@platforms = SocialPlatform.all
 		@profiles = SocialProfile.all
-		erb :"/admin/social"
+		erb :"admin/social"
     end
 end

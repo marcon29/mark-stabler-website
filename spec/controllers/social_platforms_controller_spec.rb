@@ -16,21 +16,21 @@ describe "SocialPlatformslController" do
 	# non-user blocked access tests ###########################################################
 	describe "no routes allow access to non-signed-in users" do
 		it "GET social-platforms/new route redirects to the admin/login page if user not logged in" do
-			visit '/social-platforms/new'
+			visit '/admin/social-platforms/new'
 
 			expect(page.body).to include("<h1>Login</h1>")
 			expect(page.body).to include('<form id="login-form"')
-			expect(page.body).to include('method="post" action="/login"')
+			expect(page.body).to include('method="post" action="/admin/login"')
 			expect(page).to have_field(:username)
 			expect(page).to have_field(:password)
 		end
 
 		it "GET social-platforms/edit route redirects to the admin/login page if user not logged in" do
-			visit "/social-platforms/#{@platform.slug}/edit"
+			visit "/admin/social-platforms/#{@platform.slug}/edit"
 			
 			expect(page.body).to include("<h1>Login</h1>")
 			expect(page.body).to include('<form id="login-form"')
-			expect(page.body).to include('method="post" action="/login"')
+			expect(page.body).to include('method="post" action="/admin/login"')
 			expect(page).to have_field(:username)
 			expect(page).to have_field(:password)
 		end
@@ -44,7 +44,7 @@ describe "SocialPlatformslController" do
 
 		describe "displays and lets user interact with new platform form" do
 			it "GET social-platforms/new route loads the social-platforms/new page and displays new platform form when user is logged in" do
-				visit '/social-platforms/new'
+				visit '/admin/social-platforms/new'
 
 				expect(page.body).to include("<h1>Add New Social Platform</h1>")
 				expect(page.body).to include('<form id="new-platform-form"')
@@ -56,7 +56,7 @@ describe "SocialPlatformslController" do
 			
 			it "POST social-platforms/new route lets a user enter info to create a new social platform then loads admin/social page upon success" do
 				new_platform_info = {name: "new platform3", base_url: "https://www.example3.com", image_file_name: "icon3.png"}
-				visit '/social-platforms/new'
+				visit '/admin/social-platforms/new'
 
 				fill_in :name, :with => "#{new_platform_info[:name]}"
 				fill_in :base_url, :with => "#{new_platform_info[:base_url]}"
@@ -72,14 +72,14 @@ describe "SocialPlatformslController" do
 				# check redirect 
 				expect(page.body).to include("<h1>Social Management</h1>")
 				expect(page.body).to include('<nav id="admin">')
-				expect(page.body).to include('<a href="/social-platforms/new"')
+				expect(page.body).to include('<a href="/admin/social-platforms/new"')
 			end
 		end
 
 		describe "won't create social platform if validated fields are blank" do
 			it "POST social-platforms/new route won't create a new social platform if name field is left blank" do
 				new_platform_info = {name: "new platform3", base_url: "https://www.example3.com", image_file_name: "icon3.png"}
-				visit '/social-platforms/new'
+				visit '/admin/social-platforms/new'
 				total_platforms = SocialPlatform.all.count
 
 				# fill in form without name
@@ -99,7 +99,7 @@ describe "SocialPlatformslController" do
 
 			it "POST social-platforms/new route won't create a new social platform if base_url field is left blank" do
 				new_platform_info = {name: "new platform3", base_url: "https://www.example3.com", image_file_name: "icon3.png"}
-				visit '/social-platforms/new'
+				visit '/admin/social-platforms/new'
 				total_platforms = SocialPlatform.all.count
 
 				# fill in form without base_url
@@ -119,7 +119,7 @@ describe "SocialPlatformslController" do
 
 			it "POST social-platforms/new route won't create a new social platform if image_file_name field is left blank" do
 				new_platform_info = {name: "new platform3", base_url: "https://www.example3.com", image_file_name: "icon3.png"}
-				visit '/social-platforms/new'
+				visit '/admin/social-platforms/new'
 				total_platforms = SocialPlatform.all.count
 
 				# fill in form without image_file_name
@@ -141,7 +141,7 @@ describe "SocialPlatformslController" do
 		describe "won't create social platform if validated fields are bad" do
 			it "POST social-platforms/new route won't create a new social platform if name is same as other platform" do
 				new_platform_info = {name: "new platform3", base_url: "https://www.example3.com", image_file_name: "icon3.png"}
-				visit '/social-platforms/new'
+				visit '/admin/social-platforms/new'
 				total_platforms = SocialPlatform.all.count
 
 				# fill in form with duplicated name
@@ -161,7 +161,7 @@ describe "SocialPlatformslController" do
 			
 			it "POST social-platforms/new route won't create a new social platform if base_url is same as other platform" do
 				new_platform_info = {name: "new platform3", base_url: "https://www.example3.com", image_file_name: "icon3.png"}
-				visit '/social-platforms/new'
+				visit '/admin/social-platforms/new'
 				total_platforms = SocialPlatform.all.count
 
 				# fill in form with duplicated base_url
@@ -181,7 +181,7 @@ describe "SocialPlatformslController" do
 
 			it "POST social-platforms/new route won't create a new social platform if image_file_name is same as other platform" do
 				new_platform_info = {name: "new platform3", base_url: "https://www.example3.com", image_file_name: "icon3.png"}
-				visit '/social-platforms/new'
+				visit '/admin/social-platforms/new'
 				total_platforms = SocialPlatform.all.count
 
 				# fill in form with duplicated image_file_name
@@ -201,7 +201,7 @@ describe "SocialPlatformslController" do
 
 			it "POST social-platforms/new route won't create a new social platform if base_url doesn't match standard URL format" do
 				new_platform_info = {name: "new platform3", base_url: "https://www.example3.com", image_file_name: "icon3.png"}
-				visit '/social-platforms/new'
+				visit '/admin/social-platforms/new'
 				total_platforms = SocialPlatform.all.count
 
 				# fill in form with bad base_url
@@ -221,7 +221,7 @@ describe "SocialPlatformslController" do
 
 			it "POST social-platforms/new route won't create a new social platform if image_file_name is wrong file type" do
 				new_platform_info = {name: "new platform3", base_url: "https://www.example3.com", image_file_name: "icon3.png"}
-				visit '/social-platforms/new'
+				visit '/admin/social-platforms/new'
 				total_platforms = SocialPlatform.all.count
 
 				# fill in form with bad image_file_name
@@ -242,7 +242,7 @@ describe "SocialPlatformslController" do
 
 		# it "POST Route displays the appropriate flash message upon redirect" do
 		#	# think I can test the display in only processing routes no in every get
-		# 	# visit '/social-platforms/new'
+		# 	# visit '/admin/social-platforms/new'
 		# end
 	end
 
@@ -254,12 +254,12 @@ describe "SocialPlatformslController" do
 
 		describe "displays and lets user interact with edit platform form" do
 			it "GET social-platforms/edit route loads the social-platforms/edit page and displays edit platform form when user is logged in " do			
-				visit "/social-platforms/#{@platform.slug}/edit"
+				visit "/admin/social-platforms/#{@platform.slug}/edit"
 
 				# check correct edit form is displayed
 				expect(page.body).to include("<h1>Edit #{@platform.name}</h1>")
 				expect(page.body).to include('<form id="edit-platform-form"')
-				expect(page.body).to include('method="post" action="/social-platforms/platform1"')
+				expect(page.body).to include('method="post" action="/admin/social-platforms/platform1"')
 				expect(page.body).to include('name="_method" value="patch"')
 
 				# check edit form fields are prefilled with correct existing object info
@@ -270,7 +270,7 @@ describe "SocialPlatformslController" do
 			
 			it "POST social-platforms/edit route lets a user enter info to update an existing social platform then loads admin/social page upon success" do
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
-				visit "/social-platforms/#{@platform.slug}/edit"
+				visit "/admin/social-platforms/#{@platform.slug}/edit"
 				
 				fill_in :name, :with => "#{update_platform_info[:name]}"
 				fill_in :base_url, :with => "#{update_platform_info[:base_url]}"
@@ -286,7 +286,7 @@ describe "SocialPlatformslController" do
 				# check redirect 
 				expect(page.body).to include("<h1>Social Management</h1>")
 				expect(page.body).to include('<nav id="admin">')
-				expect(page.body).to include('<a href="/social-platforms/new"')
+				expect(page.body).to include('<a href="/admin/social-platforms/new"')
 			end
 		end
 
@@ -294,7 +294,7 @@ describe "SocialPlatformslController" do
 			it "POST social-platforms/edit route won't update social platform if name field is left blank" do
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
 				check = @platform.name
-				visit "/social-platforms/#{@platform.slug}/edit"
+				visit "/admin/social-platforms/#{@platform.slug}/edit"
 				
 				# fill in form without name
 				fill_in :name, :with => ""
@@ -314,7 +314,7 @@ describe "SocialPlatformslController" do
 			it "POST social-platforms/edit route won't update social platform if base_url field is left blank" do
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
 				check = @platform.base_url
-				visit "/social-platforms/#{@platform.slug}/edit"
+				visit "/admin/social-platforms/#{@platform.slug}/edit"
 				
 				# fill in form without base_url
 				fill_in :name, :with => "#{update_platform_info[:name]}"
@@ -334,7 +334,7 @@ describe "SocialPlatformslController" do
 			it "POST social-platforms/edit route won't update social platform if image_file_name field is left blank" do
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
 				check = @platform.image_file_name
-				visit "/social-platforms/#{@platform.slug}/edit"
+				visit "/admin/social-platforms/#{@platform.slug}/edit"
 				
 				# fill in form without image_file_name
 				fill_in :name, :with => "#{update_platform_info[:name]}"
@@ -358,7 +358,7 @@ describe "SocialPlatformslController" do
 				platform2 = SocialPlatform.create(platform2_info)
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
 				check = @platform.name
-				visit "/social-platforms/#{@platform.slug}/edit"
+				visit "/admin/social-platforms/#{@platform.slug}/edit"
 
 				# fill in form with duplicated name
 				fill_in :name, :with => "platform2"
@@ -380,7 +380,7 @@ describe "SocialPlatformslController" do
 				platform2 = SocialPlatform.create(platform2_info)
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
 				check = @platform.base_url
-				visit "/social-platforms/#{@platform.slug}/edit"
+				visit "/admin/social-platforms/#{@platform.slug}/edit"
 
 				# fill in form with duplicated base_url
 				fill_in :name, :with => "#{update_platform_info[:name]}"
@@ -402,7 +402,7 @@ describe "SocialPlatformslController" do
 				platform2 = SocialPlatform.create(platform2_info)
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
 				check = @platform.image_file_name
-				visit "/social-platforms/#{@platform.slug}/edit"
+				visit "/admin/social-platforms/#{@platform.slug}/edit"
 
 				# fill in form with duplicated image_file_name
 				fill_in :name, :with => "#{update_platform_info[:name]}"
@@ -422,7 +422,7 @@ describe "SocialPlatformslController" do
 			it "POST social-platforms/edit route won't update social platform if base_url doesn't match standard URL format" do
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
 				check = @platform.base_url
-				visit "/social-platforms/#{@platform.slug}/edit"
+				visit "/admin/social-platforms/#{@platform.slug}/edit"
 
 				# fill in form with bad base_url
 				fill_in :name, :with => "#{update_platform_info[:name]}"
@@ -442,7 +442,7 @@ describe "SocialPlatformslController" do
 			it "POST social-platforms/edit route won't update social platform if image_file_name is wrong file type" do
 				update_platform_info = {name: "update platform4", base_url: "https://www.example4.com", image_file_name: "icon4.png"}
 				check = @platform.image_file_name
-				visit "/social-platforms/#{@platform.slug}/edit"
+				visit "/admin/social-platforms/#{@platform.slug}/edit"
 
 				# fill in form with bad image_file_name
 				fill_in :name, :with => "#{update_platform_info[:name]}"
@@ -462,7 +462,7 @@ describe "SocialPlatformslController" do
 
 		# it "POST Route displays the appropriate flash message upon redirect" do
 		# 	# think I can test the display in only processing routes no in every get
-		# 	# visit "/social-platforms/#{@platform.slug}/edit"
+		# 	# visit "/admin/social-platforms/#{@platform.slug}/edit"
 		# end
 	end
 
@@ -483,7 +483,7 @@ describe "SocialPlatformslController" do
 			expect(SocialPlatform.all.include?(@platform)).to be true
 			expect(page.body).to include("<h1>Social Management</h1>")
 			expect(page.body).to include('<nav id="admin">')
-			expect(page.body).to include('<a href="/social-platforms/new"')
+			expect(page.body).to include('<a href="/admin/social-platforms/new"')
 		end			
 
 		# it "POST Route displays the appropriate flash message upon redirect" do

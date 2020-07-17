@@ -3,7 +3,7 @@
 </section>
 
 <section>
-    <h3><a href="/users/new"><h3>ADD USER</a></h3>
+    <h3><a href="/admin/users/new"><h3>ADD USER</a></h3>
 </section>
 <hr>
 
@@ -27,10 +27,10 @@
                     <td><%= u.email %></td>
                     <td><%= formatted_date(u.created_at) %></td>
                     <td>
-                        <form class="crud-button" method="get" action="/users/<%= u.username %>/edit">
+                        <form class="crud-button" method="get" action="/admin/users/<%= u.username %>/edit">
                             <input id="edit-<%= u.username %>" type="submit" value="Edit">
                         </form>                
-                        <form class="crud-button" method="post" action="/users/<%= u.username %>">
+                        <form class="crud-button" method="post" action="/admin/users/<%= u.username %>">
                             <input id="hidden" type="hidden" name="_method" value="delete">
                             <input id="delete-<%= u.username %>" type="submit" value="Delete">
                         </form>

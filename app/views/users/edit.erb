@@ -3,7 +3,7 @@
 </section>
 
 <section>
-	<form id="edit-user-form" class="new-edit-form" method="post" action="/users/<%= @user.username %>">
+	<form id="edit-user-form" class="new-edit-form" method="post" action="/admin/users/<%= @user.username %>">
 		<input id="hidden" type="hidden" name="_method" value="patch">
 
 		<h3>Edit the Info You Want to Change</h3>

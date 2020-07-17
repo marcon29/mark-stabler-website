@@ -13,21 +13,21 @@ describe "UsersController" do
 	# non-user blocked access tests ###########################################################
 	describe "no routes allow access to non-signed-in users" do
 		it "GET users/new route redirects to the admin/login page if user not logged in" do
-			visit '/users/new'
+			visit '/admin/users/new'
 
 			expect(page.body).to include("<h1>Login</h1>")
 			expect(page.body).to include('<form id="login-form"')
-			expect(page.body).to include('method="post" action="/login"')
+			expect(page.body).to include('method="post" action="/admin/login"')
 			expect(page).to have_field(:username)
 			expect(page).to have_field(:password)
 		end
 
 		it "GET users/edit route redirects to the admin/login page if user not logged in" do
-			visit "/users/#{@user.username}/edit"
+			visit "/admin/users/#{@user.username}/edit"
 			
 			expect(page.body).to include("<h1>Login</h1>")
 			expect(page.body).to include('<form id="login-form"')
-			expect(page.body).to include('method="post" action="/login"')
+			expect(page.body).to include('method="post" action="/admin/login"')
 			expect(page).to have_field(:username)
 			expect(page).to have_field(:password)
 		end
@@ -41,11 +41,11 @@ describe "UsersController" do
 
 		describe "displays and lets user interact with new user form" do
 			it "GET users/new route loads the users/new page and displays new user form when user is logged in" do
-				visit '/users/new'
+				visit '/admin/users/new'
 
 				expect(page.body).to include("<h1>Add New User</h1>")
 				expect(page.body).to include('<form id="new-user-form"')
-				expect(page.body).to include('method="post" action="/users/new"')
+				expect(page.body).to include('method="post" action="/admin/users/new"')
 				expect(page).to have_field(:first_name)
 				expect(page).to have_field(:last_name)
 				expect(page).to have_field(:email)
@@ -55,7 +55,7 @@ describe "UsersController" do
 			
 			it "POST users/new route lets a user enter info to create a new user then loads admin/users page upon success" do
 				new_user_info = {first_name: "new", last_name: "usertest", email: "newusertest1@example.com", username: "newusertest1", password: "test"}
-				visit '/users/new'
+				visit '/admin/users/new'
 
 				fill_in :first_name, :with => "#{new_user_info[:first_name]}"
 				fill_in :last_name, :with => "#{new_user_info[:last_name]}"
@@ -75,14 +75,14 @@ describe "UsersController" do
 				# check redirect 
 				expect(page.body).to include("<h1>User Management</h1>")
 				expect(page.body).to include('<nav id="admin">')
-				expect(page.body).to include('<a href="/users/new"')
+				expect(page.body).to include('<a href="/admin/users/new"')
 			end
 		end
 
 		describe "won't create user if validated fields are blank" do
 			it "POST users/new route won't create a new user if first_name field is left blank" do
 				new_user_info = {first_name: "new", last_name: "usertest", email: "newusertest1@example.com", username: "newusertest1", password: "test"}
-				visit '/users/new'
+				visit '/admin/users/new'
 				total_users = User.all.count
 				
 				# fill in form without first_name
@@ -99,12 +99,12 @@ describe "UsersController" do
 				# expect info from users/new page after reload
 				expect(page.body).to include("<h1>Add New User</h1>")
 				expect(page.body).to include('<form id="new-user-form"')
-				expect(page.body).to include('method="post" action="/users/new"')
+				expect(page.body).to include('method="post" action="/admin/users/new"')
 			end
 
 			it "POST users/new route won't create a new user if last_name field is left blank" do
 				new_user_info = {first_name: "new", last_name: "usertest", email: "newusertest1@example.com", username: "newusertest1", password: "test"}
-				visit '/users/new'
+				visit '/admin/users/new'
 				total_users = User.all.count
 
 				# fill in form without last_name
@@ -121,12 +121,12 @@ describe "UsersController" do
 				# expect info from users/new page after reload
 				expect(page.body).to include("<h1>Add New User</h1>")
 				expect(page.body).to include('<form id="new-user-form"')
-				expect(page.body).to include('method="post" action="/users/new"')
+				expect(page.body).to include('method="post" action="/admin/users/new"')
 			end
 
 			it "POST users/new route won't create a new user if email field is left blank" do
 				new_user_info = {first_name: "new", last_name: "usertest", email: "newusertest1@example.com", username: "newusertest1", password: "test"}
-				visit '/users/new'
+				visit '/admin/users/new'
 				total_users = User.all.count
 
 				# fill in form without email
@@ -143,12 +143,12 @@ describe "UsersController" do
 				# expect info from users/new page after reload
 				expect(page.body).to include("<h1>Add New User</h1>")
 				expect(page.body).to include('<form id="new-user-form"')
-				expect(page.body).to include('method="post" action="/users/new"')
+				expect(page.body).to include('method="post" action="/admin/users/new"')
 			end
 			
 			it "POST users/new route won't create a new user if username field is left blank" do
 				new_user_info = {first_name: "new", last_name: "usertest", email: "newusertest1@example.com", username: "newusertest1", password: "test"}
-				visit '/users/new'
+				visit '/admin/users/new'
 				total_users = User.all.count
 
 				# fill in form without username
@@ -165,12 +165,12 @@ describe "UsersController" do
 				# expect info from users/new page after reload
 				expect(page.body).to include("<h1>Add New User</h1>")
 				expect(page.body).to include('<form id="new-user-form"')
-				expect(page.body).to include('method="post" action="/users/new"')
+				expect(page.body).to include('method="post" action="/admin/users/new"')
 			end
 
 			it "POST users/new route won't create a new user if password field is left blank" do
 				new_user_info = {first_name: "new", last_name: "usertest", email: "newusertest1@example.com", username: "newusertest1", password: "test"}
-				visit '/users/new'
+				visit '/admin/users/new'
 				total_users = User.all.count
 
 				# fill in form without password
@@ -187,14 +187,14 @@ describe "UsersController" do
 				# expect info from users/new page after reload
 				expect(page.body).to include("<h1>Add New User</h1>")
 				expect(page.body).to include('<form id="new-user-form"')
-				expect(page.body).to include('method="post" action="/users/new"')
+				expect(page.body).to include('method="post" action="/admin/users/new"')
 			end
 		end
 
 		describe "won't create user if validated fields are bad" do
 			it "POST users/new route won't create a new user if email is same as other user" do
 				new_user_info = {first_name: "new", last_name: "usertest", email: "newusertest1@example.com", username: "newusertest1", password: "test"}
-				visit '/users/new'
+				visit '/admin/users/new'
 				total_users = User.all.count
 
 				# fill in form with duplicated email
@@ -211,12 +211,12 @@ describe "UsersController" do
 				# expect info from users/new page after reload
 				expect(page.body).to include("<h1>Add New User</h1>")
 				expect(page.body).to include('<form id="new-user-form"')
-				expect(page.body).to include('method="post" action="/users/new"')
+				expect(page.body).to include('method="post" action="/admin/users/new"')
 			end
 
 			it "POST users/new route won't create a new user if email doesn't match standard email format" do
 				new_user_info = {first_name: "new", last_name: "usertest", email: "newusertest1@example.com", username: "newusertest1", password: "test"}
-				visit '/users/new'
+				visit '/admin/users/new'
 				total_users = User.all.count
 
 				# fill in form with bad email
@@ -233,12 +233,12 @@ describe "UsersController" do
 				# expect info from users/new page after reload
 				expect(page.body).to include("<h1>Add New User</h1>")
 				expect(page.body).to include('<form id="new-user-form"')
-				expect(page.body).to include('method="post" action="/users/new"')
+				expect(page.body).to include('method="post" action="/admin/users/new"')
 			end
 
 			it "POST users/new route won't create a new user if username is same as other user" do
 				new_user_info = {first_name: "new", last_name: "usertest", email: "newusertest1@example.com", username: "newusertest1", password: "test"}
-				visit '/users/new'
+				visit '/admin/users/new'
 				total_users = User.all.count
 
 				# fill in form with duplicated username
@@ -255,12 +255,12 @@ describe "UsersController" do
 				# expect info from users/new page after reload
 				expect(page.body).to include("<h1>Add New User</h1>")
 				expect(page.body).to include('<form id="new-user-form"')
-				expect(page.body).to include('method="post" action="/users/new"')
+				expect(page.body).to include('method="post" action="/admin/users/new"')
 			end
 
 			it "POST users/new route won't create a new user if username contains non-letters or spaces" do
 				new_user_info = {first_name: "new", last_name: "usertest", email: "newusertest1@example.com", username: "newusertest1", password: "test"}
-				visit '/users/new'
+				visit '/admin/users/new'
 				total_users = User.all.count
 
 				# fill in form with bad username
@@ -277,13 +277,13 @@ describe "UsersController" do
 				# expect info from users/new page after reload
 				expect(page.body).to include("<h1>Add New User</h1>")
 				expect(page.body).to include('<form id="new-user-form"')
-				expect(page.body).to include('method="post" action="/users/new"')
+				expect(page.body).to include('method="post" action="/admin/users/new"')
 			end
 		end
 
 		# it "POST Route displays the appropriate flash message upon redirect" do
 		#	# think I can test the display in only processing routes no in every get
-		# 	# visit '/users/new'
+		# 	# visit '/admin/users/new'
 		# end
 	end
 
@@ -294,13 +294,13 @@ describe "UsersController" do
 		end
 
 		describe "displays and lets user interact with edit user form" do
-			it "GET users/edit route loads the users/edit page and displays edit user form when user is logged in " do			
-				visit "/users/#{@user.username}/edit"
+			it "GET users/edit route loads the users/edit page and displays edit user form when user is logged in " do
+				visit "/admin/users/#{@user.username}/edit"
 
 				# check correct edit form is displayed
 				expect(page.body).to include("<h1>Edit #{@user.username}</h1>")
 				expect(page.body).to include('<form id="edit-user-form"')
-				expect(page.body).to include('method="post" action="/users/testuser1"')
+				expect(page.body).to include('method="post" action="/admin/users/testuser1"')
 				expect(page.body).to include('name="_method" value="patch"')
 
 				# check edit form fields are prefilled with correct existing object info
@@ -314,7 +314,7 @@ describe "UsersController" do
 			
 			it "POST users/edit route lets a user enter info to update an existing user then loads admin/users page upon success" do
 				update_user_info = {first_name: "update", last_name: "usertest", email: "updateusertest1@example.com", username: "updateusertest1", password: "test"}
-				visit "/users/#{@user.username}/edit"
+				visit "/admin/users/#{@user.username}/edit"
 				
 				fill_in :first_name, :with => "#{update_user_info[:first_name]}"
 				fill_in :last_name, :with => "#{update_user_info[:last_name]}"
@@ -334,14 +334,14 @@ describe "UsersController" do
 				# check redirect 
 				expect(page.body).to include("<h1>User Management</h1>")
 				expect(page.body).to include('<nav id="admin">')
-				expect(page.body).to include('<a href="/users/new"')
+				expect(page.body).to include('<a href="/admin/users/new"')
 			end
 		end
 
 		describe "won't update user if validated fields are blank" do
 			it "POST users/edit route won't update user if first_name field is left blank" do
 				update_user_info = {first_name: "update", last_name: "usertest", email: "updateusertest1@example.com", username: "updateusertest1", password: "test"}
-				visit "/users/#{@user.username}/edit"
+				visit "/admin/users/#{@user.username}/edit"
 				check = @user.first_name
 				
 				# fill in form without first_name
@@ -363,7 +363,7 @@ describe "UsersController" do
 
 			it "POST users/edit route won't update user if last_name field is left blank" do
 				update_user_info = {first_name: "update", last_name: "usertest", email: "updateusertest1@example.com", username: "updateusertest1", password: "test"}
-				visit "/users/#{@user.username}/edit"
+				visit "/admin/users/#{@user.username}/edit"
 				check = @user.last_name
 
 				# fill in form without last_name
@@ -385,7 +385,7 @@ describe "UsersController" do
 
 			it "POST users/edit route won't update user if email field is left blank" do
 				update_user_info = {first_name: "update", last_name: "usertest", email: "updateusertest1@example.com", username: "updateusertest1", password: "test"}
-				visit "/users/#{@user.username}/edit"
+				visit "/admin/users/#{@user.username}/edit"
 				check = @user.email
 
 				# fill in form without email
@@ -407,7 +407,7 @@ describe "UsersController" do
 
 			it "POST users/edit route won't update user if username field is left blank" do
 				update_user_info = {first_name: "update", last_name: "usertest", email: "updateusertest1@example.com", username: "updateusertest1", password: "test"}
-				visit "/users/#{@user.username}/edit"
+				visit "/admin/users/#{@user.username}/edit"
 				check = @user.username
 				
 				# fill in form without username
@@ -429,7 +429,7 @@ describe "UsersController" do
 
 			it "POST users/edit route won't update user if password field is left blank (redirects to admin/users instead)" do
 				update_user_info = {first_name: "update", last_name: "usertest", email: "updateusertest1@example.com", username: "updateusertest1", password: "password"}
-				visit "/users/#{@user.username}/edit"				
+				visit "/admin/users/#{@user.username}/edit"				
 				check = "test"
 
 				# fill in form without password
@@ -447,7 +447,7 @@ describe "UsersController" do
 				# expect info from admin/users page after reload
 				expect(page.body).to include("<h1>User Management</h1>")
 				expect(page.body).to include('<nav id="admin">')
-				expect(page.body).to include('<a href="/users/new"')
+				expect(page.body).to include('<a href="/admin/users/new"')
 			end
 		end
 
@@ -457,7 +457,7 @@ describe "UsersController" do
 				user2 = User.create(user2_info)
 				update_user_info = {first_name: "update", last_name: "usertest", email: "updateusertest1@example.com", username: "updateusertest1", password: "test"}
 				
-				visit "/users/#{@user.username}/edit"
+				visit "/admin/users/#{@user.username}/edit"
 				check = @user.email
 
 				# fill in form with duplicated email
@@ -479,7 +479,7 @@ describe "UsersController" do
 
 			it "POST users/edit route won't update user if email doesn't match standard email format" do
 				update_user_info = {first_name: "update", last_name: "usertest", email: "updateusertest1@example.com", username: "updateusertest1", password: "test"}
-				visit "/users/#{@user.username}/edit"
+				visit "/admin/users/#{@user.username}/edit"
 				check = @user.email
 
 				# fill in form with bad email
@@ -504,7 +504,7 @@ describe "UsersController" do
 				user2 = User.create(user2_info)
 				update_user_info = {first_name: "update", last_name: "usertest", email: "updateusertest1@example.com", username: "updateusertest1", password: "test"}
 				
-				visit "/users/#{@user.username}/edit"
+				visit "/admin/users/#{@user.username}/edit"
 				check = @user.username
 
 				# fill in form with duplicated username
@@ -526,7 +526,7 @@ describe "UsersController" do
 
 			it "POST users/edit route won't update user if username contains non-letters or spaces" do
 				update_user_info = {first_name: "update", last_name: "usertest", email: "updateusertest1@example.com", username: "updateusertest1", password: "test"}
-				visit "/users/#{@user.username}/edit"
+				visit "/admin/users/#{@user.username}/edit"
 				check = @user.username
 
 				# fill in form with bad username
@@ -549,7 +549,7 @@ describe "UsersController" do
 
 		# it "POST Route displays the appropriate flash message upon redirect" do
 		# 	# think I can test the display in only processing routes no in every get
-		# 	# visit "/users/#{@user.username}/edit"
+		# 	# visit "/admin/users/#{@user.username}/edit"
 		# end
 	end
 
@@ -570,7 +570,7 @@ describe "UsersController" do
 			expect(User.all.include?(@user)).to be true
 			expect(page.body).to include("<h1>User Management</h1>")
 			expect(page.body).to include('<nav id="admin">')
-			expect(page.body).to include('<a href="/users/new"')
+			expect(page.body).to include('<a href="/admin/users/new"')
 		end
 
 		it "DELETE users route won't delete last remaining user, loads admin/users page upon failure" do
@@ -580,7 +580,7 @@ describe "UsersController" do
 			expect(User.all.include?(@user)).to be true
 			expect(page.body).to include("<h1>User Management</h1>")
 			expect(page.body).to include('<nav id="admin">')
-			expect(page.body).to include('<a href="/users/new"')
+			expect(page.body).to include('<a href="/admin/users/new"')
 		end
 
 		# it "POST Route displays the appropriate flash message upon redirect" do
