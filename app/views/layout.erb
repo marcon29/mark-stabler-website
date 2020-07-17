@@ -26,8 +26,8 @@
 </head>
 
 <body>
-	<header>
-		<% if logged_in? && admin_page?%>
+	<header>		
+		<% if admin_page? && logged_in? %>
 			<h2 class="grey-text">MS.com Admin</h2>
 			<nav id="admin">
 				<ul>
@@ -64,9 +64,10 @@
 		<%= yield %>
 	</main>
 	
+	<% if public_page? && !logged_in? %>
 	<footer>
 		<h3 class="lt-orange-text">
-			<a href="mailto:online@markstabler.com" target="_blank">CONTACT</a>
+			<a href="/contact">CONTACT</a>
 		</h3>
 		
 		<div class="social">
@@ -86,5 +87,6 @@
 		
 		<p class="fine-print">© Stabler Writing Services, LLC</p>
 	</footer>
+	<% end %>
 </body>
 </html>

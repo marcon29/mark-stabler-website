@@ -39,6 +39,10 @@ class AppController < Sinatra::Base
 	
 	def admin_page?
         request.path.include?("/admin")
+	end
+	
+	def public_page?
+        !request.path.include?("/admin/")
     end
 
 	

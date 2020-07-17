@@ -41,7 +41,7 @@ header {
 main {
 	width: 90%;
 	margin: auto;
-	padding-bottom: 25rem;    /* Footer height - needs to be larger than footer height below*/
+	padding-bottom: 20rem;    /* Footer height - needs to be larger than footer height below*/
 	/* padding-bottom: 25rem;    Footer height - needs to match footer height below */
 }
 
@@ -50,17 +50,24 @@ footer {
 	position: absolute;
 	/* left: 0; */
 	bottom: 0;
-	height: 15rem;           /* Footer height - needs to be smaller than main padding-bottom */
+	height: 12rem;           /* Footer height - needs to be smaller than main padding-bottom */
 	/* height: 15rem;            Footer height - needs to match main padding-bottom */
 	width: 100%;
-	margin: 5.5rem 0 0;
-	padding: 1rem 2rem 2rem;
+	/* margin: 5.5rem 0 0; */
+	/* padding: 1rem 2rem 2rem; */
 }
 
 footer > * {
 	width: 33%;
 	margin: 1rem auto;
 	text-align: center;
+}
+
+.social img {
+	width: 3rem;
+	height: 3rem;
+	background-color: #285DC2;
+	border-radius: 35% 0;
 }
 
 /* ******************************************************* */
