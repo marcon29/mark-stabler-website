@@ -14,14 +14,21 @@
 	<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 	
 	<link href="/styles/global.css" rel="stylesheet" type="text/css">
+	<% if admin_page?%>
+		<link href="/styles/admin.css" rel="stylesheet" type="text/css">
+	<% end %>
+	<% if !admin_page?%>
+		<link href="/styles/index.css" rel="stylesheet" type="text/css">
+	<% end %>
+	<link href="/styles/responsive.css" rel="stylesheet" type="text/css">
 	
 	<!-- add in google analytics-->
 </head>
 
 <body>
-	<% if logged_in? %>
-		<header>
-			<h2 class="grey-text">MS.com Admin</h2>	
+	<header>
+		<% if logged_in? && admin_page?%>
+			<h2 class="grey-text">MS.com Admin</h2>
 			<nav id="admin">
 				<ul>
 					<li><a href="/admin">Admin Home</a></li>
@@ -31,10 +38,8 @@
 					<li><a href="/admin/logout">Log Out</a></li>
 				</ul>
 			</nav>
-		</header>
-	<% else %>
-		<header>
-			<h1><a href="#">Mark Stabler</a></h1>
+		<% else %>
+			<h1><a href="/">Mark Stabler</a></h1>
 
 			<h2 class="grey-text">Writer of Code, Copy, Poetry</h2>
 			
@@ -50,10 +55,10 @@
 				</a>
 				<a href="https://www.linkedin.com/in/stablerwriter/" target="_blank">
 					<img src="/images/frantic_in.png" alt="linkedin icon">
-				</a>		
+				</a>
 			</div>
-		</header>
-	<% end %>
+		<% end %>
+	</header>
 	
 	<main>
 		<%= yield %>

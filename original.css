@@ -1,10 +1,39 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* ******************************************************* */
+/* Resetting Default Layout and Text */
+/* ******************************************************* */
+
+html {
+	box-sizing: border-box;
+	font-size: 10px;
+}
+
+/* ******************************************************* */
+/* Site Universals */
+/* ******************************************************* */
+
+body {
+	margin: 0;
+	background-color: black;
+	color: #FFFFFF;
+	font-size: 1.6rem;
+	font-family: "Segoe UI", Lato, sans-serif;
+}
+
 /* ******************************************************* */
 /* Layout */
 /* ******************************************************* */
 
-/* Header (grid) */
+/* Header (grid) & Footer (normal) layout */
 
 header {
+	background-color: #222222;
+	position: sticky;
+	top: 0;
+	width: 100%;
+	padding: 2rem 2rem 0;
 	display: grid;
 	grid-template-columns: 2fr 1fr;
 	grid-auto-rows: minmax(5.5rem, auto);
@@ -30,6 +59,19 @@ header h2 {
 	margin: 0;
 }
 
+footer {
+	background-color: #222222;
+	width: 100%;
+	margin: 5.5rem 0 0;
+	padding: 1rem 2rem 2rem;
+}
+
+footer > * {
+	width: 33%;
+	margin: 1rem auto;
+	text-align: center;
+}
+
 .social img {
 	width: 3rem;
 	height: 3rem;
@@ -40,6 +82,8 @@ header h2 {
 /* Main content area layout (normal) */
 
 main {
+	width: 90%;
+	margin: auto;
 	background-image: url("../images/brain-blank-gray.svg");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -152,17 +196,72 @@ main {
 /* ******************************************************* */
 /* Typography */
 /* ******************************************************* */
+
+h1 {
+	color: #BD4626;
+	font-size: 3.2rem;
+	font-family: "Yanone Kaffeesatz", "sans-serif";
+	letter-spacing: .13rem;
+}
+
+header h1 {
+	font-size: 4.8rem;
+}
+
+h2 {
+	color: #285DC2;
+	font-size: 2.4rem;
+	font-family: Lato, sans-serif;
+} 
+
+h3 {
+	color: #285DC2;
+	font-size: 2rem;
+	font-family: Lato, sans-serif;
+}
+
+p, ul, ol {
+	font-weight: 300;
+}
+
 #intro p {
 	font-size: 1.8rem;
 }
 
-footer h3 {
+.fine-print {
+	font-size: 1rem;
+}
+
+.grey-text {
+	color: #AAAAAA;
+}
+
+.lt-orange-text {
+	color: #E0A726;
 	font-weight: normal;
 }
 
 /* ******************************************************* */
 /* Links */
 /* ******************************************************* */
+
+/* General Links styles */
+a {
+	outline: none;
+	text-decoration: none;
+	color: #285DC2;
+}
+
+a:focus, a:hover {
+	color: #1693A5;
+	font-weight: bold;
+}
+
+/* Header Links styles */
+h1 a, h2 a, h3 a {
+	color: inherit;
+}
+
 h1 a:focus, h1 a:hover, h2 a:focus, h2 a:hover, h3 a:focus, h3 a:hover {
 	color: #D6341D;
 	font-weight: bold;
@@ -171,4 +270,67 @@ h1 a:focus, h1 a:hover, h2 a:focus, h2 a:hover, h3 a:focus, h3 a:hover {
 /* Social media links styles */
 .social a img:focus, .social a img:hover {
 	background-color: #1693A5;
+}
+
+/* ******************************************************* */
+/* Viewport Size Adjustments */
+/* ******************************************************* */
+@media screen and (max-width: 750px) {
+	html {
+		font-size: 9.5px;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	html {
+		font-size: 9px;
+	}
+}
+
+@media screen and (max-width: 675px) {
+	html {
+		font-size: 8.5px;
+	}
+}
+
+@media screen and (max-width: 625px) {
+	html {
+		font-size: 8px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	html {
+		font-size: 10px;
+	}
+	
+	#all-services {
+		display: block;
+	}
+	
+	.text-box {
+		margin: 0 0 4rem;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	html {
+		font-size: 9px;
+	}
+}
+
+@media screen and (max-width: 440px) {
+	html {
+		font-size: 9px;
+	}
+	
+	header {
+		display: block;
+	}
+	
+	header div {
+		margin: 0;
+		padding: 1rem 0;
+		text-align: left;
+	}
 }

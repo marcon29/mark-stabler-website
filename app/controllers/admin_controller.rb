@@ -4,7 +4,8 @@ class AdminController < AppController
     # use Rack::Flash
 
     # admin home page ###############################################
-	get '/admin' do		
+	get '/admin' do
+		@added_styles = ["admin.css"]
 		if !logged_in?
 			erb :"admin/login"
 		else

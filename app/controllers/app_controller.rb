@@ -7,7 +7,7 @@ class AppController < Sinatra::Base
 	end
 
 	# home page
-	get '/' do
+	get '/' do		
 		erb :index
 	end
 
@@ -35,6 +35,10 @@ class AppController < Sinatra::Base
 	# add helpers used in numerous controllers
 	def formatted_date(date)
         date.strftime("%m/%d/%Y")
+	end
+	
+	def admin_page?
+        request.path.include?("/admin")
     end
 
 	
