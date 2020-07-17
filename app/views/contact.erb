@@ -1,21 +1,22 @@
 <section>
-    <h1>Contact Form Goes Here</h1>	
+    <h1>Contact</h1>
 </section>
 
 <section>
-	<form id="contact form" method="post" action="mailto:<%= @contact_email %>">
-		<h3>Let's Get in Touch</h3>
+	<h3>Let's Get in Touch</h3>
+	<form id="contact-form" method="post" action="mailto:<%= @contact_email %>">
 		<p><label for="first_name">First Name: </label>
 			<input id="first_name" type="text" name="email[first_name]"></p>
 		<p><label for="last_name">Last Name: </label>
 			<input id="last_name" type="text" name="email[last_name]"></p>
 		<p><label for="email">Your Email: </label>
-			<input id="email" type="text" name="email[email]"></p>
+			<input id="email" type="email" name="email[email]"></p>
 		<p><label for="subject">Subject: </label>
-            <input id="subject" type="text" name="email[subject]"></p>        
-        <p><label for="message">Message: </label>            
-            <textarea id="message" type="text" name="email[message]"></textarea></p>
-
-		<p><input type="submit" value="Send"></p>
+			<input id="subject" type="text" name="email[subject]"></p>
+		<p><label for="message">Message: </label>
+			<textarea id="message" type="text" name="email[message]"></textarea></p>
+		
+		<p><label for="blank-for-spacing">&nbsp;</label>
+			<input id="contact-submit" type="submit" value="Send"></p>
 	</form>
 </section>

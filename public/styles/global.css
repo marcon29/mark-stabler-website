@@ -17,7 +17,6 @@ html {
 body {
 	position: relative;
 	min-height: 100vh;
-	
 	margin: 0;
 	background-color: black;
 	color: #FFFFFF;
@@ -133,4 +132,42 @@ h1 a, h2 a, h3 a {
 /* ******************************************************* */
 /* Forms */
 /* ******************************************************* */
+label {
+	display: inline-block;
+	float: left;
+	clear: left;	
+	vertical-align: middle;	
+	width: 12rem;
+}
+
+input {
+	width: 20rem;
+}
+
+select {
+	width: 20.5rem;
+}
+
+textarea {
+	width: 90%;
+	height: 30rem;
+}
+
+input[type=email] {
+	width: 30rem;
+}
+
+input[type=number] {
+	width: 5em;
+}
+
+input[type=submit] {
+	width: auto;
+}
+
+
+
+
+
+
 

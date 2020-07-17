@@ -1,0 +1,18 @@
+/* ******************************************************* */
+/* Forms */
+/* ******************************************************* */
+input {
+	width: 20rem;
+}
+
+input#link_url, input#base_url {
+    width: 50rem;
+}
+
+input#headline {
+    width: 40rem;
+}
+
+input#link_text, input#image_file_name {
+    width: 30rem;
+}
