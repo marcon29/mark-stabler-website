@@ -41,11 +41,6 @@ class AppController < Sinatra::Base
         request.path.include?("/admin")
 	end
 	
-	def public_page?
-        !request.path.include?("/admin/")
-    end
-
-	
 	
 	# model helpers ###############################
 	# add helpers used in specific controller

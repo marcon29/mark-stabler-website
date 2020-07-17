@@ -64,7 +64,7 @@
 		<%= yield %>
 	</main>
 	
-	<% if public_page? && !logged_in? %>
+	<% if !admin_page? || !logged_in? %>
 	<footer>
 		<h3 class="lt-orange-text">
 			<a href="/contact">CONTACT</a>
