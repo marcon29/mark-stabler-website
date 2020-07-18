@@ -7,6 +7,22 @@ class ContentSection < ActiveRecord::Base
         numericality: { only_integer: true, message: "Page location must be a whole number."},
         allow_blank: true
 
+
+    def formatted_link_url
+        if absolute_link?
+            self.link_url.gsub(/(https:\/\/|http:\/\/)/, "")
+        else
+            self.link_url
+        end
+    end
+
+    # def format_url
+    #     string = self.url.gsub(/(https:\/\/|http:\/\/)?(www.)?/, "").strip.downcase
+       
+    #     string.ends_with?('/') ? string = string.chomp("/") : string
+    #     self.url = string if !string.empty?
+    # end
+
     # allows view to create <a> href attribute correctly
     def absolute_link?
         !!self.link_url.match(/http|www\./)

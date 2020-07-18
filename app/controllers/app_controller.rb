@@ -8,6 +8,13 @@ class AppController < Sinatra::Base
 
 	# home page
 	get '/' do
+		get_sorted_active_content
+		
+		# all_active_content = ContentSection.all.select { |cs| !cs.page_location.blank? }
+		# @sorted_active_content = all_active_content.sort_by { |cs| cs.page_location }
+		
+		
+		
 		erb :index
 	end
 
@@ -39,6 +46,11 @@ class AppController < Sinatra::Base
 	
 	def admin_page?
         request.path.include?("/admin")
+	end
+	
+	def get_sorted_active_content
+		all_active_content = ContentSection.all.select { |cs| !cs.page_location.blank? }
+		@sorted_active_content ||= all_active_content.sort_by { |cs| cs.page_location }
 	end
 	
 	

@@ -1,6 +1,43 @@
 require 'spec_helper'
-
+require 'pry'
 describe "AppController" do    
+    # template/layout tests ###########################################################
+    describe "Layout template" do
+        it "loads the homepage with correct site template content, including link to contact page" do
+            visit '/'            
+
+            # check header content
+            expect(page.body).to include('<h1><a href="/">Mark Stabler</a></h1>')
+            expect(page.body).to include('<h2 class="grey-text">Writer of Code, Copy, Poetry</h2>')
+            expect(page.body).to include('<div id="header-right" class="social">')
+            
+            # check footer content (include contact link)
+            expect(page.body).to include('<div id="footer-top">')
+            expect(page.body).to include('<div id="footer-bottom" class="social">')
+            expect(page.body).to include('<a href="/contact">CONTACT</a>')
+            expect(page.body).to include("© Stabler Writing Services, LLC")
+        end
+
+        it "template loads the correct stylesheet for public pages" do
+            visit '/'
+
+            expect(page.body).to include('<link href="/styles/global.css"')
+            expect(page.body).to_not include('<link href="/styles/admin.css"')
+		    expect(page.body).to include('<link href="/styles/index.css"')
+            expect(page.body).to include('<link href="/styles/responsive.css"')
+        end
+
+        it "template loads the correct stylesheet for admin pages when logged in" do
+            visit_admin_and_login_user
+            visit '/admin'
+
+            expect(page.body).to include('<link href="/styles/global.css"')
+            expect(page.body).to include('<link href="/styles/admin.css"')
+		    expect(page.body).to_not include('<link href="/styles/index.css"')
+	        expect(page.body).to include('<link href="/styles/responsive.css"')            
+        end
+    end
+
     # home page tests ###########################################################
     describe "Home page" do
         before do
@@ -22,21 +59,6 @@ describe "AppController" do
             @consec_bottom3 = ContentSection.create(consec_bottom3_info)
         end
 
-        it "loads the homepage with correct site template content, including link to contact page" do
-            visit '/'            
-
-            # check header content
-            expect(page.body).to include('<h1><a href="/">Mark Stabler</a></h1>')
-			expect(page.body).to include('<h2 class="grey-text">Writer of Code, Copy, Poetry</h2>')
-			expect(page.body).to include('<div id="header-right" class="social">')
-            
-            # check footer content (include contact link)
-            expect(page.body).to include('<div id="footer-top">')
-            expect(page.body).to include('<div id="footer-bottom" class="social">')
-            expect(page.body).to include('<a href="/contact">CONTACT</a>')
-            expect(page.body).to include("© Stabler Writing Services, LLC")
-        end        
-
         it "home page can list all content_sections in location order with correct content" do
             visit '/'
 
@@ -45,9 +67,10 @@ describe "AppController" do
 				expect(con_sec.page_location).to eq(counter += 1)
                 expect(page.body).to include("#{con_sec.headline}</h")
                 if con_sec.page_location != 1
-				    expect(page.body).to include("<p>#{con_sec.body_copy}</p>")
-				    expect(page.body).to include('<a href="http://' << "#{con_sec.link_url}")
-                    expect(page.body).to include(">#{con_sec.link_url}</a>")
+				    expect(page.body).to include("#{con_sec.body_copy}</p>")
+                    expect(page.body).to include('<a href="http://'<<"#{con_sec.formatted_link_url}") if con_sec.absolute_link?
+                    expect(page.body).to include('<a href="'<<"#{con_sec.formatted_link_url}") if !con_sec.absolute_link?
+                    expect(page.body).to include("#{con_sec.link_text}</a>")
                 end
 			end
         end        
@@ -56,11 +79,12 @@ describe "AppController" do
             visit '/'
 
             ContentSection.all.order("page_location ASC").each do |con_sec|				
-                # expect(page.body).to include("#{con_sec.headline}</h")
-                if con_sec.page_location = 1
-                    expect(page.body).to_not include("<p>#{con_sec.body_copy}</p>")
-                    expect(page.body).to_not include('<a href="http://' << "#{con_sec.link_url}")
-                    expect(page.body).to_not include(">#{con_sec.link_url}</a>")
+                expect(page.body).to include("#{con_sec.headline}</h")
+                if con_sec.page_location == 1
+                    expect(page.body).to_not include("#{con_sec.body_copy}</p>")
+                    expect(page.body).to_not include('<a href="http://'<<"#{con_sec.formatted_link_url}") if con_sec.absolute_link?
+                    expect(page.body).to_not include('<a href="'<<"#{con_sec.formatted_link_url}") if !con_sec.absolute_link?
+                    expect(page.body).to_not include("#{con_sec.link_text}</a>")
                 end
             end
         end
@@ -69,8 +93,8 @@ describe "AppController" do
             visit '/'
 
             ContentSection.all.order("page_location ASC").each do |con_sec|
-                expect(page.body).to include('id="' << "#{con_sec.css_id}")
-                expect(page.body).to include('class="' << "#{con_sec.css_class}")
+                expect(page.body).to include('id="'<<"#{con_sec.css_id}")
+                expect(page.body).to include('class="'<<"#{con_sec.css_class}")
             end
         end
 
@@ -86,12 +110,11 @@ describe "AppController" do
 
             ContentSection.all.order("page_location ASC").each do |con_sec|                
                 if con_sec.page_location.blank?
-                    expect(page.body).to_not include('id="' << "#{con_sec.css_id}")                    
-                    expect(page.body).to_not include('class="' << "#{con_sec.css_class}")
                     expect(page.body).to_not include("#{con_sec.headline}</h")
-				    expect(page.body).to_not include("<p>#{con_sec.body_copy}</p>")
-				    expect(page.body).to_not include('<a href="http://' << "#{con_sec.link_url}")
-                    expect(page.body).to_not include(">#{con_sec.link_url}</a>")
+                    expect(page.body).to_not include("#{con_sec.body_copy}</p>")
+                    expect(page.body).to_not include('<a href="http://'<<"#{con_sec.formatted_link_url}") if con_sec.absolute_link?
+                    expect(page.body).to_not include('<a href="'<<"#{con_sec.formatted_link_url}") if !con_sec.absolute_link?
+                    expect(page.body).to_not include("#{con_sec.link_text}</a>")
                 end
             end
         end
