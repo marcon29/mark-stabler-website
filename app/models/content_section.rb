@@ -12,7 +12,11 @@ class ContentSection < ActiveRecord::Base
         !!self.link_url.match(/http|www\./)
     end
     
-    # this will also be used for the css id
+    # creates html id attribute value for css targeting
+    def css_id
+        "con-sec-#{self.page_location}" if self.page_location
+    end
+
     def slug
         self.name.gsub(" ", "-").scan(/[[^\s\W]-]/).join.downcase
     end

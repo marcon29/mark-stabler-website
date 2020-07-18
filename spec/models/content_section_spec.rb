@@ -74,8 +74,15 @@ describe "ContentSection" do
     
     # helper method tests ########################################################
     describe "all helper methods work correctly" do
-        # tests #absolute_link? method
-        it "can tell if the link is absolute or relative" do
+        it "#css_id method creates a properly formatted html id attribute value from page_location" do
+            location_given = ContentSection.create(name: "location given", page_location: 1)
+            no_location_given = ContentSection.create(name: "no location given", page_location: "")
+            
+            expect(location_given.css_id).to eq("con-sec-1")
+            expect(no_location_given.css_id).to be_nil
+        end
+
+        it "#absolute_link? method can tell if the link is absolute or relative" do
             abs_http_link_1 = ContentSection.create(name: "absolute link", link_url: "https://example.com")
             abs_http_link_2 = ContentSection.create(name: "absolute link", link_url: "http://example.com")
             abs_http_www_link_1 = ContentSection.create(name: "absolute link", link_url: "https://www.example.com")
@@ -91,8 +98,7 @@ describe "ContentSection" do
             expect(relative_link.absolute_link?).to be false
         end
 
-        # tests #slug method
-        it "has a properly created slug" do
+        it "#slug method creates a properly formatted slug" do
             one_word = ContentSection.create(name: "stuff")
             one_word_cap = ContentSection.create(name: "Content")
             multi_word = ContentSection.create(name: "cool stuff and content")
@@ -107,9 +113,8 @@ describe "ContentSection" do
             expect(crazy_one_word.slug).to eq("tu3ff")
             expect(crazy_multi_word.slug).to eq("crz4-tu3ff")
         end
-        
-        # tests .find_by_slug method
-        it "can be found by its slug" do
+
+        it ".find_by_slug class method can find an instance by its slug" do
             valid_attrs = {name: "test content", css_class: "text-box", page_location: 1, headline: "this is cool content", body_copy: "Maybe it is cool and maybe it is not. I will let you decide.", link_url: "https://www.example.com", link_text: "example"}
             con_sec = ContentSection.create(valid_attrs)
 
