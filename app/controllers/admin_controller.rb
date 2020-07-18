@@ -45,6 +45,8 @@ class AdminController < AppController
     # admin/content routes ################################################
     get '/admin/content' do
 		redirect "/admin" if !logged_in?
+		get_sorted_active_content
+		get_inactive_content
 		@sections = ContentSection.all
 		erb :"admin/content"
 	end

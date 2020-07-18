@@ -7,7 +7,7 @@
 </section>
 
 <section class="admin-list-objects-section">
-    <h2 class="orange-text">All Content Sections</h2>
+    <h2 class="orange-text">All ACTIVE Content Sections</h2>
     <p>Listed in display order.</p>
     <hr>
     <table id="content-sections-table">
@@ -22,7 +22,44 @@
             </tr>
         </thead>
         <tbody>
-            <% @sections.order("page_location ASC").each do |cs| %>
+            <% @sorted_active_content.each do |cs| %>
+                <tr>
+                    <td><%= cs.name %></td>
+                    <td><%= cs.headline %></td>
+                    <td><%= cs.body_copy %></td>
+                    <td><a href="<%= cs.link_url %>" target="_blank"><%= cs.link_text %></td>
+                    <td><%= formatted_date(cs.updated_at) %></td>
+                    <td>
+                        <form class="crud-button" method="get" action="/admin/content-sections/<%= cs.slug %>/edit">
+                            <input id="edit-<%= cs.slug %>" type="submit" value="Edit">
+                        </form>
+                        <form class="crud-button" method="post" action="/admin/content-sections/<%= cs.slug %>">
+                            <input id="hidden" type="hidden" name="_method" value="delete">
+                            <input id="delete-<%= cs.slug %>" type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <h2 class="orange-text">All Inactive Content Sections</h2>    
+    <hr>
+    <table id="content-sections-table">
+        <thead>
+            <tr>
+                <th class="aqua-text">Section Name</th>
+                <th class="aqua-text">Headline</th>
+                <th class="aqua-text">Body Copy</th>
+                <th class="aqua-text">Link</th>
+                <th class="aqua-text">Last Updated</th>
+                <th class="aqua-text">Management Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @inactive_content.each do |cs| %>
                 <tr>
                     <td><%= cs.name %></td>
                     <td><%= cs.headline %></td>
