@@ -28,35 +28,48 @@
 <body>
 	<header>		
 		<% if admin_page? && logged_in? %>
-			<h2 class="grey-text">MS.com Admin</h2>
+			<div id="header-content">
+				<div id="header-left">
+					<h1><a href="/">MS.com Admin</a></h1>
+					<h2 class="grey-text">Writer of Code, Copy, Poetry</h2>
+				</div>
+				
+				<div id="header-right" class="social">
+					<h3><a href="/" target="_blank">Site Home Page</a></h3>
+					<br>
+					<h3><a href="/admin/logout">Log Out</a></h3>
+				</div>
+			</div>
 			<nav id="admin">
 				<ul>
-					<li><a href="/admin">Admin Home</a></li>
 					<li><a href="/admin/content">Manage Content</a></li>
 					<li><a href="/admin/social">Manage Social</a></li>
 					<li><a href="/admin/users">Manage Users</a></li>
-					<li><a href="/admin/logout">Log Out</a></li>
+					
 				</ul>
 			</nav>
 		<% else %>
-			<h1><a href="/">Mark Stabler</a></h1>
-
-			<h2 class="grey-text">Writer of Code, Copy, Poetry</h2>
-			
-			<div class="social">
-				<a href="https://www.facebook.com/StablerWriter/" target="_blank">
-					<img src="/images/frantic_fb.png" alt="facebook icon">
-				</a>			
-				<a href="https://twitter.com/stablerwriter" target="_blank">
-					<img src="/images/frantic_tw.png" alt="twitter icon">
-				</a>			
-				<a href="https://www.instagram.com/stablerwriter/" target="_blank">
-					<img src="/images/frantic_inst.png" alt="instagram icon">
-				</a>
-				<a href="https://www.linkedin.com/in/stablerwriter/" target="_blank">
-					<img src="/images/frantic_in.png" alt="linkedin icon">
-				</a>
-			</div>
+			<div id="header-content">
+				<div id="header-left">
+					<h1><a href="/">Mark Stabler</a></h1>
+					<h2 class="grey-text">Writer of Code, Copy, Poetry</h2>
+				</div>
+				
+				<div id="header-right" class="social">
+					<a href="https://www.facebook.com/StablerWriter/" target="_blank">
+						<img src="/images/frantic_fb.png" alt="facebook icon">
+					</a>			
+					<a href="https://twitter.com/stablerwriter" target="_blank">
+						<img src="/images/frantic_tw.png" alt="twitter icon">
+					</a>			
+					<a href="https://www.instagram.com/stablerwriter/" target="_blank">
+						<img src="/images/frantic_inst.png" alt="instagram icon">
+					</a>
+					<a href="https://www.linkedin.com/in/stablerwriter/" target="_blank">
+						<img src="/images/frantic_in.png" alt="linkedin icon">
+					</a>
+				</div>
+			</div>		
 		<% end %>
 	</header>
 	
@@ -66,11 +79,11 @@
 	
 	<% if !admin_page? || !logged_in? %>
 	<footer>
-		<h3 class="lt-orange-text">
-			<a href="/contact">CONTACT</a>
-		</h3>
+		<div id="footer-top">
+			<h3 class="lt-orange-text"><a href="/contact">CONTACT</a></h3>
+		</div>
 		
-		<div class="social">
+		<div id="footer-bottom" class="social">
 			<a href="https://www.facebook.com/StablerWriter/" target="_blank">
 				<img src="/images/frantic_fb.png" alt="facebook icon">
 			</a>			

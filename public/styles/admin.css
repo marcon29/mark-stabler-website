@@ -16,3 +16,13 @@ input#headline {
 input#link_text, input#image_file_name {
     width: 30rem;
 }
+
+/* ******************************************************* */
+/* Links */
+/* ******************************************************* */
+/* Header Links styles */
+h2 a:focus, h2 a:hover, 
+h3 a:focus, h3 a:hover,  
+h4 a:focus, h4 a:hover {
+	color: #1693A5;	
+}
