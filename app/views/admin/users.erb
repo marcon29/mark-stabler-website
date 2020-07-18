@@ -1,22 +1,22 @@
-<section>
+<section class="admin-page-headline">
 	<h1>User Management</h1>
 </section>
 
-<section>
-    <h3><a href="/admin/users/new"><h3>ADD USER</a></h3>
+<section  class="admin-options-section">
+    <h3 class="display-horiz"><a href="/admin/users/new">ADD USER</a></h3>
 </section>
-<hr>
 
-<section>
-    <h2>All Users</h2>
-    <table>
+<section class="admin-list-objects-section">
+    <h2 class="orange-text">All Users</h2>
+    <hr>
+    <table id="users-table">
         <thead>
             <tr>
-                <th>Username</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Date Added</th>
-                <th>Management Actions</th>
+                <th class="aqua-text">Username</th>
+                <th class="aqua-text">Name</th>
+                <th class="aqua-text">Email</th>
+                <th class="aqua-text">Date Added</th>
+                <th class="aqua-text">Management Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@
                     </td>
                 </tr>
             <% end %>
-        <tbody>
+        </tbody>
     </table>
 </section>
 

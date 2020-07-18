@@ -34,14 +34,14 @@ header {
 	position: sticky;
 	top: 0;
 	width: 100%;
+	margin: 0 0 5rem;
 	padding: 2rem 0;
 }
 
 main {
-	width: 90%;
-	margin: auto;
-	padding-bottom: 20rem;    /* Footer height - needs to be larger than footer height below*/
-	/* padding-bottom: 25rem;    Footer height - needs to match footer height below */
+	/* background-color: gray; */
+	width: 100%;
+	padding-bottom: 12rem;		/* needs to match footer height below */
 }
 
 footer {
@@ -49,8 +49,7 @@ footer {
 	position: absolute;
 	/* left: 0; */
 	bottom: 0;
-	height: 12rem;           /* Footer height - needs to be smaller than main padding-bottom */
-	/* height: 15rem;            Footer height - needs to match main padding-bottom */
+	height: 12rem;           /* Footer height */	
 	width: 100%;
 	/* margin: 5.5rem 0 0; */
 	/* padding: 1rem 2rem 2rem; */
@@ -62,7 +61,7 @@ footer > * {
 	text-align: center;
 }
 
-/* Header (flexbox) (not including nav)*/
+/* Header Content (flexbox) (not including nav)*/
 #header-content {
 	width: 90%;
 	margin: 0 auto;
@@ -81,7 +80,7 @@ footer > * {
 	text-align: right;
 }
 
-/* Navigation */
+/* Header Navigation */
 nav {
 	width: 90%;
 	margin: 0 auto;	
@@ -97,6 +96,12 @@ nav ul li {
 	display: inline-block;
 	list-style-type: none;	
 	width: 18%;
+}
+
+/* Main Content */
+#main-content {
+	width: 90%;
+	margin: 0 auto 5rem;		/* bottom margin needs to match header bottom margin above */
 }
 
 /* Specific Sections/Elements */
@@ -148,16 +153,20 @@ p, ul, ol {
 	font-weight: 300;
 }
 
-.fine-print {
-	font-size: 1rem;
-}
-
 .grey-text {
 	color: #AAAAAA;
 }
 
-.lt-orange-text {
+.orange-text {
 	color: #E0A726;
+}
+
+.aqua-text {
+	color: #1693A5;
+}
+
+.fine-print {
+	font-size: 1rem;
 }
 
 /* ******************************************************* */
@@ -197,8 +206,7 @@ h4 a:focus, h4 a:hover {
 /* ******************************************************* */
 /* Forms */
 /* ******************************************************* */
-label {
-	display: inline-block;
+label {	
 	float: left;
 	clear: left;	
 	vertical-align: middle;	

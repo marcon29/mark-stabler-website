@@ -74,13 +74,15 @@
 	</header>
 	
 	<main>
-		<%= yield %>
+		<div id="main-content">
+			<%= yield %>
+		</div>
 	</main>
 	
 	<% if !admin_page? || !logged_in? %>
 	<footer>
 		<div id="footer-top">
-			<h3 class="lt-orange-text"><a href="/contact">CONTACT</a></h3>
+			<h3 class="orange-text"><a href="/contact">CONTACT</a></h3>
 		</div>
 		
 		<div id="footer-bottom" class="social">

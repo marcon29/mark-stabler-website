@@ -1,24 +1,24 @@
-<section>
+<section class="admin-page-headline">
 	<h1>Content Management</h1>
 </section>
 
-<section>
-    <h3><a href="/admin/content-sections/new"><h3>ADD CONTENT SECTION</a></h3>
+<section  class="admin-options-section">
+    <h3 class="display-horiz"><a href="/admin/content-sections/new">ADD CONTENT SECTION</a></h3>
 </section>
-<hr>
 
-<section>
-    <h2>All Content Sections</h2>
-    <p>listed in display order</p>
-    <table>
+<section class="admin-list-objects-section">
+    <h2 class="orange-text">All Content Sections</h2>
+    <p>Listed in display order.</p>
+    <hr>
+    <table id="content-sections-table">
         <thead>
             <tr>
-                <th>Section Name</th>
-                <th>Headline</th>
-                <th>Body Copy</th>
-                <th>Link</th>
-                <th>Last Updated</th>
-                <th>Management Actions</th>
+                <th class="aqua-text">Section Name</th>
+                <th class="aqua-text">Headline</th>
+                <th class="aqua-text">Body Copy</th>
+                <th class="aqua-text">Link</th>
+                <th class="aqua-text">Last Updated</th>
+                <th class="aqua-text">Management Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -35,11 +35,11 @@
                         </form>
                         <form class="crud-button" method="post" action="/admin/content-sections/<%= cs.slug %>">
                             <input id="hidden" type="hidden" name="_method" value="delete">
-                            <input id="delete-<%= cs.slug %>" type="submit" value="Delete <%= cs.slug %>">
+                            <input id="delete-<%= cs.slug %>" type="submit" value="Delete">
                         </form>
                     </td>
                 </tr>
             <% end %>
-        <tbody>
+        </tbody>
     </table>
 </section>

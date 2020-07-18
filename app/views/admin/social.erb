@@ -1,55 +1,57 @@
-<section>
+<section class="admin-page-headline">
 	<h1>Social Management</h1>
 </section>
 
-<section>
-    <h3><a href="/admin/social-platforms/new"><h3>ADD PLATFORM</a></h3>
-    <h3><a href="/admin/social-profiles/new"><h3>ADD PROFILE</a></h3>
+<section  class="admin-options-section">
+    <h3 class="display-horiz"><a href="/admin/social-platforms/new">ADD PLATFORM</a></h3>
+    <h3 class="display-horiz"><a href="/admin/social-profiles/new">ADD PROFILE</a></h3>
 </section>
-<hr>
 
-<section>
-    <h2>All Social Profiles</h2>
-    <% @platforms.order("name ASC").each do |plat| %>        
-        <h3><%= plat.name %></h3>
-        <p>Base URL: <%= plat.base_url %></p>
-        <p>Image File: <%= plat.image_file_name %></p>
-        <form class="crud-button" method="get" action="/admin/social-platforms/<%= plat.slug %>/edit">
-            <input id="edit-<%= plat.slug %>" type="submit" value="Edit">
-        </form>
-        <form class="crud-button" method="post" action="/admin/social-platforms/<%= plat.slug %>">
-            <input id="hidden" type="hidden" name="_method" value="delete">
-            <input id="delete-<%= plat.slug %>" type="submit" value="Delete">
-        </form>
+<section class="admin-list-objects-section">    
+        <h2 class="orange-text">All Social Profiles</h2>        
+        <% @platforms.order("name ASC").each do |plat| %>
+            <section class="social-platforms-list">
+                <hr>
+                <h3><%= plat.name %></h3>
+                <p class="display-horiz">Base URL: <%= plat.base_url %></p>
+                <p class="display-horiz">Image File: <%= plat.image_file_name %></p>
+                <form class="crud-button" method="get" action="/admin/social-platforms/<%= plat.slug %>/edit">
+                    <input id="edit-<%= plat.slug %>" type="submit" value="Edit">
+                </form>
+                <form class="crud-button" method="post" action="/admin/social-platforms/<%= plat.slug %>">
+                    <input id="hidden" type="hidden" name="_method" value="delete">
+                    <input id="delete-<%= plat.slug %>" type="submit" value="Delete">
+                </form>
+            </section>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Profile Name</th>
-                    <th>Handle</th>
-                    <th>Display Order</th>
-                    <th>Management Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% plat.social_profiles.order("display_order ASC").each do |prof| %>
+            <table class="social-profiles-table">
+                <thead>
                     <tr>
-                        <td><%= prof.name %></td>
-                        <td><%= prof.handle %></td>
-                        <td><%= prof.display_order %></td>
-                        <td>
-                            <form class="crud-button" method="get" action="/admin/social-profiles/<%= prof.slug %>/edit">
-                                <input id="edit-<%= prof.slug %>" type="submit" value="Edit">
-                            </form>
-                            <form class="crud-button" method="post" action="/admin/social-profiles/<%= prof.slug %>">
-                                <input id="hidden" type="hidden" name="_method" value="delete">
-                                <input id="delete-<%= prof.slug %>" type="submit" value="Delete">
-                            </form>
-                        </td>
+                        <th class="aqua-text">Profile Name</th>
+                        <th class="aqua-text">Handle</th>
+                        <th class="aqua-text">Display Order</th>
+                        <th class="aqua-text">Management Actions</th>
                     </tr>
-                <% end %>
-            <tbody>
-        </table>
-        <hr>
+                </thead>
+                <tbody>
+                    <% plat.social_profiles.order("display_order ASC").each do |prof| %>
+                        <tr>
+                            <td><%= prof.name %></td>
+                            <td><%= prof.handle %></td>
+                            <td><%= prof.display_order %></td>
+                            <td>
+                                <form class="crud-button" method="get" action="/admin/social-profiles/<%= prof.slug %>/edit">
+                                    <input id="edit-<%= prof.slug %>" type="submit" value="Edit">
+                                </form>
+                                <form class="crud-button" method="post" action="/admin/social-profiles/<%= prof.slug %>">
+                                    <input id="hidden" type="hidden" name="_method" value="delete">
+                                    <input id="delete-<%= prof.slug %>" type="submit" value="Delete">
+                                </form>
+                            </td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        <br>
     <% end %>
 </section>

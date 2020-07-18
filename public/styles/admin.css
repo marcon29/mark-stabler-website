@@ -1,4 +1,24 @@
 /* ******************************************************* */
+/* Layout */
+/* ******************************************************* */
+.admin-page-headline {
+    margin: 0 0 1rem;
+}
+
+.admin-options-section {
+    margin: 0 0 5rem;
+}
+
+.display-horiz {
+    display: inline;
+    margin-right: 60px;
+}
+
+.crud-button {
+    display: inline;
+}
+
+/* ******************************************************* */
 /* Forms */
 /* ******************************************************* */
 input {
@@ -15,6 +35,89 @@ input#headline {
 
 input#link_text, input#image_file_name {
     width: 30rem;
+}
+
+/* ******************************************************* */
+/* Tables */
+/* ******************************************************* */
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+tr:nth-of-type(even) {
+    background-color: #333333;
+}
+
+th {
+    text-align: left;
+}
+
+/* Content Sections Table */
+#content-sections-table thead th:nth-child(1) {
+    width: 10%;
+}
+
+#content-sections-table thead th:nth-child(2) {
+    width: 20%;
+}
+
+#content-sections-table thead th:nth-child(3) {
+    width: 50%;
+}
+
+#content-sections-table thead th:nth-child(4) {
+    width: 10%;
+}
+
+#content-sections-table thead th:nth-child(5) {
+    width: 10%;
+}
+
+#content-sections-table thead th:nth-child(6) {
+    width: 25%;
+}
+
+/* Social Profiles Table */
+.social-platforms-list {
+    margin-bottom: 2rem;
+}
+
+.social-profiles-table thead th:nth-child(1) {
+    width: 30%;
+}
+
+.social-profiles-table thead th:nth-child(2) {
+    width: 30%;
+}
+
+.social-profiles-table thead th:nth-child(3) {
+    width: 20%;
+}
+
+.social-profiles-table thead th:nth-child(4) {
+    width: 60%;
+}
+
+/* Social Profiles Table */
+#users-table thead th:nth-child(1) {
+    width: 15%;
+}
+
+#users-table thead th:nth-child(2) {
+    width: 15%;
+}
+
+#users-table thead th:nth-child(3) {
+    width: 30%;
+}
+
+#users-table thead th:nth-child(4) {
+    width: 10%;
+}
+
+#users-table thead th:nth-child(4) {
+    width: 20%;
 }
 
 /* ******************************************************* */

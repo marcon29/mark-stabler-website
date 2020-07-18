@@ -40,7 +40,6 @@ main {
 }
 
 /* Grid layout for All Sevices section */
-
 #all-services {
 	display: grid;
 	grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -72,7 +71,6 @@ main {
 /* ******************************************************* */
 /* 3D shapes */
 /* ******************************************************* */
-
 #trap-top {
 	grid-column: 5 / 9;
 	grid-row: 1 / 3;
