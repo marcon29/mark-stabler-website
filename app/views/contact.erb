@@ -4,7 +4,7 @@
 
 <section>
 	<h3>Let's Get in Touch</h3>
-	<form id="contact-form" method="post" action="mailto:<%= @contact_email %>">
+	<form id="contact-form" method="post" action="/contact">
 		<p><label for="first_name">First Name: </label>
 			<input id="first_name" type="text" name="email[first_name]"></p>
 		<p><label for="last_name">Last Name: </label>
@@ -13,8 +13,8 @@
 			<input id="email" type="email" name="email[email]"></p>
 		<p><label for="subject">Subject: </label>
 			<input id="subject" type="text" name="email[subject]"></p>
-		<p><label for="message">Message: </label>
-			<textarea id="message" type="text" name="email[message]"></textarea></p>
+		<p><label for="body">Message: </label>
+			<textarea id="body" type="text" name="email[body]"></textarea></p>
 		
 		<p><label for="blank-for-spacing">&nbsp;</label>
 			<input id="contact-submit" type="submit" value="Send"></p>

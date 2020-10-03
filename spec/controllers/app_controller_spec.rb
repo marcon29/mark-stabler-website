@@ -121,34 +121,41 @@ describe "AppController" do
     end
 
     describe "Contact page" do
-        # it "loads the contact page and displays the contact form" do
-        #     visit '/contact'
-            
-        #     # expect(page.status_code).to eq(200)
-        #     # expect(page.body).to include("")
-        # end
+        it "loads the contact page and displays the contact form" do
+            visit '/contact'
+
+            expect(page.body).to include("<h1>Contact</h1>")
+            expect(page.body).to include('<form id="contact-form"')
+            expect(page.body).to include('method="post" action="/contact"')
+            expect(page).to have_field(:first_name)
+            expect(page).to have_field(:last_name)
+            expect(page).to have_field(:email)
+            expect(page).to have_field(:subject)
+            expect(page).to have_field(:body)
+        end   
     
-        # it "lets a user create and send an email to the correct address, then reloads the page" do
-        #     # visit '/contact'
-            
-        #     # fill_in :first_name, :with => "input value"
-        #     # fill_in :last_name, :with => "input value"
-        #     # fill_in :email, :with => "input value"
-        #     # fill_in :subject, :with => "input value"
-        #     # fill_in :message, :with => "input value"
-        #     # click_button "Submit"            
+        it "lets a user create and send an email to the correct address, then reloads the page" do
+            email_info = {first_name: "test", last_name: "sender", email: "testsender1@example.com", subject: "I want to hire your", body: "please work with me"}
 
-        #     # expect(params[:first_name]).to eq("input value")
-        #     # expect(params[:last_name]).to eq("input value")
-        #     # expect(params[:email]).to eq("input value")
-        #     # expect(params[:subject]).to eq("input value")
-        #     # expect(params[:message]).to eq("input value")
-        #     # expect(params[:message]).to eq("input value")
-            
-        #     # # need to verify email address sent to and how info is transfered for mailto form
+            visit '/contact'
 
-        #     # expect(page).to have_current_path("/contact")
-        # end
+            fill_in :first_name, :with => "#{email_info[:first_name]}"
+            fill_in :last_name, :with => "#{email_info[:last_name]}"
+            fill_in :email, :with => "#{email_info[:email]}"
+            fill_in :subject, :with => "#{email_info[:subject]}"
+            fill_in :body, :with => "#{email_info[:body]}"
+            click_button "Send"
+
+            expect(params[:email][:first_name]).to eq("test")
+            expect(params[:email][:last_name]).to eq("sender")
+            expect(params[:email][:email]).to eq("testsender1@example.com")
+            expect(params[:email][:subject]).to eq("I want to hire your")
+            expect(params[:email][:body]).to eq("please work with me")
+            
+            # # need to verify email address sent to and how info is transfered for mailto form
+
+            # expect(page).to have_current_path("/contact")
+        end
 
         # it "POST Route displays the appropriate flash message upon redirect" do
 		# 	# think I can test the display in only processing routes no in every get

@@ -1,3 +1,5 @@
+require 'pony'
+
 class AppController < Sinatra::Base
 	configure do
 		set :views, "app/views/"
@@ -19,15 +21,22 @@ class AppController < Sinatra::Base
 	end
 
 	post '/contact' do
-        # process contact form
-                
+		chec = Pony.mail({ 		
+			  :to => "online@markstabler.com",
+			  :from => params[:email][:email],
+			  :subject => params[:email][:subject],
+			  :body => params[:email][:body]
+		})
+		binding.pry
+		# :from => "#{params[:email][:first_name]} #{params[:email][:last_name]}",
+                        
 		# if # email sent
 		# 	# flash[:message] = "Your message was sent. I'll get back to you as soon as possible."
 		# else
 		# 	# flash[:message] = "There was a problem sending your message. Looks like I owe you a beer. Please submit again."
 		# end
 		
-		# redirect back
+		redirect back
     end
 
 
